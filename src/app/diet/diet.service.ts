@@ -16,12 +16,12 @@ export class DietService implements TableComponentAbstractService<Diet> {
 
   constructor(private http: HttpClient) { }
 
-  create(details: DietDetails): Observable<DietDetails> {
-    const body: Partial<DietRequest> = {
+  create(details?: DietDetails): Observable<DietDetails> {
+    const body: Partial<DietRequest> = details ? {
       name: details.name,
       description: details.description,
       meal_ids: details.meals.map((meal: Meal) => meal.id!),
-    }
+    } : {};
 
     return this.http.post<DietDetails>(`${this.endpointUrl}`, body)
   }
