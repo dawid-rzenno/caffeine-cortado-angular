@@ -2,42 +2,29 @@ import { Route } from "@angular/router";
 import { MealFormComponent } from "./meal-form/meal-form.component";
 import { MealDetailsComponent } from "./meal-details/meal-details.component";
 import { mealResolver } from "./meal.resolver";
-import { createTitle } from "../shared/create-title.funtion";
 import { MealTableComponent } from "./meal-table/meal-table.component";
+import { mealsResolver } from "./meals.resolver";
 
 export const mealRoutes: Route[] = [
   {
-    path: 'read',
-    children: [
-      {
-        path: 'all',
-        component: MealTableComponent,
-        resolve: {
-          paginatedResponse: mealResolver
-        },
-        title: createTitle('Meals'),
-      },
-      {
-        path: 'details/:id',
-        component: MealDetailsComponent,
-        resolve: {
-          details: mealResolver
-        },
-        title: createTitle('Meal Details'),
-      },
-    ]
+    path: 'list',
+    component: MealTableComponent,
+    resolve: {
+      paginatedResponse: mealsResolver
+    },
   },
   {
-    path: 'create',
-    component: MealFormComponent,
-    title: createTitle('New Meal'),
+    path: 'details/:id',
+    component: MealDetailsComponent,
+    resolve: {
+      details: mealResolver
+    },
   },
   {
-    path: 'edit/:id',
+    path: 'form/:id',
     component: MealFormComponent,
     resolve: {
       details: mealResolver
     },
-    title: createTitle('Edit Meal'),
   }
 ]
