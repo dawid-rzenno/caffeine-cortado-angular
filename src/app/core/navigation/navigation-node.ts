@@ -47,7 +47,7 @@ export class NavigationNode {
 
     this.label = label;
     this.urlSegment = urlSegment;
-    this.hideInTree = urlSegment === '/read/details' || urlSegment === '/edit';
+    this.hideInTree = urlSegment === '/details';
   }
 
   protected getAncestorsUrl(parentNavigationNode: NavigationNode): string {

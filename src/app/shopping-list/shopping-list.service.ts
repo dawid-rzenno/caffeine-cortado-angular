@@ -16,12 +16,12 @@ export class ShoppingListService {
 
   constructor(private http: HttpClient) { }
 
-  create(details: ShoppingListDetails): Observable<ShoppingListDetails> {
-    const body: Partial<ShoppingListRequest> = {
+  create(details?: ShoppingListDetails): Observable<ShoppingListDetails> {
+    const body: Partial<ShoppingListRequest> = details ? {
       name: details.name,
       description: details.description,
       ingredient_ids: details.ingredients.map((ingredient: Ingredient) => ingredient.id!),
-    }
+    } : {};
 
     return this.http.post<ShoppingListDetails>(`${this.endpointUrl}`, body)
   }

@@ -12,12 +12,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { Meal } from "../../meal/meal";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
-import { DietMealControlComponent } from "../diet-meal-control/diet-meal-control.component";
 import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import {
-  DietMealControlDialogComponent
-} from "../diet-meal-control/diet-meal-control-dialog/diet-meal-control-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 export type DietForm = {
   id: FormControl<number | undefined>,
@@ -43,7 +39,6 @@ export type DietDetailsForm = DietForm & {
     AsyncPipe,
     MealTableComponent,
     NgTemplateOutlet,
-    DietMealControlComponent,
     NumberToAdjectivePipe
   ],
   templateUrl: './diet-form.component.html',
@@ -82,13 +77,13 @@ export class DietFormComponent extends FormComponentAbstract<DietDetails> implem
   }
 
   openDialog(): void {
-    const dialogRef: MatDialogRef<DietMealControlDialogComponent, Meal> = this.matDialog.open(DietMealControlDialogComponent);
-
-    dialogRef.afterClosed().subscribe((meal: Meal | undefined) => {
-      if (meal) {
-        this.addNewMeal(meal);
-      }
-    });
+    // const dialogRef: MatDialogRef<DietMealControlDialogComponent, Meal> = this.matDialog.open(DietMealControlDialogComponent);
+    //
+    // dialogRef.afterClosed().subscribe((meal: Meal | undefined) => {
+    //   if (meal) {
+    //     this.addNewMeal(meal);
+    //   }
+    // });
   }
 
   protected addNewMeal(meal: Meal) {

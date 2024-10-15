@@ -2,42 +2,29 @@ import { Routes } from "@angular/router";
 import { ShoppingListDetailsComponent } from "./shopping-list-details/shopping-list-details.component";
 import { shoppingListResolver } from "./shopping-list.resolver";
 import { ShoppingListFormComponent } from "./shopping-list-form/shopping-list-form.component";
-import { createTitle } from "../shared/create-title.funtion";
 import { ShoppingListTableComponent } from "./shopping-list-table/shopping-list-table.component";
+import { shoppingListsResolver } from "./shopping-lists.resolver";
 
 export const shoppingListRoutes: Routes = [
   {
-    path: 'read',
-    children: [
-      {
-        path: 'all',
-        component: ShoppingListTableComponent,
-        resolve: {
-          paginatedResponse: shoppingListResolver
-        },
-        title: createTitle('Shopping Lists'),
-      },
-      {
-        path: 'details/:id',
-        component: ShoppingListDetailsComponent,
-        resolve: {
-          details: shoppingListResolver
-        },
-        title: createTitle('Shopping List Details'),
-      },
-    ]
+    path: 'all',
+    component: ShoppingListTableComponent,
+    resolve: {
+      paginatedResponse: shoppingListsResolver
+    },
   },
   {
-    path: 'create',
-    component: ShoppingListFormComponent,
-    title: createTitle('New Shopping List'),
+    path: 'details/:id',
+    component: ShoppingListDetailsComponent,
+    resolve: {
+      details: shoppingListResolver
+    },
   },
   {
-    path: 'edit/:id',
+    path: 'form/:id',
     component: ShoppingListFormComponent,
     resolve: {
       details: shoppingListResolver
     },
-    title: createTitle('Edit Shopping List'),
   }
 ]

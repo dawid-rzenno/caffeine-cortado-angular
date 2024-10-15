@@ -11,42 +11,36 @@ export class NavigationService implements NavigationServiceInterface {
   readonly navigationNodes: NavigationNode[] = [
     new NavigationNode('Kitchen', '', [
       new NavigationNode('Diets', '/diet', [
-        new NavigationNode('See all diets', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create a diet', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ]),
       new NavigationNode('Meals', '/meal',[
-        new NavigationNode('See all meals', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create a meal', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ]),
       new NavigationNode('Beverages', '/beverage', [
-        new NavigationNode('See all beverages', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create a beverage', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ]),
       new NavigationNode('Ingredients', '/ingredient', [
-        new NavigationNode('See all ingredients', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create an ingredient', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ]),
     ]),
     new NavigationNode('Gym', '', [
       new NavigationNode('Workouts', '/workout', [
-        new NavigationNode('See all workouts', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create a workout', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ]),
       new NavigationNode('Exercises', '/exercise', [
-        new NavigationNode('See all exercises', '/read/all'),
-        new NavigationNode('Details', '/read/details'),
-        new NavigationNode('Edit', '/edit'),
-        new NavigationNode('Create an exercise', '/create'),
+        new NavigationNode('List', '/list'),
+        new NavigationNode('Details', '/details'),
+        new NavigationNode('Form', '/form'),
       ])
     ]),
   ];

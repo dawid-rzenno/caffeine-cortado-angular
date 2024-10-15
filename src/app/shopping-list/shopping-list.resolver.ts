@@ -1,13 +1,10 @@
 import { ResolveFn } from '@angular/router';
 import { inject } from "@angular/core";
-import { ShoppingList, ShoppingListDetails } from "./shopping-list";
+import { ShoppingListDetails } from "./shopping-list";
 import { ShoppingListService } from "./shopping-list.service";
-import { PaginatedResponse } from "../shared/models/paginated-response";
-import { MatPaginatorConfig } from "../shared/models/mat-paginator-config";
 
-export const shoppingListResolver: ResolveFn<ShoppingListDetails | PaginatedResponse<ShoppingList>> = (route) => {
-
+export const shoppingListResolver: ResolveFn<ShoppingListDetails> = (route) => {
   const id: string | null = route.paramMap.get('id');
-
-  return id ? inject(ShoppingListService).get(id) : inject(ShoppingListService).getAll(MatPaginatorConfig.defaultPaginationParams)
+  const service: ShoppingListService = inject(ShoppingListService);
+  return id ? service.get(id) : service.create()
 };

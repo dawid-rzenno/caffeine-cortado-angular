@@ -3,8 +3,7 @@ import { PaginatedResponse } from "../shared/models/paginated-response";
 import { inject } from "@angular/core";
 import { ExerciseService } from "./exercise.service";
 
-export const exerciseResolver: ResolveFn<unknown | PaginatedResponse<unknown>> = (route) => {
-  const id: string | null = route.paramMap.get('id');
+export const exercisesResolver: ResolveFn<unknown | PaginatedResponse<unknown>> = () => {
   const service: ExerciseService = inject(ExerciseService);
-  return id ? service.get(id) : service.create()
+  return service.getAll()
 };

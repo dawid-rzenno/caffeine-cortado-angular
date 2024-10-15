@@ -1,43 +1,30 @@
 import { Route } from "@angular/router";
-import { createTitle } from "../shared/create-title.funtion";
 import { WorkoutFormComponent } from "./workout-form/workout-form.component";
 import { WorkoutDetailsComponent } from "./workout-details/workout-details.component";
 import { WorkoutTableComponent } from "./workout-table/workout-table.component";
 import { workoutResolver } from "./workout.resolver";
+import { workoutsResolver } from "./workouts.resolver";
 
 export const workoutRoutes: Route[] = [
   {
-    path: 'read',
-    children: [
-      {
-        path: 'all',
-        component: WorkoutTableComponent,
-        resolve: {
-          paginatedResponse: workoutResolver
-        },
-        title: createTitle('Workouts'),
-      },
-      {
-        path: 'details/:id',
-        component: WorkoutDetailsComponent,
-        resolve: {
-          details: workoutResolver
-        },
-        title: createTitle('Workout Details'),
-      },
-    ]
+    path: 'list',
+    component: WorkoutTableComponent,
+    resolve: {
+      paginatedResponse: workoutsResolver
+    },
   },
   {
-    path: 'create',
-    component: WorkoutFormComponent,
-    title: createTitle('New Workout'),
+    path: 'details/:id',
+    component: WorkoutDetailsComponent,
+    resolve: {
+      details: workoutResolver
+    },
   },
   {
-    path: 'edit/:id',
+    path: 'form/:id',
     component: WorkoutFormComponent,
     resolve: {
       details: workoutResolver
     },
-    title: createTitle('Edit Workout'),
   }
 ]

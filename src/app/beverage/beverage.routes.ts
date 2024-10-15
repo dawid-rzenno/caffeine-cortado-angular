@@ -1,43 +1,30 @@
 import { Route } from "@angular/router";
-import { createTitle } from "../shared/create-title.funtion";
 import { BeverageTableComponent } from "./beverage-table/beverage-table.component";
 import { BeverageFormComponent } from "./beverage-form/beverage-form.component";
 import { BeverageDetailsComponent } from "./beverage-details/beverage-details.component";
 import { beverageResolver } from "./beverage.resolver";
+import { beveragesResolver } from "./beverages.resolver";
 
 export const beverageRoutes: Route[] = [
   {
-    path: 'read',
-    children: [
-      {
-        path: 'all',
-        component: BeverageTableComponent,
-        resolve: {
-          paginatedResponse: beverageResolver
-        },
-        title: createTitle('Beverages'),
-      },
-      {
-        path: 'details/:id',
-        component: BeverageDetailsComponent,
-        resolve: {
-          details: beverageResolver
-        },
-        title: createTitle('Beverage Details'),
-      },
-    ]
+    path: 'list',
+    component: BeverageTableComponent,
+    resolve: {
+      paginatedResponse: beveragesResolver
+    },
   },
   {
-    path: 'create',
-    component: BeverageFormComponent,
-    title: createTitle('New Beverage'),
+    path: 'details/:id',
+    component: BeverageDetailsComponent,
+    resolve: {
+      details: beverageResolver
+    },
   },
   {
-    path: 'edit/:id',
+    path: 'form/:id',
     component: BeverageFormComponent,
     resolve: {
       details: beverageResolver
     },
-    title: createTitle('Edit Beverage'),
   }
 ]

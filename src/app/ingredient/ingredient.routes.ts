@@ -1,43 +1,30 @@
 import { Route } from "@angular/router";
 import { ingredientResolver } from "./ingredient.resolver";
-import { createTitle } from "../shared/create-title.funtion";
 import { IngredientDetailsComponent } from "./ingredient-details/ingredient-details.component";
 import { IngredientFormComponent } from "./ingredient-form/ingredient-form.component";
 import { IngredientTableComponent } from "./ingredient-table/ingredient-table.component";
+import { ingredientsResolver } from "./ingredients.resolver";
 
 export const ingredientRoutes: Route[] = [
   {
-    path: 'read',
-    children: [
-      {
-        path: 'all',
-        component: IngredientTableComponent,
-        resolve: {
-          paginatedResponse: ingredientResolver
-        },
-        title: createTitle('Ingredients'),
-      },
-      {
-        path: 'details/:id',
-        component: IngredientDetailsComponent,
-        resolve: {
-          details: ingredientResolver
-        },
-        title: createTitle('Ingredient Details'),
-      },
-    ]
+    path: 'list',
+    component: IngredientTableComponent,
+    resolve: {
+      paginatedResponse: ingredientsResolver
+    },
   },
   {
-    path: 'create',
-    component: IngredientFormComponent,
-    title: createTitle('New Ingredient'),
+    path: 'details/:id',
+    component: IngredientDetailsComponent,
+    resolve: {
+      details: ingredientResolver
+    },
   },
   {
-    path: 'edit/:id',
+    path: 'form/:id',
     component: IngredientFormComponent,
     resolve: {
       details: ingredientResolver
     },
-    title: createTitle('Edit Ingredient'),
   }
 ]

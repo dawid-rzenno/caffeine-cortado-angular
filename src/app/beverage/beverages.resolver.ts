@@ -3,8 +3,7 @@ import { PaginatedResponse } from "../shared/models/paginated-response";
 import { inject } from "@angular/core";
 import { BeverageService } from "./beverage.service";
 
-export const beverageResolver: ResolveFn<unknown | PaginatedResponse<unknown>> = (route) => {
-  const id: string | null = route.paramMap.get('id');
+export const beveragesResolver: ResolveFn<PaginatedResponse<unknown>> = () => {
   const service: BeverageService = inject(BeverageService);
-  return id ? service.get(id) : service.create()
+  return service.getAll()
 };

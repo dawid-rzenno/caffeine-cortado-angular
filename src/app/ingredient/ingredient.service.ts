@@ -15,8 +15,8 @@ export class IngredientService implements TableComponentAbstractService<Ingredie
 
   constructor(private http: HttpClient) { }
 
-  create(details: IngredientDetails): Observable<IngredientDetails> {
-    const body: Partial<IngredientDetails> = {
+  create(details?: IngredientDetails): Observable<IngredientDetails> {
+    const body: Partial<IngredientDetails> = details ? {
       name: details.name,
       category_id: details.category_id,
       price: details.price,
@@ -24,7 +24,7 @@ export class IngredientService implements TableComponentAbstractService<Ingredie
       proteins: details.proteins,
       carbohydrates: details.carbohydrates,
       fats: details.fats,
-    }
+    } : {};
 
     return this.http.post<IngredientDetails>(`${this.endpointUrl}`, body)
   }
