@@ -4,7 +4,6 @@ import { IngredientDetails } from "./ingredient";
 import { IngredientService } from "./ingredient.service";
 
 export const ingredientResolver: ResolveFn<IngredientDetails> = (route) => {
-  const id: string | null = route.paramMap.get('id');
-  const service: IngredientService = inject(IngredientService);
-  return id ? service.get(id) : service.create()
+  return inject(IngredientService).get(route.paramMap.get('id') as string);
+
 };

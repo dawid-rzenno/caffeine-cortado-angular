@@ -4,6 +4,7 @@ import { WorkoutDetailsComponent } from "./workout-details/workout-details.compo
 import { WorkoutTableComponent } from "./workout-table/workout-table.component";
 import { workoutResolver } from "./workout.resolver";
 import { workoutsResolver } from "./workouts.resolver";
+import { workoutFormGuard } from "./workout-form.guard";
 
 export const workoutRoutes: Route[] = [
   {
@@ -23,8 +24,16 @@ export const workoutRoutes: Route[] = [
   {
     path: 'form/:id',
     component: WorkoutFormComponent,
+    canActivate: [
+      workoutFormGuard
+    ],
     resolve: {
       details: workoutResolver
     },
-  }
+  },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    redirectTo: 'form/'
+  },
 ]

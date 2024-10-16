@@ -14,6 +14,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
 import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
 import { MatDialog } from "@angular/material/dialog";
+import { takeUntil } from "rxjs";
 
 export type DietForm = {
   id: FormControl<number | undefined>,
@@ -65,6 +66,9 @@ export class DietFormComponent extends FormComponentAbstract<DietDetails> implem
 
   constructor(route: ActivatedRoute, service: DietService) {
     super(route, service);
+
+    // ToDo: change behaviour of form components to subscription instead of static data
+    route.data.pipe(takeUntil(this.destroy$)).subscribe((data) => {console.log(data)})
   }
 
   override ngOnInit() {

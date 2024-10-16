@@ -4,6 +4,7 @@ import { IngredientDetailsComponent } from "./ingredient-details/ingredient-deta
 import { IngredientFormComponent } from "./ingredient-form/ingredient-form.component";
 import { IngredientTableComponent } from "./ingredient-table/ingredient-table.component";
 import { ingredientsResolver } from "./ingredients.resolver";
+import { ingredientFormGuard } from "./ingredient-form.guard";
 
 export const ingredientRoutes: Route[] = [
   {
@@ -23,8 +24,16 @@ export const ingredientRoutes: Route[] = [
   {
     path: 'form/:id',
     component: IngredientFormComponent,
+    canActivate: [
+      ingredientFormGuard
+    ],
     resolve: {
       details: ingredientResolver
     },
-  }
+  },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    redirectTo: 'form/'
+  },
 ]

@@ -4,6 +4,7 @@ import { MealDetailsComponent } from "./meal-details/meal-details.component";
 import { mealResolver } from "./meal.resolver";
 import { MealTableComponent } from "./meal-table/meal-table.component";
 import { mealsResolver } from "./meals.resolver";
+import { mealFormGuard } from "./meal-form.guard";
 
 export const mealRoutes: Route[] = [
   {
@@ -23,8 +24,16 @@ export const mealRoutes: Route[] = [
   {
     path: 'form/:id',
     component: MealFormComponent,
+    canActivate: [
+      mealFormGuard
+    ],
     resolve: {
       details: mealResolver
     },
-  }
+  },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    redirectTo: 'form/'
+  },
 ]

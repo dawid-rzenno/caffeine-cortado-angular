@@ -13,7 +13,7 @@ export class NavigationService implements NavigationServiceInterface {
       new NavigationNode('Diets', '/diet', [
         new NavigationNode('List', '/list'),
         new NavigationNode('Details', '/details'),
-        new NavigationNode('Form', '/form'),
+        new NavigationNode('Form', '/new'),
       ]),
       new NavigationNode('Meals', '/meal',[
         new NavigationNode('List', '/list'),

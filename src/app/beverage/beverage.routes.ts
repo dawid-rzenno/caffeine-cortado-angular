@@ -4,6 +4,7 @@ import { BeverageFormComponent } from "./beverage-form/beverage-form.component";
 import { BeverageDetailsComponent } from "./beverage-details/beverage-details.component";
 import { beverageResolver } from "./beverage.resolver";
 import { beveragesResolver } from "./beverages.resolver";
+import { beverageFormGuard } from "./beverage-form.guard";
 
 export const beverageRoutes: Route[] = [
   {
@@ -23,8 +24,16 @@ export const beverageRoutes: Route[] = [
   {
     path: 'form/:id',
     component: BeverageFormComponent,
+    canActivate: [
+      beverageFormGuard
+    ],
     resolve: {
       details: beverageResolver
     },
-  }
+  },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    redirectTo: 'form/'
+  },
 ]

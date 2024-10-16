@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { GetAllRequestParams } from "../shared/table-component-abstract.directive";
+import { DBItem, GetAllRequestParams } from "../shared/table-component-abstract.directive";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 
 @Injectable({
@@ -14,21 +14,21 @@ export class WorkoutService {
 
   constructor(private http: HttpClient) { }
 
-  create(details?: unknown): Observable<unknown> {
-    const body: Partial<unknown> = details ? {} : {};
+  create(details?: DBItem): Observable<DBItem> {
+    const body: Partial<DBItem> = details ? {} : {};
 
-    return this.http.post<unknown>(`${this.endpointUrl}`, body)
+    return this.http.post<DBItem>(`${this.endpointUrl}`, body)
   }
 
-  get(id: string): Observable<unknown> {
-    return this.http.get<unknown>(`${this.endpointUrl}/${id}`)
+  get(id: string): Observable<DBItem> {
+    return this.http.get<DBItem>(`${this.endpointUrl}/${id}`)
   }
 
-  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<unknown>> {
-    return this.http.get<PaginatedResponse<unknown>>(`${this.endpointUrl}`, {
+  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<DBItem>> {
+    return this.http.get<PaginatedResponse<DBItem>>(`${this.endpointUrl}`, {
       params: new HttpParams({ fromObject: params })
     }).pipe(
-      map((paginatedResponse: PaginatedResponse<unknown>) => new PaginatedResponse<unknown>(paginatedResponse))
+      map((paginatedResponse: PaginatedResponse<DBItem>) => new PaginatedResponse<DBItem>(paginatedResponse))
     )
   }
 }

@@ -4,7 +4,5 @@ import { inject } from "@angular/core";
 import { ExerciseService } from "./exercise.service";
 
 export const exerciseResolver: ResolveFn<unknown | PaginatedResponse<unknown>> = (route) => {
-  const id: string | null = route.paramMap.get('id');
-  const service: ExerciseService = inject(ExerciseService);
-  return id ? service.get(id) : service.create()
+  return inject(ExerciseService).get(route.paramMap.get('id') as string);
 };

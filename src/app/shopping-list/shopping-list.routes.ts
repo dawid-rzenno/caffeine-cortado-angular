@@ -4,6 +4,7 @@ import { shoppingListResolver } from "./shopping-list.resolver";
 import { ShoppingListFormComponent } from "./shopping-list-form/shopping-list-form.component";
 import { ShoppingListTableComponent } from "./shopping-list-table/shopping-list-table.component";
 import { shoppingListsResolver } from "./shopping-lists.resolver";
+import { shoppingListFormGuard } from "./shopping-list-form.guard";
 
 export const shoppingListRoutes: Routes = [
   {
@@ -23,8 +24,16 @@ export const shoppingListRoutes: Routes = [
   {
     path: 'form/:id',
     component: ShoppingListFormComponent,
+    canActivate: [
+      shoppingListFormGuard
+    ],
     resolve: {
       details: shoppingListResolver
     },
-  }
+  },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    redirectTo: 'form/'
+  },
 ]

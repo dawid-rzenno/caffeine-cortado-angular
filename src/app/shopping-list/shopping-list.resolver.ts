@@ -4,7 +4,5 @@ import { ShoppingListDetails } from "./shopping-list";
 import { ShoppingListService } from "./shopping-list.service";
 
 export const shoppingListResolver: ResolveFn<ShoppingListDetails> = (route) => {
-  const id: string | null = route.paramMap.get('id');
-  const service: ShoppingListService = inject(ShoppingListService);
-  return id ? service.get(id) : service.create()
+  return inject(ShoppingListService).get(route.paramMap.get('id') as string);
 };

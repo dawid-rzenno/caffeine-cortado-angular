@@ -3,7 +3,5 @@ import { inject } from "@angular/core";
 import { WorkoutService } from "./workout.service";
 
 export const workoutResolver: ResolveFn<unknown> = (route) => {
-  const id: string | null = route.paramMap.get('id');
-  const service: WorkoutService = inject(WorkoutService);
-  return id ? service.get(id) : service.create()
+  return inject(WorkoutService).get(route.paramMap.get('id') as string);
 };
