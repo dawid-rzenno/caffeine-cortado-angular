@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { map, Observable } from "rxjs";
 import { PaginatedResponse } from "../shared/models/paginated-response";
-import { DBItem, GetAllRequestParams } from "../shared/table-component-abstract.directive";
+import { IdentifiedItem, GetAllRequestParams } from "../shared/table-component-abstract.directive";
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +14,21 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  create(details?: DBItem): Observable<DBItem> {
-    const body: Partial<DBItem> = details ? {} : {};
+  create(details?: IdentifiedItem): Observable<IdentifiedItem> {
+    const body: Partial<IdentifiedItem> = details ? {} : {};
 
-    return this.http.post<DBItem>(`${this.endpointUrl}`, body)
+    return this.http.post<IdentifiedItem>(`${this.endpointUrl}`, body)
   }
 
-  get(id: string): Observable<DBItem> {
-    return this.http.get<DBItem>(`${this.endpointUrl}/${id}`)
+  get(id: string): Observable<IdentifiedItem> {
+    return this.http.get<IdentifiedItem>(`${this.endpointUrl}/${id}`)
   }
 
-  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<DBItem>> {
-    return this.http.get<PaginatedResponse<DBItem>>(`${this.endpointUrl}`, {
+  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<IdentifiedItem>> {
+    return this.http.get<PaginatedResponse<IdentifiedItem>>(`${this.endpointUrl}`, {
       params: new HttpParams({ fromObject: params })
     }).pipe(
-      map((paginatedResponse: PaginatedResponse<DBItem>) => new PaginatedResponse<DBItem>(paginatedResponse))
+      map((paginatedResponse: PaginatedResponse<IdentifiedItem>) => new PaginatedResponse<IdentifiedItem>(paginatedResponse))
     )
   }
 }

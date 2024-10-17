@@ -1,10 +1,11 @@
-import { ActivatedRoute } from "@angular/router";
-import { debounceTime, map, mergeMap, Observable, takeUntil } from "rxjs";
+import { ActivatedRoute, Data } from "@angular/router";
+import { debounceTime, filter, map, mergeMap, Observable, takeUntil } from "rxjs";
 import { FormControl, UntypedFormGroup } from "@angular/forms";
 import { Directive, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
 import { GetAllRequestParams } from "../table-component-abstract.directive";
 import { PaginatedResponse } from "../models/paginated-response";
+import { FORM_DATA_KEY } from "../../shopping-list/shopping-list.routes";
 
 export type FormComponentAbstractService<ItemDetails> = {
   create(item: ItemDetails): Observable<ItemDetails>;
@@ -15,13 +16,17 @@ export type SearchComponentAbstractService<Item> = {
 }
 
 @Directive()
-export abstract class FormComponentAbstract<ItemDetails extends Record<string, any>> extends ObservingComponentAbstract implements OnInit {
+export abstract class FormComponentAbstract<DataModel extends Record<string, any>> extends ObservingComponentAbstract implements OnInit {
   abstract formGroup: UntypedFormGroup;
-  abstract defaultFormGroupValue: ItemDetails;
+  abstract defaultFormGroupValue: DataModel;
 
-  readonly details: ItemDetails | undefined = this.route.snapshot.data['details'];
+  readonly dataSource$: Observable<DataModel> = this.route.data.pipe(
+    map((routeData: Data) => routeData[FORM_DATA_KEY]),
+    filter((dataModel: DataModel) => Boolean(dataModel)),
+    takeUntil(this.destroy$)
+  );
 
-  protected constructor(private route: ActivatedRoute, private service: FormComponentAbstractService<ItemDetails>) {
+  protected constructor(private route: ActivatedRoute, private service: FormComponentAbstractService<DataModel>) {
     super();
   }
 
@@ -34,14 +39,14 @@ export abstract class FormComponentAbstract<ItemDetails extends Record<string, a
     )
   }
 
-  optionToNameMapper<T extends {name: string}>(value: T) {
-    return value.name
+  optionToNameMapper<T extends { name: string }>(value: T) {
+    return value.name;
   }
 
   ngOnInit(): void {
-    if (this.details) {
-      this.formGroup.patchValue(this.details);
-    }
+    this.dataSource$.subscribe((dataModel: DataModel) => {
+      this.formGroup.patchValue(dataModel);
+    });
   }
 
   onCreateClick(): void {

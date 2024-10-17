@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { ShoppingList, ShoppingListDetails, ShoppingListRequest } from "./shopping-list";
+import { ShoppingListModel, ShoppingListModel, ShoppingListRequest } from "./shopping-list-model";
 import { GetAllRequestParams } from "../shared/table-component-abstract.directive";
 import { Ingredient } from "../ingredient/ingredient";
 import { PaginatedResponse } from "../shared/models/paginated-response";
@@ -16,30 +16,30 @@ export class ShoppingListService {
 
   constructor(private http: HttpClient) { }
 
-  create(details?: ShoppingListDetails): Observable<ShoppingListDetails> {
+  create(details?: ShoppingListModel): Observable<ShoppingListModel> {
     const body: Partial<ShoppingListRequest> = details ? {
       name: details.name,
       description: details.description,
       ingredient_ids: details.ingredients.map((ingredient: Ingredient) => ingredient.id!),
     } : {};
 
-    return this.http.post<ShoppingListDetails>(`${this.endpointUrl}`, body)
+    return this.http.post<ShoppingListModel>(`${this.endpointUrl}`, body)
   }
 
-  get(id: string): Observable<ShoppingListDetails> {
-    return this.http.get<ShoppingListDetails>(`${this.endpointUrl}/${id}`)
+  get(id: string): Observable<ShoppingListModel> {
+    return this.http.get<ShoppingListModel>(`${this.endpointUrl}/${id}`)
   }
 
-  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<ShoppingList>> {
-    return this.http.get<PaginatedResponse<ShoppingList>>(`${this.endpointUrl}`, {
+  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<ShoppingListModel>> {
+    return this.http.get<PaginatedResponse<ShoppingListModel>>(`${this.endpointUrl}`, {
       params: new HttpParams({ fromObject: params })
     }).pipe(
-      map((paginatedResponse: PaginatedResponse<ShoppingList>) => new PaginatedResponse<ShoppingList>(paginatedResponse))
+      map((paginatedResponse: PaginatedResponse<ShoppingListModel>) => new PaginatedResponse<ShoppingListModel>(paginatedResponse))
     )
   }
 
-  update(details: ShoppingListDetails): Observable<ShoppingListDetails> {
-    return this.http.put<ShoppingListDetails>(`${this.endpointUrl}/${details.id}`, details)
+  update(details: ShoppingListModel): Observable<ShoppingListModel> {
+    return this.http.put<ShoppingListModel>(`${this.endpointUrl}/${details.id}`, details)
   }
 
   delete(id: number): Observable<void> {

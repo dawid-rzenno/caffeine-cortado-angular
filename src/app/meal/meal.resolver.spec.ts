@@ -2,10 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { mealResolver } from './meal.resolver';
-import { Meal, MealDetails } from "./meal";
+import { MealModel, MealModel } from "./meal.model";
 
 describe('mealResolver', () => {
-  const executeResolver: ResolveFn<Meal[] | MealDetails> = (...resolverParameters) =>
+  const executeResolver: ResolveFn<MealModel[] | MealModel> = (...resolverParameters) =>
       TestBed.runInInjectionContext(() => mealResolver(...resolverParameters));
 
   beforeEach(() => {

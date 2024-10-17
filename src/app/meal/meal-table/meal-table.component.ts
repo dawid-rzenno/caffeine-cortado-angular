@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
-import { Meal } from "../meal";
+import { MealModel } from "../meal.model";
 import { TableComponentAbstract } from "../../shared/table-component-abstract.directive";
 import { MatCardModule } from "@angular/material/card";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -26,7 +26,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   templateUrl: './meal-table.component.html',
   styleUrl: './meal-table.component.scss'
 })
-export class MealTableComponent extends TableComponentAbstract<Meal> {
+export class MealTableComponent extends TableComponentAbstract<MealModel> {
   override displayedColumns: string[] = ["id", "name", "description", "rating", "actions"];
 
   constructor(service: MealService, route: ActivatedRoute, dialog: MatDialog) {

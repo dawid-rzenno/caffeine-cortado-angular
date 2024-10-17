@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Meal, MealDetails } from "../meal";
+import { MealModel, MealModel } from "../meal.model";
 import { ActivatedRoute } from "@angular/router";
 import { MealService } from "../meal.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -15,6 +15,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/ma
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { ShoppingListModel } from "../../shopping-list/shopping-list-model";
 
 export type MealForm = {
   id: FormControl<number | undefined>,
@@ -27,7 +28,7 @@ export type MealDetailsForm = MealForm & {
   ingredients: FormArray<FormGroup<IngredientForm>>
 }
 
-export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
+export const createMealForm = (meal: MealModel) => new FormGroup<MealForm>({
   id: new FormControl<number | undefined>(meal.id, {nonNullable: true}),
   name: new FormControl<string>(meal.name, {nonNullable: true}),
   description: new FormControl<string>(meal.description, {nonNullable: true}),
@@ -50,7 +51,7 @@ export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.scss'
 })
-export class MealFormComponent extends FormComponentAbstract<MealDetails> implements OnInit {
+export class MealFormComponent extends FormComponentAbstract<MealModel> implements OnInit {
   readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
   readonly ingredientTableDataSource$: Observable<Ingredient[]> =
     this.ingredientsFormArray.valueChanges.pipe(
@@ -66,7 +67,7 @@ export class MealFormComponent extends FormComponentAbstract<MealDetails> implem
     ingredients: this.ingredientsFormArray,
   });
 
-  readonly defaultFormGroupValue: MealDetails = {
+  readonly defaultFormGroupValue: MealModel = {
     id: undefined,
     name: "",
     description: "",
@@ -86,15 +87,22 @@ export class MealFormComponent extends FormComponentAbstract<MealDetails> implem
 
   override ngOnInit() {
     super.ngOnInit();
-    if (this.details) {
-      for (let ingredient of this.details.ingredients) {
-        this.ingredientsFormArray.push(createIngredientForm(ingredient))
+
+    this.dataSource$.subscribe((details: MealModel) => {
+      for (let ingredient of details?.ingredients) {
+        this.addNewIngredient(ingredient);
       }
-    }
+    });
   }
 
   onOptionSelected(event: MatAutocompleteSelectedEvent): void {
-    this.formGroup.controls.ingredients.push(createIngredientForm(event.option.value))
+    this.addNewIngredient(event.option.value);
     this.ingredientSearchFormControl.reset();
+  }
+
+  protected addNewIngredient(ingredient: Ingredient): void {
+    this.ingredientsFormArray.push(
+      createIngredientForm(ingredient)
+    )
   }
 }

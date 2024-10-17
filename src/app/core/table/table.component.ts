@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { MatButtonModule } from "@angular/material/button";
-import { DBItem } from "../table-component-abstract.directive";
 import { MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
+import { IdentifiedItem } from "../../shared/table-component-abstract.directive";
 
-export type TableRecord = DBItem & {
+export type TableRecord = IdentifiedItem & {
   name: string,
   description: string,
 }

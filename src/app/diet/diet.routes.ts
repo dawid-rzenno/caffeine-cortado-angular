@@ -1,35 +1,31 @@
 import { DietDetailsComponent } from "./diet-details/diet-details.component";
 import { dietResolver } from "./diet.resolver";
 import { DietFormComponent } from "./diet-form/diet-form.component";
-import { RedirectCommand, Router, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 import { DietTableComponent } from "./diet-table/diet-table.component";
 import { dietsResolver } from "./diets.resolver";
-import { DietService } from "./diet.service";
-import { inject } from "@angular/core";
-import { map, tap } from "rxjs";
-import { Diet } from "./diet";
-import { dietFormGuard } from "./diet-form.guard";
+import { FORM_DATA_KEY, TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export const dietRoutes: Routes = [
   {
     path: 'list',
     component: DietTableComponent,
     resolve: {
-      paginatedResponse: dietsResolver
+      [TABLE_DATA_KEY]: dietsResolver
     },
   },
   {
     path: 'details/:id',
     component: DietDetailsComponent,
     resolve: {
-      details: dietResolver
+      [FORM_DATA_KEY]: dietResolver
     },
   },
   {
     path: 'form/:id',
     component: DietFormComponent,
     resolve: {
-      details: dietResolver
+      [FORM_DATA_KEY]: dietResolver
     },
   },
   {

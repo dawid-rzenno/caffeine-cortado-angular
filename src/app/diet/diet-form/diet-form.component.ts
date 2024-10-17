@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
-import { DietDetails } from "../diet";
+import { Diet } from "../diet";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { DietService } from "../diet.service";
@@ -9,12 +9,11 @@ import { MatInputModule } from "@angular/material/input";
 import { AsyncPipe, NgForOf, NgTemplateOutlet } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
-import { Meal } from "../../meal/meal";
+import { MealModel } from "../../meal/meal.model";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
 import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
 import { MatDialog } from "@angular/material/dialog";
-import { takeUntil } from "rxjs";
 
 export type DietForm = {
   id: FormControl<number | undefined>,
@@ -23,7 +22,7 @@ export type DietForm = {
 }
 
 export type DietDetailsForm = DietForm & {
-  meals: FormArray<FormControl<Meal>>
+  meals: FormArray<FormControl<MealModel>>
 }
 
 @Component({
@@ -45,8 +44,8 @@ export type DietDetailsForm = DietForm & {
   templateUrl: './diet-form.component.html',
   styleUrl: './diet-form.component.scss'
 })
-export class DietFormComponent extends FormComponentAbstract<DietDetails> implements OnInit {
-  readonly mealsFormArray: FormArray<FormControl<Meal>> = new FormArray<FormControl<Meal>>([]);
+export class DietFormComponent extends FormComponentAbstract<Diet> implements OnInit {
+  readonly mealsFormArray: FormArray<FormControl<MealModel>> = new FormArray<FormControl<MealModel>>([]);
 
   readonly formGroup: FormGroup<DietDetailsForm> = new FormGroup<DietDetailsForm>({
     id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
@@ -55,7 +54,7 @@ export class DietFormComponent extends FormComponentAbstract<DietDetails> implem
     meals: this.mealsFormArray
   });
 
-  readonly defaultFormGroupValue: DietDetails = {
+  readonly defaultFormGroupValue: Diet = {
     id: undefined,
     name: "",
     description: "",
@@ -66,18 +65,16 @@ export class DietFormComponent extends FormComponentAbstract<DietDetails> implem
 
   constructor(route: ActivatedRoute, service: DietService) {
     super(route, service);
-
-    // ToDo: change behaviour of form components to subscription instead of static data
-    route.data.pipe(takeUntil(this.destroy$)).subscribe((data) => {console.log(data)})
   }
 
-  override ngOnInit() {
+  override ngOnInit(): void {
     super.ngOnInit();
-    if (this.details) {
-      for (let meal of this.details.meals) {
+
+    this.dataSource$.subscribe((details: Diet) => {
+      for (let meal of details.meals) {
         this.addNewMeal(meal);
       }
-    }
+    });
   }
 
   openDialog(): void {
@@ -90,9 +87,9 @@ export class DietFormComponent extends FormComponentAbstract<DietDetails> implem
     // });
   }
 
-  protected addNewMeal(meal: Meal) {
+  protected addNewMeal(meal: MealModel): void {
     this.mealsFormArray.push(
-      new FormControl<Meal>(meal) as FormControl<Meal>
+      new FormControl<MealModel>(meal) as FormControl<MealModel>
     )
   }
 

@@ -7,9 +7,10 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 import { MatPaginatorConfig, PaginationParams } from "./models/mat-paginator-config";
 import { PaginatedResponse } from "./models/paginated-response";
+import { TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
-export type DBItem = {
-  id?: number
+export type IdentifiedItem = {
+  id: number;
 }
 
 export type GetAllRequestParams = Partial<PaginationParams> & {
@@ -17,14 +18,14 @@ export type GetAllRequestParams = Partial<PaginationParams> & {
   parentId?: number;
 }
 
-export type TableComponentAbstractService<Item extends DBItem> = {
+export type TableComponentAbstractService<Item extends IdentifiedItem> = {
   delete(id: number): Observable<void>;
   getAll(params: GetAllRequestParams): Observable<PaginatedResponse<Item>>;
 }
 
 @Directive()
-export abstract class TableComponentAbstract<Item extends DBItem> extends ObservingComponentAbstract {
-  dataSource: Item[] = [];
+export abstract class TableComponentAbstract<Item extends IdentifiedItem> extends ObservingComponentAbstract {
+  items: Item[] = [];
 
   displayedColumns: string[] = ["id", "name", "description", "actions"];
   pageSizeOptions: number[] = MatPaginatorConfig.DefaultPageSizeOptions;
@@ -38,10 +39,9 @@ export abstract class TableComponentAbstract<Item extends DBItem> extends Observ
   ) {
     super();
 
-    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data['paginatedResponse'];
+    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[TABLE_DATA_KEY];
     this.matPaginatorConfig = paginatedResponse.createMatPaginatorConfig();
-    console.log(this.matPaginatorConfig)
-    this.dataSource = paginatedResponse.content;
+    this.items = paginatedResponse.content;
   }
 
   onDeleteClick(item: Item): void {
@@ -62,7 +62,7 @@ export abstract class TableComponentAbstract<Item extends DBItem> extends Observ
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result && item.id) {
         this.service
           .delete(item.id)
@@ -76,9 +76,9 @@ export abstract class TableComponentAbstract<Item extends DBItem> extends Observ
     this.service
       .getAll(params)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: PaginatedResponse<Item>) => {
-        this.matPaginatorConfig = response.createMatPaginatorConfig();
-        this.dataSource = response.content;
+      .subscribe((paginatedResponse: PaginatedResponse<Item>) => {
+        this.matPaginatorConfig = paginatedResponse.createMatPaginatorConfig();
+        this.items = paginatedResponse.content;
       });
   }
 }

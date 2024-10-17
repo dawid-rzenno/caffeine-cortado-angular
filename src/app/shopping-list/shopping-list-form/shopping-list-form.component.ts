@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { ShoppingListDetails } from "../shopping-list";
+import { ShoppingListModel } from "../shopping-list-model";
 import { ActivatedRoute } from "@angular/router";
 import { ShoppingListService } from "../shopping-list.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -17,7 +17,7 @@ import {
   MatOption
 } from "@angular/material/autocomplete";
 import { map, Observable, startWith } from "rxjs";
-import { Ingredient } from "../../ingredient/ingredient";
+import { Ingredient, IngredientDetails } from "../../ingredient/ingredient";
 import { IngredientService } from "../../ingredient/ingredient.service";
 
 export type ShoppingListForm = {
@@ -48,7 +48,7 @@ export type ShoppingListDetailsForm = ShoppingListForm & {
   templateUrl: './shopping-list-form.component.html',
   styleUrl: './shopping-list-form.component.scss'
 })
-export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingListDetails> {
+export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingListModel> implements OnInit {
   readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
   readonly ingredientTableDataSource$: Observable<Ingredient[]> =
     this.ingredientsFormArray.valueChanges.pipe(
@@ -63,7 +63,7 @@ export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingLis
     ingredients: this.ingredientsFormArray,
   })
 
-  readonly defaultFormGroupValue: ShoppingListDetails = {
+  readonly defaultFormGroupValue: ShoppingListModel = {
     id: undefined,
     name: "",
     description: "",
@@ -78,15 +78,25 @@ export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingLis
 
   constructor(route: ActivatedRoute, service: ShoppingListService, private ingredientService: IngredientService) {
     super(route, service);
+  }
 
-    if (this.details) {
-      for (let ingredient of this.details.ingredients) {
-        this.ingredientsFormArray.push(createIngredientForm(ingredient))
+  override ngOnInit(): void {
+    super.ngOnInit();
+
+    this.dataSource$.subscribe((details: ShoppingListModel) => {
+      for (let ingredient of details.ingredients) {
+        this.addNewIngredient(ingredient);
       }
-    }
+    });
   }
 
   onOptionSelected(event: MatAutocompleteSelectedEvent): void {
     this.formGroup.controls.ingredients.push(createIngredientForm(event.option.value))
+  }
+
+  protected addNewIngredient(ingredient: Ingredient): void {
+    this.ingredientsFormArray.push(
+      createIngredientForm(ingredient)
+    )
   }
 }

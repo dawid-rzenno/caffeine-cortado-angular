@@ -1,15 +1,18 @@
-import { DBItem } from "../shared/table-component-abstract.directive";
-import { Meal } from "../meal/meal";
+import { IdentifiedItem } from "../shared/table-component-abstract.directive";
+import { MealModel } from "../meal/meal.model";
 
-export type Diet = DBItem & {
+type DietBase = {
   name: string;
   description: string;
 }
 
-export type DietDetails = Diet & {
-  meals: Meal[];
+export type Diet = IdentifiedItem & DietBase & {
+  meals: MealModel[];
 }
 
-export type DietRequest = Omit<DietDetails, 'meals'> & {
-  meal_ids: number[];
+type PatchDietRequestBase = {
+  meal_ids?: number[];
 }
+
+export type PatchDietRequest = IdentifiedItem & Partial<DietBase & PatchDietRequestBase>;
+export type PatchDietResponse = Partial<Diet>;

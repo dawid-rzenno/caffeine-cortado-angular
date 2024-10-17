@@ -1,10 +1,10 @@
 import { RedirectCommand, ResolveFn, Router } from '@angular/router';
 import { inject } from "@angular/core";
-import { Diet, DietDetails } from "./diet";
+import { Diet } from "./diet";
 import { DietService } from "./diet.service";
 import { map } from "rxjs";
 
-export const dietResolver: ResolveFn<DietDetails>  = (route, state) => {
+export const dietResolver: ResolveFn<Diet>  = (route, state) => {
 
   const service: DietService = inject(DietService);
   const router: Router = inject(Router);

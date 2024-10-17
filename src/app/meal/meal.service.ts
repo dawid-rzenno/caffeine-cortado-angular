@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { Meal, MealDetails, MealRequest } from "./meal";
+import { MealModel, MealModel, MealRequest } from "./meal.model";
 import { GetAllRequestParams, TableComponentAbstractService } from "../shared/table-component-abstract.directive";
 import { Ingredient } from "../ingredient/ingredient";
 import { PaginatedResponse } from "../shared/models/paginated-response";
@@ -10,13 +10,13 @@ import { PaginatedResponse } from "../shared/models/paginated-response";
 @Injectable({
   providedIn: 'root'
 })
-export class MealService implements TableComponentAbstractService<Meal>{
+export class MealService implements TableComponentAbstractService<MealModel>{
 
   private readonly endpointUrl: string = `${environment.apiUrl}/food/meal`;
 
   constructor(private http: HttpClient) { }
 
-  create(details?: MealDetails): Observable<MealDetails> {
+  create(details?: MealModel): Observable<MealModel> {
     const body: Partial<MealRequest> = details ? {
       name: details.name,
       description: details.description,
@@ -24,23 +24,23 @@ export class MealService implements TableComponentAbstractService<Meal>{
       rating: details.rating
     } : {};
 
-    return this.http.post<MealDetails>(`${this.endpointUrl}`, body)
+    return this.http.post<MealModel>(`${this.endpointUrl}`, body)
   }
 
-  get(id: string): Observable<MealDetails> {
-    return this.http.get<MealDetails>(`${this.endpointUrl}/${id}`)
+  get(id: string): Observable<MealModel> {
+    return this.http.get<MealModel>(`${this.endpointUrl}/${id}`)
   }
 
-  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<Meal>> {
-    return this.http.get<PaginatedResponse<Meal>>(`${this.endpointUrl}`, {
+  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<MealModel>> {
+    return this.http.get<PaginatedResponse<MealModel>>(`${this.endpointUrl}`, {
       params: new HttpParams({ fromObject: params })
     }).pipe(
-      map((paginatedResponse: PaginatedResponse<Meal>) => new PaginatedResponse<Meal>(paginatedResponse))
+      map((paginatedResponse: PaginatedResponse<MealModel>) => new PaginatedResponse<MealModel>(paginatedResponse))
     )
   }
 
-  update(details: MealDetails): Observable<MealDetails> {
-    return this.http.put<MealDetails>(`${this.endpointUrl}/${details.id}`, details)
+  update(details: MealModel): Observable<MealModel> {
+    return this.http.put<MealModel>(`${this.endpointUrl}/${details.id}`, details)
   }
 
   delete(id: number): Observable<void> {

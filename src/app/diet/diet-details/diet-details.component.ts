@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { DietDetails } from "../diet";
+import { Diet } from "../diet";
 import { DetailsComponentAbstract } from "../../shared/abstracts/details-component.abstract";
 import { MatCardModule } from "@angular/material/card";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
@@ -16,7 +16,7 @@ import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
   templateUrl: './diet-details.component.html',
   styleUrl: './diet-details.component.scss'
 })
-export class DietDetailsComponent extends DetailsComponentAbstract<DietDetails> {
+export class DietDetailsComponent extends DetailsComponentAbstract<Diet> {
   constructor(route: ActivatedRoute) {
     super(route);
   }

@@ -5,20 +5,21 @@ import { IngredientFormComponent } from "./ingredient-form/ingredient-form.compo
 import { IngredientTableComponent } from "./ingredient-table/ingredient-table.component";
 import { ingredientsResolver } from "./ingredients.resolver";
 import { ingredientFormGuard } from "./ingredient-form.guard";
+import { FORM_DATA_KEY, TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export const ingredientRoutes: Route[] = [
   {
     path: 'list',
     component: IngredientTableComponent,
     resolve: {
-      paginatedResponse: ingredientsResolver
+      [TABLE_DATA_KEY]: ingredientsResolver
     },
   },
   {
     path: 'details/:id',
     component: IngredientDetailsComponent,
     resolve: {
-      details: ingredientResolver
+      [FORM_DATA_KEY]: ingredientResolver
     },
   },
   {
@@ -28,7 +29,7 @@ export const ingredientRoutes: Route[] = [
       ingredientFormGuard
     ],
     resolve: {
-      details: ingredientResolver
+      [FORM_DATA_KEY]: ingredientResolver
     },
   },
   {

@@ -1,6 +1,6 @@
-import { DBItem } from "../shared/table-component-abstract.directive";
+import { IdentifiedItem } from "../shared/table-component-abstract.directive";
 
-export type Ingredient = DBItem & {
+export type Ingredient = IdentifiedItem & {
   name: string;
   category_id: number;
   price: number;
