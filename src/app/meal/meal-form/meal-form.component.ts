@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { MealModel, MealModel } from "../meal.model";
+import { Meal } from "../meal";
 import { ActivatedRoute } from "@angular/router";
 import { MealService } from "../meal.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -15,7 +15,6 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/ma
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { ShoppingListModel } from "../../shopping-list/shopping-list-model";
 
 export type MealForm = {
   id: FormControl<number | undefined>,
@@ -28,10 +27,10 @@ export type MealDetailsForm = MealForm & {
   ingredients: FormArray<FormGroup<IngredientForm>>
 }
 
-export const createMealForm = (meal: MealModel) => new FormGroup<MealForm>({
-  id: new FormControl<number | undefined>(meal.id, {nonNullable: true}),
-  name: new FormControl<string>(meal.name, {nonNullable: true}),
-  description: new FormControl<string>(meal.description, {nonNullable: true}),
+export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
+  id: new FormControl<number | undefined>(meal.id, { nonNullable: true }),
+  name: new FormControl<string>(meal.name, { nonNullable: true }),
+  description: new FormControl<string>(meal.description, { nonNullable: true }),
 })
 
 @Component({
@@ -51,7 +50,7 @@ export const createMealForm = (meal: MealModel) => new FormGroup<MealForm>({
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.scss'
 })
-export class MealFormComponent extends FormComponentAbstract<MealModel> implements OnInit {
+export class MealFormComponent extends FormComponentAbstract<Meal> implements OnInit {
   readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
   readonly ingredientTableDataSource$: Observable<Ingredient[]> =
     this.ingredientsFormArray.valueChanges.pipe(
@@ -60,14 +59,14 @@ export class MealFormComponent extends FormComponentAbstract<MealModel> implemen
     ) as Observable<Ingredient[]>;
 
   readonly formGroup: FormGroup<MealDetailsForm> = new FormGroup<MealDetailsForm>({
-    id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
-    name: new FormControl<string>("", {nonNullable: true}),
-    description: new FormControl<string>("", {nonNullable: true}),
-    rating: new FormControl<number>(2, {nonNullable: true}),
+    id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
+    name: new FormControl<string>("", { nonNullable: true }),
+    description: new FormControl<string>("", { nonNullable: true }),
+    rating: new FormControl<number>(2, { nonNullable: true }),
     ingredients: this.ingredientsFormArray,
   });
 
-  readonly defaultFormGroupValue: MealModel = {
+  readonly defaultFormGroupValue: Partial<Meal> = {
     id: undefined,
     name: "",
     description: "",
@@ -75,7 +74,7 @@ export class MealFormComponent extends FormComponentAbstract<MealModel> implemen
     ingredients: []
   };
 
-  readonly ingredientSearchFormControl: FormControl<string> = new FormControl<string>('', {nonNullable: true})
+  readonly ingredientSearchFormControl: FormControl<string> = new FormControl<string>('', { nonNullable: true })
   readonly ingredientAutocompleteOptions$: Observable<Ingredient[]> = this.createAutocompleteOptions$(
     this.ingredientSearchFormControl,
     this.ingredientService
@@ -88,7 +87,7 @@ export class MealFormComponent extends FormComponentAbstract<MealModel> implemen
   override ngOnInit() {
     super.ngOnInit();
 
-    this.dataSource$.subscribe((details: MealModel) => {
+    this.dataSource$.subscribe((details: Meal) => {
       for (let ingredient of details?.ingredients) {
         this.addNewIngredient(ingredient);
       }

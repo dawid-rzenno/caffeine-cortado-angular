@@ -5,21 +5,21 @@ import { ExerciseTableComponent } from "./exercise-table/exercise-table.componen
 import { exerciseResolver } from "./exercise.resolver";
 import { exercisesResolver } from "./exercises.resolver";
 import { exerciseFormGuard } from "./exercise-form.guard";
-import { FORM_DATA_KEY, TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { DATA_KEY, PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export const exerciseRoutes: Route[] = [
   {
     path: 'list',
     component: ExerciseTableComponent,
     resolve: {
-      [TABLE_DATA_KEY]: exercisesResolver
+      [PAGINATED_DATA_KEY]: exercisesResolver
     },
   },
   {
     path: 'details/:id',
     component: ExerciseDetailsComponent,
     resolve: {
-      [FORM_DATA_KEY]: exerciseResolver
+      [DATA_KEY]: exerciseResolver
     },
   },
   {
@@ -29,7 +29,7 @@ export const exerciseRoutes: Route[] = [
       exerciseFormGuard
     ],
     resolve: {
-      [FORM_DATA_KEY]: exerciseResolver
+      [DATA_KEY]: exerciseResolver
     },
   },
   {

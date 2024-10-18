@@ -5,21 +5,21 @@ import { BeverageDetailsComponent } from "./beverage-details/beverage-details.co
 import { beverageResolver } from "./beverage.resolver";
 import { beveragesResolver } from "./beverages.resolver";
 import { beverageFormGuard } from "./beverage-form.guard";
-import { FORM_DATA_KEY, TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { DATA_KEY, PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export const beverageRoutes: Route[] = [
   {
     path: 'list',
     component: BeverageTableComponent,
     resolve: {
-      [TABLE_DATA_KEY]: beveragesResolver
+      [PAGINATED_DATA_KEY]: beveragesResolver
     },
   },
   {
     path: 'details/:id',
     component: BeverageDetailsComponent,
     resolve: {
-      [FORM_DATA_KEY]: beverageResolver
+      [DATA_KEY]: beverageResolver
     },
   },
   {
@@ -29,7 +29,7 @@ export const beverageRoutes: Route[] = [
       beverageFormGuard
     ],
     resolve: {
-      [FORM_DATA_KEY]: beverageResolver
+      [DATA_KEY]: beverageResolver
     },
   },
   {

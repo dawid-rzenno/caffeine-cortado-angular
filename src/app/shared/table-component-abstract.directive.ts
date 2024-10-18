@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 import { MatPaginatorConfig, PaginationParams } from "./models/mat-paginator-config";
 import { PaginatedResponse } from "./models/paginated-response";
-import { TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export type IdentifiedItem = {
   id: number;
@@ -39,7 +39,7 @@ export abstract class TableComponentAbstract<Item extends IdentifiedItem> extend
   ) {
     super();
 
-    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[TABLE_DATA_KEY];
+    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[PAGINATED_DATA_KEY];
     this.matPaginatorConfig = paginatedResponse.createMatPaginatorConfig();
     this.items = paginatedResponse.content;
   }

@@ -9,7 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { AsyncPipe, NgForOf, NgTemplateOutlet } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
-import { MealModel } from "../../meal/meal.model";
+import { Meal } from "../../meal/meal";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
 import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
@@ -22,7 +22,7 @@ export type DietForm = {
 }
 
 export type DietDetailsForm = DietForm & {
-  meals: FormArray<FormControl<MealModel>>
+  meals: FormArray<FormControl<Meal>>
 }
 
 @Component({
@@ -45,7 +45,7 @@ export type DietDetailsForm = DietForm & {
   styleUrl: './diet-form.component.scss'
 })
 export class DietFormComponent extends FormComponentAbstract<Diet> implements OnInit {
-  readonly mealsFormArray: FormArray<FormControl<MealModel>> = new FormArray<FormControl<MealModel>>([]);
+  readonly mealsFormArray: FormArray<FormControl<Meal>> = new FormArray<FormControl<Meal>>([]);
 
   readonly formGroup: FormGroup<DietDetailsForm> = new FormGroup<DietDetailsForm>({
     id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
@@ -54,7 +54,7 @@ export class DietFormComponent extends FormComponentAbstract<Diet> implements On
     meals: this.mealsFormArray
   });
 
-  readonly defaultFormGroupValue: Diet = {
+  readonly defaultFormGroupValue: Partial<Diet> = {
     id: undefined,
     name: "",
     description: "",
@@ -87,9 +87,9 @@ export class DietFormComponent extends FormComponentAbstract<Diet> implements On
     // });
   }
 
-  protected addNewMeal(meal: MealModel): void {
+  protected addNewMeal(meal: Meal): void {
     this.mealsFormArray.push(
-      new FormControl<MealModel>(meal) as FormControl<MealModel>
+      new FormControl<Meal>(meal) as FormControl<Meal>
     )
   }
 

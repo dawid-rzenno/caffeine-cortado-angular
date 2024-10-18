@@ -1,18 +1,19 @@
 import { IdentifiedItem } from "../shared/table-component-abstract.directive";
 
-export type Ingredient = IdentifiedItem & {
+type IngredientBase = {
   name: string;
   category_id: number;
   price: number;
   quantity?: number;
   amount: number;
-}
-
-export type Nutrients = {
   calories: number;
   proteins: number;
   carbohydrates: number;
   fats: number;
-}
+};
 
-export type IngredientDetails = Ingredient & Nutrients;
+export type Ingredient = IdentifiedItem & IngredientBase;
+
+export type IngredientPatchRequest = IdentifiedItem & Partial<IngredientBase>;
+
+export type IngredientPatchResponse = Partial<Ingredient>;

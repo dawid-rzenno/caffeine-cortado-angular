@@ -17,7 +17,7 @@ import {
   MatOption
 } from "@angular/material/autocomplete";
 import { map, Observable, startWith } from "rxjs";
-import { Ingredient, IngredientDetails } from "../../ingredient/ingredient";
+import { Ingredient } from "../../ingredient/ingredient";
 import { IngredientService } from "../../ingredient/ingredient.service";
 
 export type ShoppingListForm = {
@@ -63,7 +63,7 @@ export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingLis
     ingredients: this.ingredientsFormArray,
   })
 
-  readonly defaultFormGroupValue: ShoppingListModel = {
+  readonly defaultFormGroupValue: Partial<ShoppingListModel> = {
     id: undefined,
     name: "",
     description: "",

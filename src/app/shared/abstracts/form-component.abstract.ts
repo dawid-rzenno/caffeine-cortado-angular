@@ -5,7 +5,7 @@ import { Directive, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
 import { GetAllRequestParams } from "../table-component-abstract.directive";
 import { PaginatedResponse } from "../models/paginated-response";
-import { FORM_DATA_KEY } from "../../shopping-list/shopping-list.routes";
+import { DATA_KEY } from "../../shopping-list/shopping-list.routes";
 
 export type FormComponentAbstractService<ItemDetails> = {
   create(item: ItemDetails): Observable<ItemDetails>;
@@ -18,10 +18,10 @@ export type SearchComponentAbstractService<Item> = {
 @Directive()
 export abstract class FormComponentAbstract<DataModel extends Record<string, any>> extends ObservingComponentAbstract implements OnInit {
   abstract formGroup: UntypedFormGroup;
-  abstract defaultFormGroupValue: DataModel;
+  abstract defaultFormGroupValue: Partial<DataModel>;
 
   readonly dataSource$: Observable<DataModel> = this.route.data.pipe(
-    map((routeData: Data) => routeData[FORM_DATA_KEY]),
+    map((routeData: Data) => routeData[DATA_KEY]),
     filter((dataModel: DataModel) => Boolean(dataModel)),
     takeUntil(this.destroy$)
   );

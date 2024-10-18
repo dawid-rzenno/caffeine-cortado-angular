@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { GetAllRequestParams, TableComponentAbstractService } from "../shared/table-component-abstract.directive";
-import { Diet, Diet, DietRequest } from "./diet";
+import { Diet, DietPatchRequest } from "./diet";
 import { map, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { MealModel } from "../meal/meal.model";
+import { Meal, MealPatchRequest } from "../meal/meal";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 
 @Injectable({
@@ -17,10 +17,10 @@ export class DietService implements TableComponentAbstractService<Diet> {
   constructor(private http: HttpClient) { }
 
   create(details?: Diet): Observable<Diet> {
-    const body: Partial<DietRequest> = details ? {
+    const body: Partial<DietPatchRequest> = details ? {
       name: details.name,
       description: details.description,
-      meal_ids: details.meals.map((meal: MealModel) => meal.id!),
+      meals: details.meals.map((meal: Meal) => ({ id: meal.id } as MealPatchRequest)),
     } : {};
 
     return this.http.post<Diet>(`${this.endpointUrl}`, body)

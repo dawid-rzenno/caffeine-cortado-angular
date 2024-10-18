@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Ingredient, IngredientDetails } from "./ingredient";
+import { Ingredient } from "./ingredient";
 import { GetAllRequestParams, TableComponentAbstractService } from "../shared/table-component-abstract.directive";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 
@@ -15,8 +15,8 @@ export class IngredientService implements TableComponentAbstractService<Ingredie
 
   constructor(private http: HttpClient) { }
 
-  create(details?: IngredientDetails): Observable<IngredientDetails> {
-    const body: Partial<IngredientDetails> = details ? {
+  create(details?: Ingredient): Observable<Ingredient> {
+    const body: Partial<Ingredient> = details ? {
       name: details.name,
       category_id: details.category_id,
       price: details.price,
@@ -26,11 +26,11 @@ export class IngredientService implements TableComponentAbstractService<Ingredie
       fats: details.fats,
     } : {};
 
-    return this.http.post<IngredientDetails>(`${this.endpointUrl}`, body)
+    return this.http.post<Ingredient>(`${this.endpointUrl}`, body)
   }
 
-  get(id: string): Observable<IngredientDetails> {
-    return this.http.get<IngredientDetails>(`${this.endpointUrl}/${id}`)
+  get(id: string): Observable<Ingredient> {
+    return this.http.get<Ingredient>(`${this.endpointUrl}/${id}`)
   }
 
   getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<Ingredient>> {
@@ -41,8 +41,8 @@ export class IngredientService implements TableComponentAbstractService<Ingredie
     )
   }
 
-  update(details: IngredientDetails): Observable<IngredientDetails> {
-    return this.http.put<IngredientDetails>(`${this.endpointUrl}/${details.id}`, details)
+  update(details: Ingredient): Observable<Ingredient> {
+    return this.http.put<Ingredient>(`${this.endpointUrl}/${details.id}`, details)
   }
 
   delete(id: number | undefined): Observable<void> {

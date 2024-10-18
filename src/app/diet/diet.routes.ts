@@ -4,28 +4,28 @@ import { DietFormComponent } from "./diet-form/diet-form.component";
 import { Routes } from "@angular/router";
 import { DietTableComponent } from "./diet-table/diet-table.component";
 import { dietsResolver } from "./diets.resolver";
-import { FORM_DATA_KEY, TABLE_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { DATA_KEY, PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
 
 export const dietRoutes: Routes = [
   {
     path: 'list',
     component: DietTableComponent,
     resolve: {
-      [TABLE_DATA_KEY]: dietsResolver
+      [PAGINATED_DATA_KEY]: dietsResolver
     },
   },
   {
     path: 'details/:id',
     component: DietDetailsComponent,
     resolve: {
-      [FORM_DATA_KEY]: dietResolver
+      [DATA_KEY]: dietResolver
     },
   },
   {
     path: 'form/:id',
     component: DietFormComponent,
     resolve: {
-      [FORM_DATA_KEY]: dietResolver
+      [DATA_KEY]: dietResolver
     },
   },
   {

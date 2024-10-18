@@ -9,7 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
 import { IngredientService } from "../ingredient.service";
-import { Ingredient, IngredientDetails } from "../ingredient";
+import { Ingredient } from "../ingredient";
 
 export type IngredientForm = {
   id: FormControl<number | undefined>,
@@ -52,7 +52,7 @@ export const createIngredientForm = (ingredient: Ingredient) => new FormGroup<In
   templateUrl: './ingredient-form.component.html',
   styleUrl: './ingredient-form.component.scss'
 })
-export class IngredientFormComponent extends FormComponentAbstract<IngredientDetails> {
+export class IngredientFormComponent extends FormComponentAbstract<Ingredient> {
   readonly formGroup: FormGroup<IngredientDetailsForm> = new FormGroup<IngredientDetailsForm>({
     id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
     category_id: new FormControl<number>(0, {nonNullable: true}),
@@ -66,7 +66,7 @@ export class IngredientFormComponent extends FormComponentAbstract<IngredientDet
     fats: new FormControl<number>(0, {nonNullable: true})
   });
 
-  readonly defaultFormGroupValue: IngredientDetails = {
+  readonly defaultFormGroupValue: Partial<Ingredient> = {
     amount: 0,
     calories: 0,
     carbohydrates: 0,
