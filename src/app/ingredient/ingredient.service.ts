@@ -3,13 +3,13 @@ import { map, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Ingredient } from "./ingredient";
-import { GetAllRequestParams, TableComponentAbstractService } from "../shared/table-component-abstract.directive";
+import { GetAllRequestParams, ItemTableComponentAbstractService } from "../shared/item-table-component-abstract.directive";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientService implements TableComponentAbstractService<Ingredient> {
+export class IngredientService implements ItemTableComponentAbstractService<Ingredient> {
 
   private readonly endpointUrl: string = `${environment.apiUrl}/food/ingredient`;
 

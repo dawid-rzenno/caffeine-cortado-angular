@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DetailsComponentAbstract } from "../../shared/abstracts/details-component.abstract";
+import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component-abstract.directive";
 import { Ingredient } from "../ingredient";
 import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
@@ -15,7 +15,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
   templateUrl: './ingredient-details.component.html',
   styleUrl: './ingredient-details.component.scss'
 })
-export class IngredientDetailsComponent extends DetailsComponentAbstract<Ingredient> {
+export class IngredientDetailsComponent extends ItemDetailsComponentAbstract<Ingredient> {
 
   constructor(route: ActivatedRoute) {
     super(route);

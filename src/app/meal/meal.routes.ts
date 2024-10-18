@@ -1,25 +1,25 @@
 import { Route } from "@angular/router";
 import { MealFormComponent } from "./meal-form/meal-form.component";
-import { MealDetailsComponent } from "./meal-details/meal-details.component";
 import { mealResolver } from "./meal.resolver";
 import { MealTableComponent } from "./meal-table/meal-table.component";
 import { mealsResolver } from "./meals.resolver";
 import { mealFormGuard } from "./meal-form.guard";
-import { DATA_KEY, PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+import { MealDetailsComponent } from "./meal-details/meal-details.component";
 
 export const mealRoutes: Route[] = [
   {
     path: 'list',
     component: MealTableComponent,
     resolve: {
-      [PAGINATED_DATA_KEY]: mealsResolver
+      [ITEMS_KEY]: mealsResolver
     },
   },
   {
     path: 'details/:id',
     component: MealDetailsComponent,
     resolve: {
-      [DATA_KEY]: mealResolver
+      [ITEM_KEY]: mealResolver
     },
   },
   {
@@ -29,7 +29,7 @@ export const mealRoutes: Route[] = [
       mealFormGuard
     ],
     resolve: {
-      [DATA_KEY]: mealResolver
+      [ITEM_KEY]: mealResolver
     },
   },
   {

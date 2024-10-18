@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableComponentAbstract } from "../../shared/table-component-abstract.directive";
+import { ItemTableComponentAbstract } from "../../shared/item-table-component-abstract.directive";
 import { MatDialog } from "@angular/material/dialog";
 import { IngredientService } from "../ingredient.service";
 import { Ingredient } from "../ingredient";
@@ -26,7 +26,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   templateUrl: './ingredient-table.component.html',
   styleUrl: './ingredient-table.component.scss'
 })
-export class IngredientTableComponent extends TableComponentAbstract<Ingredient> {
+export class IngredientTableComponent extends ItemTableComponentAbstract<Ingredient> {
   override displayedColumns: string[] = ['id', 'name', 'category', 'price', 'actions']
 
   constructor(service: IngredientService, route: ActivatedRoute, dialog: MatDialog) {

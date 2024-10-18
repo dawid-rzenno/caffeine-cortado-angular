@@ -3,7 +3,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 import { ShoppingListModel, ShoppingListRequest } from "./shopping-list-model";
-import { GetAllRequestParams } from "../shared/table-component-abstract.directive";
+import { GetAllRequestParams } from "../shared/item-table-component-abstract.directive";
 import { Ingredient } from "../ingredient/ingredient";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 

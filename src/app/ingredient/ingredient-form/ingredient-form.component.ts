@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -52,7 +52,7 @@ export const createIngredientForm = (ingredient: Ingredient) => new FormGroup<In
   templateUrl: './ingredient-form.component.html',
   styleUrl: './ingredient-form.component.scss'
 })
-export class IngredientFormComponent extends FormComponentAbstract<Ingredient> {
+export class IngredientFormComponent extends ItemFormComponentAbstract<Ingredient> {
   readonly formGroup: FormGroup<IngredientDetailsForm> = new FormGroup<IngredientDetailsForm>({
     id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
     category_id: new FormControl<number>(0, {nonNullable: true}),

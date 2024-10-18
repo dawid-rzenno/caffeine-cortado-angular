@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Meal } from "../meal";
-import { DetailsComponentAbstract } from "../../shared/abstracts/details-component.abstract";
+import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component-abstract.directive";
 import { MatCardModule } from "@angular/material/card";
 
 @Component({
@@ -14,7 +14,7 @@ import { MatCardModule } from "@angular/material/card";
   templateUrl: './meal-details.component.html',
   styleUrl: './meal-details.component.scss'
 })
-export class MealDetailsComponent extends DetailsComponentAbstract<Meal> {
+export class MealDetailsComponent extends ItemDetailsComponentAbstract<Meal> {
 
   constructor(route: ActivatedRoute) {
     super(route);

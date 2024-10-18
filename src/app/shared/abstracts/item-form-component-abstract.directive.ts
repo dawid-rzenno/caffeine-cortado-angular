@@ -3,9 +3,9 @@ import { debounceTime, filter, map, mergeMap, Observable, takeUntil } from "rxjs
 import { FormControl, UntypedFormGroup } from "@angular/forms";
 import { Directive, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
-import { GetAllRequestParams } from "../table-component-abstract.directive";
+import { GetAllRequestParams } from "../item-table-component-abstract.directive";
 import { PaginatedResponse } from "../models/paginated-response";
-import { DATA_KEY } from "../../shopping-list/shopping-list.routes";
+import { ITEM_KEY } from "../../shopping-list/shopping-list.routes";
 
 export type FormComponentAbstractService<ItemDetails> = {
   create(item: ItemDetails): Observable<ItemDetails>;
@@ -16,17 +16,17 @@ export type SearchComponentAbstractService<Item> = {
 }
 
 @Directive()
-export abstract class FormComponentAbstract<DataModel extends Record<string, any>> extends ObservingComponentAbstract implements OnInit {
+export abstract class ItemFormComponentAbstract<Item extends Record<string, any>> extends ObservingComponentAbstract implements OnInit {
   abstract formGroup: UntypedFormGroup;
-  abstract defaultFormGroupValue: Partial<DataModel>;
+  abstract defaultFormGroupValue: Partial<Item>;
 
-  readonly dataSource$: Observable<DataModel> = this.route.data.pipe(
-    map((routeData: Data) => routeData[DATA_KEY]),
-    filter((dataModel: DataModel) => Boolean(dataModel)),
+  readonly item$: Observable<Item> = this.route.data.pipe(
+    map((routeData: Data) => routeData[ITEM_KEY]),
+    filter((item: Item) => Boolean(item)),
     takeUntil(this.destroy$)
   );
 
-  protected constructor(private route: ActivatedRoute, private service: FormComponentAbstractService<DataModel>) {
+  protected constructor(private route: ActivatedRoute, private service: FormComponentAbstractService<Item>) {
     super();
   }
 
@@ -44,8 +44,8 @@ export abstract class FormComponentAbstract<DataModel extends Record<string, any
   }
 
   ngOnInit(): void {
-    this.dataSource$.subscribe((dataModel: DataModel) => {
-      this.formGroup.patchValue(dataModel);
+    this.item$.subscribe((item: Item) => {
+      this.formGroup.patchValue(item);
     });
   }
 

@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 import { MatPaginatorConfig, PaginationParams } from "./models/mat-paginator-config";
 import { PaginatedResponse } from "./models/paginated-response";
-import { PAGINATED_DATA_KEY } from "../shopping-list/shopping-list.routes";
+import { ITEMS_KEY } from "../shopping-list/shopping-list.routes";
 
 export type IdentifiedItem = {
   id: number;
@@ -18,13 +18,13 @@ export type GetAllRequestParams = Partial<PaginationParams> & {
   parentId?: number;
 }
 
-export type TableComponentAbstractService<Item extends IdentifiedItem> = {
+export type ItemTableComponentAbstractService<Item extends IdentifiedItem> = {
   delete(id: number): Observable<void>;
   getAll(params: GetAllRequestParams): Observable<PaginatedResponse<Item>>;
 }
 
 @Directive()
-export abstract class TableComponentAbstract<Item extends IdentifiedItem> extends ObservingComponentAbstract {
+export abstract class ItemTableComponentAbstract<Item extends IdentifiedItem> extends ObservingComponentAbstract {
   items: Item[] = [];
 
   displayedColumns: string[] = ["id", "name", "description", "actions"];
@@ -33,13 +33,13 @@ export abstract class TableComponentAbstract<Item extends IdentifiedItem> extend
   matPaginatorConfig: MatPaginatorConfig;
 
   protected constructor(
-    private service: TableComponentAbstractService<Item>,
+    private service: ItemTableComponentAbstractService<Item>,
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {
     super();
 
-    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[PAGINATED_DATA_KEY];
+    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[ITEMS_KEY];
     this.matPaginatorConfig = paginatedResponse.createMatPaginatorConfig();
     this.items = paginatedResponse.content;
   }

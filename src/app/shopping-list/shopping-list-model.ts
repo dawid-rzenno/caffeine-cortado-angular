@@ -1,4 +1,4 @@
-import { IdentifiedItem } from "../shared/table-component-abstract.directive";
+import { IdentifiedItem } from "../shared/item-table-component-abstract.directive";
 import { Ingredient } from "../ingredient/ingredient";
 
 export type ShoppingListModel = IdentifiedItem & {

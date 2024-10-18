@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
 import { Diet } from "../diet";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -44,7 +44,7 @@ export type DietDetailsForm = DietForm & {
   templateUrl: './diet-form.component.html',
   styleUrl: './diet-form.component.scss'
 })
-export class DietFormComponent extends FormComponentAbstract<Diet> implements OnInit {
+export class DietFormComponent extends ItemFormComponentAbstract<Diet> implements OnInit {
   readonly mealsFormArray: FormArray<FormControl<Meal>> = new FormArray<FormControl<Meal>>([]);
 
   readonly formGroup: FormGroup<DietDetailsForm> = new FormGroup<DietDetailsForm>({
@@ -70,7 +70,7 @@ export class DietFormComponent extends FormComponentAbstract<Diet> implements On
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.dataSource$.subscribe((details: Diet) => {
+    this.item$.subscribe((details: Diet) => {
       for (let meal of details.meals) {
         this.addNewMeal(meal);
       }

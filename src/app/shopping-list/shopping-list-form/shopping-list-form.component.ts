@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ShoppingListModel } from "../shopping-list-model";
 import { ActivatedRoute } from "@angular/router";
@@ -48,9 +48,9 @@ export type ShoppingListDetailsForm = ShoppingListForm & {
   templateUrl: './shopping-list-form.component.html',
   styleUrl: './shopping-list-form.component.scss'
 })
-export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingListModel> implements OnInit {
+export class ShoppingListFormComponent extends ItemFormComponentAbstract<ShoppingListModel> implements OnInit {
   readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
-  readonly ingredientTableDataSource$: Observable<Ingredient[]> =
+  readonly ingredients$: Observable<Ingredient[]> =
     this.ingredientsFormArray.valueChanges.pipe(
       startWith(() => this.ingredientsFormArray.getRawValue()),
       map(() => this.ingredientsFormArray.getRawValue())
@@ -83,7 +83,7 @@ export class ShoppingListFormComponent extends FormComponentAbstract<ShoppingLis
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.dataSource$.subscribe((details: ShoppingListModel) => {
+    this.item$.subscribe((details: ShoppingListModel) => {
       for (let ingredient of details.ingredients) {
         this.addNewIngredient(ingredient);
       }

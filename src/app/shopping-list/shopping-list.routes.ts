@@ -6,22 +6,22 @@ import { ShoppingListTableComponent } from "./shopping-list-table/shopping-list-
 import { shoppingListsResolver } from "./shopping-lists.resolver";
 import { shoppingListFormGuard } from "./shopping-list-form.guard";
 
-export const PAGINATED_DATA_KEY: string = 'TABLE_DATA_KEY';
-export const DATA_KEY: string = 'FORM_DATA_KEY';
+export const ITEMS_KEY: string = 'ITEMS';
+export const ITEM_KEY: string = 'ITEM';
 
 export const shoppingListRoutes: Routes = [
   {
     path: 'all',
     component: ShoppingListTableComponent,
     resolve: {
-      [PAGINATED_DATA_KEY]: shoppingListsResolver
+      [ITEMS_KEY]: shoppingListsResolver
     },
   },
   {
     path: 'details/:id',
     component: ShoppingListDetailsComponent,
     resolve: {
-      [DATA_KEY]: shoppingListResolver
+      [ITEM_KEY]: shoppingListResolver
     },
   },
   {
@@ -31,7 +31,7 @@ export const shoppingListRoutes: Routes = [
       shoppingListFormGuard
     ],
     resolve: {
-      [DATA_KEY]: shoppingListResolver
+      [ITEM_KEY]: shoppingListResolver
     },
   },
   {

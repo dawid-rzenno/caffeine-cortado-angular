@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { IdentifiedItem, GetAllRequestParams } from "../shared/table-component-abstract.directive";
+import { IdentifiedItem, GetAllRequestParams } from "../shared/item-table-component-abstract.directive";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 
 @Injectable({

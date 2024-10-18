@@ -28,7 +28,7 @@ import { NAVIGATION_SERVICE_TOKEN, NavigationServiceInterface } from "../navigat
 export class SideNavComponent implements AfterViewInit {
   @ViewChild('tree') tree!: MatTree<NavigationNode, NavigationNode>;
 
-  readonly dataSource: NavigationNode[] = this.navigationService.navigationNodes;
+  readonly navigationNodes: NavigationNode[] = this.navigationService.navigationNodes;
 
   readonly childrenAccessor = (node: NavigationNode) => node.nodes ?? [];
   readonly hasNode = (_: number, node: NavigationNode) => !!node.nodes && node.nodes.length > 0;
@@ -41,7 +41,7 @@ export class SideNavComponent implements AfterViewInit {
   }
 
   protected expandTree(): void {
-    for (let node of this.dataSource) {
+    for (let node of this.navigationNodes) {
       this.tree.expandDescendants(node);
     }
   }

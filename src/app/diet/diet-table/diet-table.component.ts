@@ -4,7 +4,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { ActivatedRoute, RouterModule } from "@angular/router";
-import { TableComponentAbstract } from "../../shared/table-component-abstract.directive";
+import { ItemTableComponentAbstract } from "../../shared/item-table-component-abstract.directive";
 import { Diet } from "../diet";
 import { DietService } from "../diet.service";
 import { MatDialog } from "@angular/material/dialog";
@@ -26,7 +26,7 @@ import { NgIf } from "@angular/common";
   templateUrl: './diet-table.component.html',
   styleUrl: './diet-table.component.scss'
 })
-export class DietTableComponent extends TableComponentAbstract<Diet> {
+export class DietTableComponent extends ItemTableComponentAbstract<Diet> {
   constructor(service: DietService, route: ActivatedRoute, dialog: MatDialog) {
     super(service, route, dialog);
   }

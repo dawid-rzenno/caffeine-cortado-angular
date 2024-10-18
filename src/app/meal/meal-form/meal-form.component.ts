@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormComponentAbstract } from "../../shared/abstracts/form-component.abstract";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Meal } from "../meal";
 import { ActivatedRoute } from "@angular/router";
@@ -50,9 +50,9 @@ export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.scss'
 })
-export class MealFormComponent extends FormComponentAbstract<Meal> implements OnInit {
+export class MealFormComponent extends ItemFormComponentAbstract<Meal> implements OnInit {
   readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
-  readonly ingredientTableDataSource$: Observable<Ingredient[]> =
+  readonly ingredients$: Observable<Ingredient[]> =
     this.ingredientsFormArray.valueChanges.pipe(
       startWith(() => this.ingredientsFormArray.getRawValue()),
       map(() => this.ingredientsFormArray.getRawValue())
@@ -87,7 +87,7 @@ export class MealFormComponent extends FormComponentAbstract<Meal> implements On
   override ngOnInit() {
     super.ngOnInit();
 
-    this.dataSource$.subscribe((details: Meal) => {
+    this.item$.subscribe((details: Meal) => {
       for (let ingredient of details?.ingredients) {
         this.addNewIngredient(ingredient);
       }

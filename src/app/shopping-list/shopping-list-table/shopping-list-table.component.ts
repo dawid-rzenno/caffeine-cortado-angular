@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShoppingListModel } from "../shopping-list-model";
-import { TableComponentAbstract } from "../../shared/table-component-abstract.directive";
+import { ItemTableComponentAbstract } from "../../shared/item-table-component-abstract.directive";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
@@ -26,7 +26,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   templateUrl: './shopping-list-table.component.html',
   styleUrl: './shopping-list-table.component.scss'
 })
-export class ShoppingListTableComponent extends TableComponentAbstract<ShoppingListModel> {
+export class ShoppingListTableComponent extends ItemTableComponentAbstract<ShoppingListModel> {
   constructor(service: ShoppingListService, route: ActivatedRoute, dialog: MatDialog) {
     super(service, route, dialog);
   }

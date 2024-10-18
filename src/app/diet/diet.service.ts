@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetAllRequestParams, TableComponentAbstractService } from "../shared/table-component-abstract.directive";
+import { GetAllRequestParams, ItemTableComponentAbstractService } from "../shared/item-table-component-abstract.directive";
 import { Diet, DietPatchRequest } from "./diet";
 import { map, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
@@ -10,7 +10,7 @@ import { PaginatedResponse } from "../shared/models/paginated-response";
 @Injectable({
   providedIn: 'root'
 })
-export class DietService implements TableComponentAbstractService<Diet> {
+export class DietService implements ItemTableComponentAbstractService<Diet> {
 
   private readonly endpointUrl: string = `${environment.apiUrl}/food/diet`;
 
