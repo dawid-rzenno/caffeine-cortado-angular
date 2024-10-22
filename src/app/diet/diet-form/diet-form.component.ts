@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
-import { Diet } from "../diet";
+import { Diet, DietPatch } from "../diet";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { DietService } from "../diet.service";
@@ -13,15 +13,15 @@ import { Meal } from "../../meal/meal";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
 import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { MatIconModule } from "@angular/material/icon";
+import { NameChangeModalComponent } from "./name-change-modal/name-change-modal.component";
+import { filter, switchMap } from "rxjs";
 
 export type DietForm = {
   id: FormControl<number | undefined>,
-  name: FormControl<string>,
-  description: FormControl<string>,
-}
-
-export type DietDetailsForm = DietForm & {
+  name: FormControl<string | undefined>,
   meals: FormArray<FormControl<Meal>>
 }
 
@@ -39,27 +39,25 @@ export type DietDetailsForm = DietForm & {
     AsyncPipe,
     MealTableComponent,
     NgTemplateOutlet,
-    NumberToAdjectivePipe
+    NumberToAdjectivePipe,
+    FaIconComponent,
+    MatIconModule
   ],
   templateUrl: './diet-form.component.html',
   styleUrl: './diet-form.component.scss'
 })
-export class DietFormComponent extends ItemFormComponentAbstract<Diet> implements OnInit {
-  readonly mealsFormArray: FormArray<FormControl<Meal>> = new FormArray<FormControl<Meal>>([]);
+export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch> implements OnInit {
+  get mealControls(): FormArray<FormControl<Meal>> {
+    return this.form.get('meals') as FormArray<FormControl<Meal>>;
+  }
 
-  readonly formGroup: FormGroup<DietDetailsForm> = new FormGroup<DietDetailsForm>({
+  readonly form: FormGroup<DietForm> = new FormGroup<DietForm>({
     id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
     name: new FormControl<string>("", { nonNullable: true }),
-    description: new FormControl<string>("", { nonNullable: true }),
-    meals: this.mealsFormArray
+    meals: new FormArray<FormControl<Meal>>([])
   });
 
-  readonly defaultFormGroupValue: Partial<Diet> = {
-    id: undefined,
-    name: "",
-    description: "",
-    meals: []
-  };
+  defaultFormValue: Diet | undefined;
 
   protected readonly matDialog: MatDialog = inject(MatDialog);
 
@@ -70,8 +68,9 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet> implement
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.item$.subscribe((details: Diet) => {
-      for (let meal of details.meals) {
+    this.initialFormValue$.subscribe((diet: Diet) => {
+      this.defaultFormValue = diet;
+      for (let meal of diet.meals) {
         this.addNewMeal(meal);
       }
     });
@@ -87,11 +86,32 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet> implement
     // });
   }
 
+  onNameEditClick(): void {
+    const dialogRef: MatDialogRef<NameChangeModalComponent, string> = this.matDialog.open(
+      NameChangeModalComponent,
+      { data: { name: this.nameControl.value } }
+    );
+
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter((newName: string | undefined) => Boolean(newName)),
+        switchMap((newName: string | undefined) => this.service.patch({
+          id: this.idControl.value,
+          // @ts-ignore, filter already handles checking if the name is defined
+          name: newName
+        })),
+      )
+      .subscribe((response: DietPatch) => {
+        if (response.name) {
+          this.nameControl.patchValue(response.name);
+        }
+      });
+  }
+
   protected addNewMeal(meal: Meal): void {
-    this.mealsFormArray.push(
+    this.mealControls.push(
       new FormControl<Meal>(meal) as FormControl<Meal>
     )
   }
-
-
 }

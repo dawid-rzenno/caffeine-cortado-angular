@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { NgForOf } from "@angular/common";
-import { ShoppingListModel } from "../shopping-list-model";
+import { ShoppingList } from "../shopping-list";
 import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component-abstract.directive";
 import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle } from "@angular/material/card";
 
@@ -20,7 +20,7 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle }
   templateUrl: './shopping-list-details.component.html',
   styleUrl: './shopping-list-details.component.scss'
 })
-export class ShoppingListDetailsComponent extends ItemDetailsComponentAbstract<ShoppingListModel> {
+export class ShoppingListDetailsComponent extends ItemDetailsComponentAbstract<ShoppingList> {
 
   constructor(route: ActivatedRoute) {
     super(route);

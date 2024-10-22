@@ -1,4 +1,5 @@
 import { MatPaginatorConfig } from "./mat-paginator-config";
+import { ItemBase } from "../item-table-component-abstract.directive";
 
 export type Sort = {
   empty: boolean;
@@ -15,13 +16,13 @@ export type Pageable = {
   unpaged: boolean;
 };
 
-type PaginatedResponseArgs<T> = Omit<PaginatedResponse<T>, 'createMatPaginatorConfig'>
+type PaginatedResponseArgs<T extends ItemBase> = Omit<PaginatedResponse<T>, 'createMatPaginatorConfig'>
 
-export class PaginatedResponse<DataModel> {
+export class PaginatedResponse<Item extends ItemBase> {
   totalElements: number;
   totalPages: number;
   size: number;
-  content: DataModel[];
+  content: Item[];
   number: number;
   sort: Sort;
   numberOfElements: number;
@@ -30,7 +31,7 @@ export class PaginatedResponse<DataModel> {
   last: boolean;
   empty: boolean;
 
-  constructor(args: PaginatedResponseArgs<DataModel>) {
+  constructor(args: PaginatedResponseArgs<Item>) {
     this.totalElements = args.totalElements;
     this.totalPages = args.totalPages;
     this.size = args.size;

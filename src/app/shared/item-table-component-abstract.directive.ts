@@ -1,4 +1,4 @@
-import { Observable, takeUntil } from "rxjs";
+import { map, Observable, takeUntil } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { ObservingComponentAbstract } from "./abstracts/observing-component.abstract";
 import { Directive } from "@angular/core";
@@ -8,32 +8,75 @@ import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation
 import { MatPaginatorConfig, PaginationParams } from "./models/mat-paginator-config";
 import { PaginatedResponse } from "./models/paginated-response";
 import { ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
-export type IdentifiedItem = {
-  id: number;
-}
+export type Id = number;
+
+export type ItemBase = { id: Id; };
+
+export type SearchResult = ItemBase & {
+  name: string;
+};
 
 export type GetAllRequestParams = Partial<PaginationParams> & {
   search?: string;
   parentId?: number;
 }
 
-export type ItemTableComponentAbstractService<Item extends IdentifiedItem> = {
-  delete(id: number): Observable<void>;
-  getAll(params: GetAllRequestParams): Observable<PaginatedResponse<Item>>;
+@Directive()
+export abstract class ItemServiceAbstract<
+  Item extends ItemBase,
+  ItemPatch extends ItemBase
+> {
+  protected abstract endpointUrl: string;
+
+  protected constructor(protected http: HttpClient) {}
+
+  create(): Observable<Item> {
+    return this.http.post<Item>(`${this.endpointUrl}`, undefined)
+  }
+
+  get(id: string): Observable<Item> {
+    return this.http.get<Item>(`${this.endpointUrl}/${id}`)
+  }
+
+  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<Item>> {
+    return this.http.get<PaginatedResponse<Item>>(`${this.endpointUrl}`, {
+      params: new HttpParams({ fromObject: params })
+    }).pipe(
+      map((paginatedResponse: PaginatedResponse<Item>) => new PaginatedResponse<Item>(paginatedResponse))
+    )
+  }
+
+  patch(patch: ItemPatch): Observable<ItemPatch> {
+    return this.http.patch<ItemPatch>(`${this.endpointUrl}/${patch.id}`, patch)
+  }
+
+  search(params?: GetAllRequestParams): Observable<PaginatedResponse<SearchResult>> {
+    return this.http.get<PaginatedResponse<SearchResult>>(`${this.endpointUrl}/search`, {
+      params: new HttpParams({ fromObject: params })
+    }).pipe(
+      map((paginatedResponse: PaginatedResponse<SearchResult>) =>
+        new PaginatedResponse<SearchResult>(paginatedResponse))
+    )
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.endpointUrl}/${id}`)
+  }
 }
 
 @Directive()
-export abstract class ItemTableComponentAbstract<Item extends IdentifiedItem> extends ObservingComponentAbstract {
+export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPatch extends ItemBase> extends ObservingComponentAbstract {
   items: Item[] = [];
 
-  displayedColumns: string[] = ["id", "name", "description", "actions"];
+  displayedColumns: string[] = ["id", "name", "actions"];
   pageSizeOptions: number[] = MatPaginatorConfig.DefaultPageSizeOptions;
 
   matPaginatorConfig: MatPaginatorConfig;
 
   protected constructor(
-    private service: ItemTableComponentAbstractService<Item>,
+    private service: ItemServiceAbstract<Item, ItemPatch>,
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {

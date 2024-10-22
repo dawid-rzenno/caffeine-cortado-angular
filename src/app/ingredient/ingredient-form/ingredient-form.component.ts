@@ -9,7 +9,8 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
 import { IngredientService } from "../ingredient.service";
-import { Ingredient } from "../ingredient";
+import { Ingredient, IngredientPatch } from "../ingredient";
+import { SearchResult } from "../../shared/item-table-component-abstract.directive";
 
 export type IngredientForm = {
   id: FormControl<number | undefined>,
@@ -26,6 +27,16 @@ export type IngredientDetailsForm = IngredientForm & {
   carbohydrates: FormControl<number>,
   fats: FormControl<number>
 }
+
+export type SearchResultForm = {
+  id: FormControl<number | undefined>,
+  name: FormControl<string>,
+}
+
+export const createSearchResultForm = (searchResult: SearchResult) => new FormGroup<SearchResultForm>({
+  id: new FormControl<number | undefined>(searchResult.id, {nonNullable: true}),
+  name: new FormControl<string>(searchResult.name, {nonNullable: true}),
+})
 
 export const createIngredientForm = (ingredient: Ingredient) => new FormGroup<IngredientForm>({
   id: new FormControl<number | undefined>(ingredient.id, {nonNullable: true}),
@@ -52,8 +63,8 @@ export const createIngredientForm = (ingredient: Ingredient) => new FormGroup<In
   templateUrl: './ingredient-form.component.html',
   styleUrl: './ingredient-form.component.scss'
 })
-export class IngredientFormComponent extends ItemFormComponentAbstract<Ingredient> {
-  readonly formGroup: FormGroup<IngredientDetailsForm> = new FormGroup<IngredientDetailsForm>({
+export class IngredientFormComponent extends ItemFormComponentAbstract<Ingredient, IngredientPatch> {
+  readonly form: FormGroup<IngredientDetailsForm> = new FormGroup<IngredientDetailsForm>({
     id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
     category_id: new FormControl<number>(0, {nonNullable: true}),
     name: new FormControl<string>('', {nonNullable: true}),
@@ -66,7 +77,7 @@ export class IngredientFormComponent extends ItemFormComponentAbstract<Ingredien
     fats: new FormControl<number>(0, {nonNullable: true})
   });
 
-  readonly defaultFormGroupValue: Partial<Ingredient> = {
+  readonly defaultFormValue: Partial<Ingredient> = {
     amount: 0,
     calories: 0,
     carbohydrates: 0,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Meal } from "../meal";
+import { Meal, MealPatch } from "../meal";
 import { ActivatedRoute } from "@angular/router";
 import { MealService } from "../meal.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -9,28 +9,26 @@ import { MatInputModule } from "@angular/material/input";
 import { AsyncPipe, NgForOf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
-import { createIngredientForm, IngredientForm } from "../../ingredient/ingredient-form/ingredient-form.component";
-import { Ingredient } from "../../ingredient/ingredient";
+import { createSearchResultForm, SearchResultForm } from "../../ingredient/ingredient-form/ingredient-form.component";
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { SearchResult } from "../../shared/item-table-component-abstract.directive";
 
 export type MealForm = {
   id: FormControl<number | undefined>,
   name: FormControl<string>,
-  description: FormControl<string>,
 }
 
 export type MealDetailsForm = MealForm & {
   rating: FormControl<number>,
-  ingredients: FormArray<FormGroup<IngredientForm>>
+  ingredients: FormArray<FormGroup<SearchResultForm>>
 }
 
 export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
   id: new FormControl<number | undefined>(meal.id, { nonNullable: true }),
-  name: new FormControl<string>(meal.name, { nonNullable: true }),
-  description: new FormControl<string>(meal.description, { nonNullable: true }),
+  name: new FormControl<string>(meal.name, { nonNullable: true })
 })
 
 @Component({
@@ -50,32 +48,30 @@ export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.scss'
 })
-export class MealFormComponent extends ItemFormComponentAbstract<Meal> implements OnInit {
-  readonly ingredientsFormArray: FormArray<FormGroup<IngredientForm>> = new FormArray<FormGroup<IngredientForm>>([])
-  readonly ingredients$: Observable<Ingredient[]> =
+export class MealFormComponent extends ItemFormComponentAbstract<Meal, MealPatch> implements OnInit {
+  readonly ingredientsFormArray: FormArray<FormGroup<SearchResultForm>> = new FormArray<FormGroup<SearchResultForm>>([])
+  readonly ingredients$: Observable<SearchResult[]> =
     this.ingredientsFormArray.valueChanges.pipe(
       startWith(() => this.ingredientsFormArray.getRawValue()),
       map(() => this.ingredientsFormArray.getRawValue())
-    ) as Observable<Ingredient[]>;
+    ) as Observable<SearchResult[]>;
 
-  readonly formGroup: FormGroup<MealDetailsForm> = new FormGroup<MealDetailsForm>({
+  readonly form: FormGroup<MealDetailsForm> = new FormGroup<MealDetailsForm>({
     id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
     name: new FormControl<string>("", { nonNullable: true }),
-    description: new FormControl<string>("", { nonNullable: true }),
     rating: new FormControl<number>(2, { nonNullable: true }),
     ingredients: this.ingredientsFormArray,
   });
 
-  readonly defaultFormGroupValue: Partial<Meal> = {
+  readonly defaultFormValue: Partial<Meal> = {
     id: undefined,
     name: "",
-    description: "",
     rating: 2,
     ingredients: []
   };
 
   readonly ingredientSearchFormControl: FormControl<string> = new FormControl<string>('', { nonNullable: true })
-  readonly ingredientAutocompleteOptions$: Observable<Ingredient[]> = this.createAutocompleteOptions$(
+  readonly ingredientAutocompleteOptions$: Observable<SearchResult[]> = this.createAutocompleteOptions$(
     this.ingredientSearchFormControl,
     this.ingredientService
   );
@@ -87,7 +83,7 @@ export class MealFormComponent extends ItemFormComponentAbstract<Meal> implement
   override ngOnInit() {
     super.ngOnInit();
 
-    this.item$.subscribe((details: Meal) => {
+    this.initialFormValue$.subscribe((details: Meal) => {
       for (let ingredient of details?.ingredients) {
         this.addNewIngredient(ingredient);
       }
@@ -99,9 +95,9 @@ export class MealFormComponent extends ItemFormComponentAbstract<Meal> implement
     this.ingredientSearchFormControl.reset();
   }
 
-  protected addNewIngredient(ingredient: Ingredient): void {
+  protected addNewIngredient(ingredient: SearchResult): void {
     this.ingredientsFormArray.push(
-      createIngredientForm(ingredient)
+      createSearchResultForm(ingredient)
     )
   }
 }

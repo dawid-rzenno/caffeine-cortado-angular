@@ -2,10 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { shoppingListResolver } from './shopping-list.resolver';
-import { ShoppingListModel, ShoppingListModel } from "./shopping-list-model";
+import { ShoppingList } from "./shopping-list";
 
 describe('shoppingListResolver', () => {
-  const executeResolver: ResolveFn<ShoppingListModel[] | ShoppingListModel> = (...resolverParameters) =>
+  const executeResolver: ResolveFn<ShoppingList[] | ShoppingList> = (...resolverParameters) =>
       TestBed.runInInjectionContext(() => shoppingListResolver(...resolverParameters));
 
   beforeEach(() => {

@@ -1,15 +1,14 @@
 import { ItemBase } from "../shared/item-table-component-abstract.directive";
 import { Ingredient, IngredientPatch } from "../ingredient/ingredient";
 
-type MealBase = {
+type ShoppingListBase = {
   name: string;
-  rating: number;
-}
+};
 
-export type Meal = ItemBase & MealBase & {
+export type ShoppingList = ItemBase & ShoppingListBase & {
   ingredients: Ingredient[]
-}
+};
 
-export type MealPatch = ItemBase & Partial<MealBase & {
+export type ShoppingListPatch = ItemBase & Partial<ShoppingListBase & {
   ingredients: IngredientPatch[]
 }>;

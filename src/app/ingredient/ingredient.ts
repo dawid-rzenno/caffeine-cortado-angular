@@ -1,4 +1,4 @@
-import { IdentifiedItem } from "../shared/item-table-component-abstract.directive";
+import { ItemBase } from "../shared/item-table-component-abstract.directive";
 
 type IngredientBase = {
   name: string;
@@ -12,8 +12,6 @@ type IngredientBase = {
   fats: number;
 };
 
-export type Ingredient = IdentifiedItem & IngredientBase;
+export type Ingredient = ItemBase & IngredientBase;
 
-export type IngredientPatchRequest = IdentifiedItem & Partial<IngredientBase>;
-
-export type IngredientPatchResponse = Partial<Ingredient>;
+export type IngredientPatch = ItemBase & Partial<IngredientBase & {}>;

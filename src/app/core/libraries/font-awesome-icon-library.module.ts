@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import {
   faCaretDown,
   faChevronRight,
-  faClose,
+  faClose, faEdit,
   faHeartPulse,
   faMugHot,
   faPlus,
@@ -23,7 +23,8 @@ export class FontAwesomeIconLibraryModule {
       faClose,
       faWarning,
       faHeartPulse,
-      faChevronRight
+      faChevronRight,
+      faEdit
     );
   }
 }

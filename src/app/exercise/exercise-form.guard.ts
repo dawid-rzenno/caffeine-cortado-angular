@@ -2,7 +2,7 @@ import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
 import { inject } from "@angular/core";
 import { map } from "rxjs";
 import { ExerciseService } from "./exercise.service";
-import { IdentifiedItem } from "../shared/item-table-component-abstract.directive";
+import { ItemBase } from "../shared/item-table-component-abstract.directive";
 
 export const exerciseFormGuard: CanActivateFn = (route, state) => {
   const service: ExerciseService = inject(ExerciseService);
@@ -11,7 +11,7 @@ export const exerciseFormGuard: CanActivateFn = (route, state) => {
   return route.paramMap.get('id')
     ? true
     : service.create().pipe(
-    map((exercise: IdentifiedItem) => new RedirectCommand(
+    map((exercise: ItemBase) => new RedirectCommand(
       router.createUrlTree([state.url, exercise.id])
     ))
   );

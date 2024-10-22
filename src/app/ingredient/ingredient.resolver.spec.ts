@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { ingredientResolver } from './ingredient.resolver';
-import { Ingredient, Ingredient } from "./ingredient";
 
 describe('ingredientResolver', () => {
   const executeResolver: ResolveFn<Ingredient[] | Ingredient> = (...resolverParameters) =>
