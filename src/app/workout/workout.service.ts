@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { GetAllRequestParams } from "../shared/abstracts/item-table-component.abstract";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 import { ItemBase } from "../shared/models/item-base";
+import { PaginationParams } from "../shared/models/mat-paginator-config";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class WorkoutService {
     return this.http.get<ItemBase>(`${this.endpointUrl}/${id}`)
   }
 
-  getAll(params?: GetAllRequestParams): Observable<PaginatedResponse<ItemBase>> {
+  getAll(params?: Partial<PaginationParams>): Observable<PaginatedResponse<ItemBase>> {
     return this.http.get<PaginatedResponse<ItemBase>>(`${this.endpointUrl}`, {
       params: new HttpParams({ fromObject: params })
     }).pipe(
