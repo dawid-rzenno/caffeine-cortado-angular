@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Meal, MealPatch } from "./meal";
-import { ItemServiceAbstract } from "../shared/item-table-component-abstract.directive";
+import { ItemServiceAbstract } from "../shared/abstracts/item-table-component-abstract.directive";
 
 @Injectable({
   providedIn: 'root'

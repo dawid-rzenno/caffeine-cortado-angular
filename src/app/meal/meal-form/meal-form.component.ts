@@ -14,7 +14,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/ma
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { SearchResult } from "../../shared/item-table-component-abstract.directive";
+import { SearchResult } from "../../shared/abstracts/item-table-component-abstract.directive";
 
 export type MealForm = {
   id: FormControl<number | undefined>,

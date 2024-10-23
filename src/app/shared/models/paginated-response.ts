@@ -1,5 +1,5 @@
 import { MatPaginatorConfig } from "./mat-paginator-config";
-import { ItemBase } from "../item-table-component-abstract.directive";
+import { ItemBase } from "../abstracts/item-table-component-abstract.directive";
 
 export type Sort = {
   empty: boolean;

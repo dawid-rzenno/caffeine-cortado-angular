@@ -1,4 +1,4 @@
-import { ItemBase } from "../shared/item-table-component-abstract.directive";
+import { ItemBase } from "../shared/abstracts/item-table-component-abstract.directive";
 import { Ingredient, IngredientPatch } from "../ingredient/ingredient";
 
 type MealBase = {

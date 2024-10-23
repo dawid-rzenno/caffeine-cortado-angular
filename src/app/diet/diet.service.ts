@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ItemServiceAbstract } from "../shared/item-table-component-abstract.directive";
+import { ItemServiceAbstract } from "../shared/abstracts/item-table-component-abstract.directive";
 import { Diet, DietPatch } from "./diet";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";

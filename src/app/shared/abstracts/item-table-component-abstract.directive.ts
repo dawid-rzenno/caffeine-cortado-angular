@@ -1,13 +1,13 @@
 import { map, Observable, takeUntil } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
-import { ObservingComponentAbstract } from "./abstracts/observing-component.abstract";
+import { ObservingComponentAbstract } from "./observing-component.abstract";
 import { Directive } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
-import { MatPaginatorConfig, PaginationParams } from "./models/mat-paginator-config";
-import { PaginatedResponse } from "./models/paginated-response";
-import { ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
+import { MatPaginatorConfig, PaginationParams } from "../models/mat-paginator-config";
+import { PaginatedResponse } from "../models/paginated-response";
+import { ITEMS_KEY } from "../../shopping-list/shopping-list.routes";
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 export type Id = number;

@@ -7,7 +7,7 @@ import {
   GetAllRequestParams,
   ItemBase,
   SearchResult
-} from "../item-table-component-abstract.directive";
+} from "./item-table-component-abstract.directive";
 import { PaginatedResponse } from "../models/paginated-response";
 import { ITEM_KEY } from "../../shopping-list/shopping-list.routes";
 

@@ -10,7 +10,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
 import { IngredientService } from "../ingredient.service";
 import { Ingredient, IngredientPatch } from "../ingredient";
-import { SearchResult } from "../../shared/item-table-component-abstract.directive";
+import { SearchResult } from "../../shared/abstracts/item-table-component-abstract.directive";
 
 export type IngredientForm = {
   id: FormControl<number | undefined>,

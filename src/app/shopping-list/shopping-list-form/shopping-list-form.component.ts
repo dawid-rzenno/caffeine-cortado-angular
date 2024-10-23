@@ -18,7 +18,7 @@ import {
 } from "@angular/material/autocomplete";
 import { map, Observable, startWith } from "rxjs";
 import { IngredientService } from "../../ingredient/ingredient.service";
-import { SearchResult } from "../../shared/item-table-component-abstract.directive";
+import { SearchResult } from "../../shared/abstracts/item-table-component-abstract.directive";
 
 export type ShoppingListForm = {
   id: FormControl<number | undefined>,
