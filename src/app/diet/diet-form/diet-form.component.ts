@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { Diet, DietPatch } from "../diet";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";

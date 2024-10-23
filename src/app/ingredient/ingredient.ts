@@ -1,4 +1,4 @@
-import { ItemBase } from "../shared/abstracts/item-table-component-abstract.directive";
+import { ItemBase } from "../shared/models/item-base";
 
 type IngredientBase = {
   name: string;

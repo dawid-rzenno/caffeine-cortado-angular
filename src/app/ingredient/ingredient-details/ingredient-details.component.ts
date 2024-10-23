@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component-abstract.directive";
+import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component.abstract";
 import { Ingredient } from "../ingredient";
 import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";

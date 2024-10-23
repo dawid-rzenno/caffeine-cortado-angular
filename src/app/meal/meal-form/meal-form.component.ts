@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Meal, MealPatch } from "../meal";
 import { ActivatedRoute } from "@angular/router";
@@ -14,7 +14,8 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/ma
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { SearchResult } from "../../shared/abstracts/item-table-component-abstract.directive";
+
+import { SearchResult } from "../../shared/models/search-result";
 
 export type MealForm = {
   id: FormControl<number | undefined>,

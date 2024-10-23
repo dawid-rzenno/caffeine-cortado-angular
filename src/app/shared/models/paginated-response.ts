@@ -1,20 +1,8 @@
 import { MatPaginatorConfig } from "./mat-paginator-config";
-import { ItemBase } from "../abstracts/item-table-component-abstract.directive";
 
-export type Sort = {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
-};
-
-export type Pageable = {
-  pageNumber: number;
-  pageSize: number;
-  sort: Sort;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
-};
+import { ItemBase } from "./item-base";
+import { Sort } from "./sort";
+import { Pageable } from "./pageable";
 
 type PaginatedResponseArgs<T extends ItemBase> = Omit<PaginatedResponse<T>, 'createMatPaginatorConfig'>
 

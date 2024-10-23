@@ -3,13 +3,11 @@ import { debounceTime, filter, map, mergeMap, Observable, shareReplay, takeUntil
 import { FormControl, UntypedFormGroup } from "@angular/forms";
 import { Directive, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
-import {
-  GetAllRequestParams,
-  ItemBase,
-  SearchResult
-} from "./item-table-component-abstract.directive";
 import { PaginatedResponse } from "../models/paginated-response";
 import { ITEM_KEY } from "../../shopping-list/shopping-list.routes";
+import { ItemBase } from "../models/item-base";
+import { SearchResult } from "../models/search-result";
+import { PaginationParams } from "../models/mat-paginator-config";
 
 export type FormComponentAbstractService<Item extends ItemBase, ItemPatch extends ItemBase> = {
   create(item: Item): Observable<Item>;
@@ -17,8 +15,11 @@ export type FormComponentAbstractService<Item extends ItemBase, ItemPatch extend
   delete(id: number): Observable<void>
 }
 
+export type SearchParams = { name: string }
+
 export type SearchComponentAbstractService<Item extends SearchResult> = {
-  getAll(data: GetAllRequestParams): Observable<PaginatedResponse<Item>>;
+  getAll(params: Partial<PaginationParams>): Observable<PaginatedResponse<Item>>;
+  search(params: Partial<PaginationParams & SearchParams>): Observable<PaginatedResponse<SearchResult>>;
 }
 
 @Directive()
@@ -36,23 +37,29 @@ export abstract class ItemFormComponentAbstract<
     takeUntil(this.destroy$)
   );
 
-  get idControl(): FormControl<number> {
+  protected get idControl(): FormControl<number> {
     return this.form.get('id') as FormControl<number>;
   }
 
-  get nameControl(): FormControl<string> {
+  protected get nameControl(): FormControl<string> {
     return this.form.get('name') as FormControl<string>;
   }
 
-  protected constructor(protected route: ActivatedRoute, protected service: FormComponentAbstractService<Item, ItemPatch>) {
+  protected constructor(
+    protected route: ActivatedRoute,
+    protected service: FormComponentAbstractService<Item, ItemPatch>
+  ) {
     super();
   }
 
-  createAutocompleteOptions$<Option extends SearchResult>(searchFormControl: FormControl<string>, service: SearchComponentAbstractService<Option>): Observable<Option[]> {
+  createAutocompleteOptions$(
+    searchFormControl: FormControl<string>,
+    service: SearchComponentAbstractService<SearchResult>
+  ): Observable<SearchResult[]> {
     return searchFormControl.valueChanges.pipe(
       debounceTime(250),
-      mergeMap((search: string) => service.getAll({ search })),
-      map((response: PaginatedResponse<Option>) => response.content),
+      mergeMap((search: string) => service.search({ name: search })),
+      map((response: PaginatedResponse<SearchResult>) => response.content),
       takeUntil(this.destroy$)
     )
   }

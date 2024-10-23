@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component-abstract.directive";
+import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -10,7 +10,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
 import { IngredientService } from "../ingredient.service";
 import { Ingredient, IngredientPatch } from "../ingredient";
-import { SearchResult } from "../../shared/abstracts/item-table-component-abstract.directive";
+
+import { SearchResult } from "../../shared/models/search-result";
 
 export type IngredientForm = {
   id: FormControl<number | undefined>,

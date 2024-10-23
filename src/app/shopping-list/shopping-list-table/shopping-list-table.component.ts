@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShoppingList, ShoppingListPatch } from "../shopping-list";
-import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component-abstract.directive";
+import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component.abstract";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";

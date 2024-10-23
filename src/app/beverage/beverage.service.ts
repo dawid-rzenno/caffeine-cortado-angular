@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, Observable } from "rxjs";
-import { ItemBase, GetAllRequestParams } from "../shared/abstracts/item-table-component-abstract.directive";
+import { GetAllRequestParams } from "../shared/abstracts/item-table-component.abstract";
 import { PaginatedResponse } from "../shared/models/paginated-response";
+import { ItemBase } from "../shared/models/item-base";
 
 @Injectable({
   providedIn: 'root'

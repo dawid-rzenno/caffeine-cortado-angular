@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component-abstract.directive";
+import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component.abstract";
 import { MatDialog } from "@angular/material/dialog";
 import { IngredientService } from "../ingredient.service";
 import { Ingredient, IngredientPatch } from "../ingredient";

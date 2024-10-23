@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { NgForOf } from "@angular/common";
 import { ShoppingList } from "../shopping-list";
-import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component-abstract.directive";
+import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component.abstract";
 import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle } from "@angular/material/card";
 
 @Component({

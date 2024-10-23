@@ -2,7 +2,8 @@ import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
 import { inject } from "@angular/core";
 import { map } from "rxjs";
 import { ExerciseService } from "./exercise.service";
-import { ItemBase } from "../shared/abstracts/item-table-component-abstract.directive";
+
+import { ItemBase } from "../shared/models/item-base";
 
 export const exerciseFormGuard: CanActivateFn = (route, state) => {
   const service: ExerciseService = inject(ExerciseService);

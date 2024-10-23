@@ -1,5 +1,5 @@
-import { ItemBase } from "../shared/abstracts/item-table-component-abstract.directive";
 import { Ingredient, IngredientPatch } from "../ingredient/ingredient";
+import { ItemBase } from "../shared/models/item-base";
 
 type MealBase = {
   name: string;

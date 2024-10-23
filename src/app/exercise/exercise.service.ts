@@ -3,7 +3,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { map, Observable } from "rxjs";
 import { PaginatedResponse } from "../shared/models/paginated-response";
-import { ItemBase, GetAllRequestParams } from "../shared/abstracts/item-table-component-abstract.directive";
+import { GetAllRequestParams } from "../shared/abstracts/item-table-component.abstract";
+import { ItemBase } from "../shared/models/item-base";
 
 @Injectable({
   providedIn: 'root'
