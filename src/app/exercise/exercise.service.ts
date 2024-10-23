@@ -15,10 +15,8 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  create(details?: ItemBase): Observable<ItemBase> {
-    const body: Partial<ItemBase> = details ? {} : {};
-
-    return this.http.post<ItemBase>(`${this.endpointUrl}`, body)
+  create(): Observable<ItemBase> {
+    return this.http.post<ItemBase>(`${this.endpointUrl}`, undefined)
   }
 
   get(id: string): Observable<ItemBase> {
