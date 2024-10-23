@@ -12,7 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { Meal } from "../../meal/meal";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
-import { NumberToAdjectivePipe } from "../../shared/number-to-adjective.pipe";
+import { NumberToAdjectivePipe } from "../../shared/pipes/number-to-adjective.pipe";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { MatIconModule } from "@angular/material/icon";
