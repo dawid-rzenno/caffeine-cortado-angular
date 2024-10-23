@@ -24,10 +24,7 @@ export type GetAllRequestParams = Partial<PaginationParams> & {
 }
 
 @Directive()
-export abstract class ItemServiceAbstract<
-  Item extends ItemBase,
-  ItemPatch extends ItemBase
-> {
+export abstract class ItemServiceAbstract<Item extends ItemBase, ItemPatch extends ItemBase> {
   protected abstract endpointUrl: string;
 
   protected constructor(protected http: HttpClient) {}

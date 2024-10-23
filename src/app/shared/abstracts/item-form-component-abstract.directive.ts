@@ -22,10 +22,14 @@ export type SearchComponentAbstractService<Item extends SearchResult> = {
 }
 
 @Directive()
-export abstract class ItemFormComponentAbstract<Item extends ItemBase, ItemPatch extends ItemBase> extends ObservingComponentAbstract implements OnInit {
+export abstract class ItemFormComponentAbstract<
+  Item extends ItemBase,
+  ItemPatch extends ItemBase
+> extends ObservingComponentAbstract implements OnInit {
+
   abstract form: UntypedFormGroup;
 
-  readonly initialFormValue$: Observable<Item> = this.route.data.pipe(
+  readonly item$: Observable<Item> = this.route.data.pipe(
     map((routeData: Data) => routeData[ITEM_KEY]),
     filter((item: Item) => Boolean(item)),
     shareReplay(1),
@@ -58,7 +62,7 @@ export abstract class ItemFormComponentAbstract<Item extends ItemBase, ItemPatch
   }
 
   ngOnInit(): void {
-    this.initialFormValue$.subscribe((item: Item) => {
+    this.item$.subscribe((item: Item) => {
       this.form.patchValue(item);
     });
   }
@@ -72,6 +76,6 @@ export abstract class ItemFormComponentAbstract<Item extends ItemBase, ItemPatch
   }
 
   onResetClick(): void {
-    this.initialFormValue$.subscribe((initialFormValue: Item) => this.form.reset(initialFormValue))
+    this.item$.subscribe((initialFormValue: Item) => this.form.reset(initialFormValue))
   }
 }

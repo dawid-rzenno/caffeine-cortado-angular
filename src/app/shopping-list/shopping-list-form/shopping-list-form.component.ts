@@ -78,7 +78,7 @@ export class ShoppingListFormComponent extends ItemFormComponentAbstract<Shoppin
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.initialFormValue$.subscribe((details: ShoppingList) => {
+    this.item$.subscribe((details: ShoppingList) => {
       for (let ingredient of details.ingredients) {
         this.addNewIngredient(ingredient);
       }

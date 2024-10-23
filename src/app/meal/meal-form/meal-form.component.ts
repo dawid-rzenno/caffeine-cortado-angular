@@ -83,7 +83,7 @@ export class MealFormComponent extends ItemFormComponentAbstract<Meal, MealPatch
   override ngOnInit() {
     super.ngOnInit();
 
-    this.initialFormValue$.subscribe((details: Meal) => {
+    this.item$.subscribe((details: Meal) => {
       for (let ingredient of details?.ingredients) {
         this.addNewIngredient(ingredient);
       }
