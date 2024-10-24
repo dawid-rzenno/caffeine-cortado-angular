@@ -10,6 +10,7 @@ type IngredientBase = {
   proteins: number;
   carbohydrates: number;
   fats: number;
+  iron: number;
 };
 
 export type Ingredient = ItemBase & IngredientBase;
