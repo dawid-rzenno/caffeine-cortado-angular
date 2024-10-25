@@ -11,7 +11,11 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p></p>
+      <cortado-nutrition-table
+        [items]="meals"
+        detailsLink="/diet/details"
+        formLink="/diet/form"
+      ></cortado-nutrition-table>
     </mat-card-content>
     <mat-card-actions>
       <ng-template [ngTemplateOutlet]="form.controls.id.value ? saveButton : createButton"></ng-template>

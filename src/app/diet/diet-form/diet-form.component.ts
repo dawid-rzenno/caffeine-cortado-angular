@@ -18,12 +18,10 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { MatIconModule } from "@angular/material/icon";
 import { NameChangeModalComponent } from "./name-change-modal/name-change-modal.component";
 import { filter, switchMap } from "rxjs";
-
-export type DietForm = {
-  id: FormControl<number | undefined>,
-  name: FormControl<string | undefined>,
-  meals: FormArray<FormControl<Meal>>
-}
+import { NutritionTableComponent } from "../../nutrition-table/nutrition-table.component";
+import { DietForm } from "./diet-form";
+import { createEmptyNutrition, ItemNutrition, Nutrition } from "../../nutrition-table/item-nutrition";
+import { ItemBase } from "../../shared/models/item-base";
 
 @Component({
   selector: 'cortado-diet-form',
@@ -41,7 +39,8 @@ export type DietForm = {
     NgTemplateOutlet,
     NumberToAdjectivePipe,
     FaIconComponent,
-    MatIconModule
+    MatIconModule,
+    NutritionTableComponent
   ],
   templateUrl: './diet-form.component.html',
   styleUrl: './diet-form.component.scss'
@@ -59,6 +58,28 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
 
   defaultFormValue: Diet | undefined;
 
+  meals: ItemNutrition[] = [
+    {
+      ...createEmptyNutrition(),
+      name: 'jabłko',
+      id: -1
+    } as ItemNutrition,
+    {
+      ...createEmptyNutrition(),
+      name: 'pomarańcza',
+      id: -1,
+    } as ItemNutrition,
+    {
+      ...createEmptyNutrition(),
+      name: 'gruszka',
+      id: -1,
+    } as ItemNutrition,
+    {
+      ...createEmptyNutrition(),
+      name: 'Summary'
+    } as ItemNutrition
+  ];
+
   protected readonly matDialog: MatDialog = inject(MatDialog);
 
   constructor(route: ActivatedRoute, service: DietService) {
@@ -74,16 +95,6 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
         this.addNewMeal(meal);
       }
     });
-  }
-
-  openDialog(): void {
-    // const dialogRef: MatDialogRef<DietMealControlDialogComponent, Meal> = this.matDialog.open(DietMealControlDialogComponent);
-    //
-    // dialogRef.afterClosed().subscribe((meal: Meal | undefined) => {
-    //   if (meal) {
-    //     this.addNewMeal(meal);
-    //   }
-    // });
   }
 
   onNameEditClick(): void {

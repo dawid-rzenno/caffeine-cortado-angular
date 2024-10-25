@@ -1,2 +1,5 @@
 export type Id = number;
-export type ItemBase = { id: Id; };
+export type ItemBase = {
+  id: Id;
+  name: string;
+};
