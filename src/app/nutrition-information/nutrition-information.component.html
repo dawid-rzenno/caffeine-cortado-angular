@@ -1,0 +1,39 @@
+<mat-grid-list gutterSize="0" cols="3" rowHeight="fit" class="nutrition-grid-list">
+
+  <mat-grid-tile colspan="3" class="name">Nutrition Information</mat-grid-tile>
+
+  <!-- HEADERS -->
+
+  <mat-grid-tile class="category">Typical values</mat-grid-tile>
+  <mat-grid-tile class="category"><b>Per 100g</b></mat-grid-tile>
+  <mat-grid-tile class="category"><b>% of RDA</b></mat-grid-tile>
+
+  <!-- CELLS -->
+
+  <mat-grid-tile rowspan="2" class="subcategory">Energy</mat-grid-tile>
+  <mat-grid-tile colspan="2">{{ item.energy[0].value }} {{ item.energy[0].unit }}</mat-grid-tile>
+  <mat-grid-tile colspan="2">{{ item.energy[1].value }} {{ item.energy[1].unit }}</mat-grid-tile>
+
+  @for (macronutrient of item.macronutrients; track macronutrient.id) {
+    <mat-grid-tile class="subcategory">{{ macronutrient.name }}</mat-grid-tile>
+    <mat-grid-tile>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</mat-grid-tile>
+    <mat-grid-tile>{{ macronutrient.amount.rdaPercentage }} %</mat-grid-tile>
+  }
+
+  <mat-grid-tile colspan="3" class="category">Vitamins</mat-grid-tile>
+
+  @for (vitamin of item.vitamins; track vitamin.id) {
+    <mat-grid-tile class="subcategory">{{ vitamin.name }}</mat-grid-tile>
+    <mat-grid-tile>{{ vitamin.amount.value }} {{ vitamin.amount.unit }}</mat-grid-tile>
+    <mat-grid-tile>{{ vitamin.amount.rdaPercentage }} %</mat-grid-tile>
+  }
+
+  <mat-grid-tile colspan="3" class="category">Minerals</mat-grid-tile>
+
+  @for (mineral of item.minerals; track mineral.id) {
+    <mat-grid-tile class="subcategory">{{ mineral.name }}</mat-grid-tile>
+    <mat-grid-tile>{{ mineral.amount.value }} {{ mineral.amount.unit }}</mat-grid-tile>
+    <mat-grid-tile>{{ mineral.amount.rdaPercentage }} %</mat-grid-tile>
+  }
+
+</mat-grid-list>

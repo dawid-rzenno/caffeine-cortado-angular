@@ -20,8 +20,6 @@ import { NameChangeModalComponent } from "./name-change-modal/name-change-modal.
 import { filter, switchMap } from "rxjs";
 import { NutritionTableComponent } from "../../nutrition-table/nutrition-table.component";
 import { DietForm } from "./diet-form";
-import { createEmptyNutrition, ItemNutrition, Nutrition } from "../../nutrition-table/item-nutrition";
-import { ItemBase } from "../../shared/models/item-base";
 
 @Component({
   selector: 'cortado-diet-form',
@@ -57,28 +55,6 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
   });
 
   defaultFormValue: Diet | undefined;
-
-  meals: ItemNutrition[] = [
-    {
-      ...createEmptyNutrition(),
-      name: 'jabłko',
-      id: -1
-    } as ItemNutrition,
-    {
-      ...createEmptyNutrition(),
-      name: 'pomarańcza',
-      id: -1,
-    } as ItemNutrition,
-    {
-      ...createEmptyNutrition(),
-      name: 'gruszka',
-      id: -1,
-    } as ItemNutrition,
-    {
-      ...createEmptyNutrition(),
-      name: 'Summary'
-    } as ItemNutrition
-  ];
 
   protected readonly matDialog: MatDialog = inject(MatDialog);
 

@@ -1,8 +1,8 @@
 import { Ingredient, IngredientPatch } from "../ingredient/ingredient";
 import { ItemBase } from "../shared/models/item-base";
-import { Nutrition } from "../nutrition-table/item-nutrition";
+import { NutritionBase } from "../nutrition-table/nutrition";
 
-type MealBase = Nutrition & {
+type MealBase = NutritionBase & {
   name: string;
   rating: number;
 }

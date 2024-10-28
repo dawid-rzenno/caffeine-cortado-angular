@@ -1,0 +1,25 @@
+$border: 1px gray solid;
+
+.name {
+  font-weight: bold;
+  font-size: 1.25rem;
+  background: #c4c4c4;
+}
+
+.nutrition-grid-list {
+  height: 100%;
+  border: $border;
+  mat-grid-tile {
+    border: $border;
+  }
+}
+
+.category {
+  background: #e7e7e7;
+  font-weight: bold;
+}
+
+.subcategory {
+  background: #f6f6f6;
+  font-weight: bold;
+}

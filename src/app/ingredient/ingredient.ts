@@ -1,16 +1,9 @@
 import { ItemBase } from "../shared/models/item-base";
+import { NutritionBase } from "../nutrition-table/nutrition";
 
-type IngredientBase = {
+type IngredientBase = NutritionBase & {
   name: string;
-  category_id: number;
   price: number;
-  quantity?: number;
-  amount: number;
-  calories: number;
-  proteins: number;
-  carbohydrates: number;
-  fats: number;
-  iron: number;
 };
 
 export type Ingredient = ItemBase & IngredientBase;

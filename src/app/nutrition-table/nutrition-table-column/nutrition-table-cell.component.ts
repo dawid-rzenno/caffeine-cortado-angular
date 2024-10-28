@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Nutrient } from "../nutrient";
+import { Macronutrient } from "../nutrient";
 import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef } from "@angular/material/table";
 
 @Component({
@@ -16,5 +16,5 @@ import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef } fr
   styleUrl: './nutrition-table-cell.component.scss'
 })
 export class NutritionTableCellComponent {
-  @Input({ required: true }) nutrient!: Nutrient;
+  @Input({ required: true }) nutrient!: Macronutrient;
 }

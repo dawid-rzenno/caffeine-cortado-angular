@@ -1,12 +1,10 @@
-import { Amount, createEmptyAmount } from "./amount";
+import { ItemBase } from "../shared/models/item-base";
+import { Amount } from "./amount";
 
-export type Nutrient = Amount & {
-  dailyValuePercentage: number;
+export type Nutrient = ItemBase & NutrientBase;
+
+export type NutrientBase = {
+  name: string;
+  amount: Amount;
+  subnutrients?: Nutrient[];
 };
-
-export function createEmptyNutrient(unit: string): Nutrient {
-  return {
-    ...createEmptyAmount(unit),
-    dailyValuePercentage: 0,
-  }
-}
