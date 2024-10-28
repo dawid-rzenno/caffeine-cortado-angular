@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NutritionBase } from "./nutrition";
+import { NutritionBase } from "./models/nutrition";
 import { MatGridListModule } from "@angular/material/grid-list";
 
 @Component({

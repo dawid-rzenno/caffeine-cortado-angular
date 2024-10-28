@@ -1,4 +1,4 @@
-import { ItemBase } from "../shared/models/item-base";
+import { ItemBase } from "../../shared/models/item-base";
 
 export type Amount = ItemBase & AmountBase;
 

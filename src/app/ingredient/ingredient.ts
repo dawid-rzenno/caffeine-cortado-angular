@@ -1,5 +1,5 @@
 import { ItemBase } from "../shared/models/item-base";
-import { NutritionBase } from "../nutrition-information/nutrition";
+import { NutritionBase } from "../nutrition-information/models/nutrition";
 
 type IngredientBase = NutritionBase & {
   name: string;

@@ -1,4 +1,4 @@
-import { ItemBase } from "../shared/models/item-base";
+import { ItemBase } from "../../shared/models/item-base";
 import { Nutrient } from "./nutrient";
 import { AmountBase } from "./amount";
 

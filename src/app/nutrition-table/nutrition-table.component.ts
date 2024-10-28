@@ -3,7 +3,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
 import { RouterLink } from "@angular/router";
-import { Nutrition, NutritionBase } from "../nutrition-information/nutrition";
+import { Nutrition, NutritionBase } from "../nutrition-information/models/nutrition";
 
 @Component({
   selector: 'cortado-nutrition-table',
