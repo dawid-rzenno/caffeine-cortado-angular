@@ -11,10 +11,10 @@
   <!-- CELLS -->
 
   <mat-grid-tile rowspan="2" class="subcategory">Energy</mat-grid-tile>
-  <mat-grid-tile colspan="2">{{ item.energy[0].value }} {{ item.energy[0].unit }}</mat-grid-tile>
-  <mat-grid-tile colspan="2">{{ item.energy[1].value }} {{ item.energy[1].unit }}</mat-grid-tile>
+  <mat-grid-tile colspan="2">{{ nutrition.energy[0].value }} {{ nutrition.energy[0].unit }}</mat-grid-tile>
+  <mat-grid-tile colspan="2">{{ nutrition.energy[1].value }} {{ nutrition.energy[1].unit }}</mat-grid-tile>
 
-  @for (macronutrient of item.macronutrients; track macronutrient.id) {
+  @for (macronutrient of nutrition.macronutrients; track macronutrient.id) {
     @if (macronutrient.components) {
       <mat-grid-tile [rowspan]="1 + macronutrient.components.length" class="subcategory">
         <span>{{ macronutrient.name }}</span>
@@ -47,7 +47,7 @@
 
   <mat-grid-tile colspan="3" class="category">Vitamins</mat-grid-tile>
 
-  @for (vitamin of item.vitamins; track vitamin.id) {
+  @for (vitamin of nutrition.vitamins; track vitamin.id) {
     <mat-grid-tile class="subcategory">{{ vitamin.name }}</mat-grid-tile>
     <mat-grid-tile>{{ vitamin.amount.value }} {{ vitamin.amount.unit }}</mat-grid-tile>
     <mat-grid-tile>{{ vitamin.amount.rdaPercentage }} %</mat-grid-tile>
@@ -55,7 +55,7 @@
 
   <mat-grid-tile colspan="3" class="category">Minerals</mat-grid-tile>
 
-  @for (mineral of item.minerals; track mineral.id) {
+  @for (mineral of nutrition.minerals; track mineral.id) {
     <mat-grid-tile class="subcategory">{{ mineral.name }}</mat-grid-tile>
     <mat-grid-tile>{{ mineral.amount.value }} {{ mineral.amount.unit }}</mat-grid-tile>
     <mat-grid-tile>{{ mineral.amount.rdaPercentage }} %</mat-grid-tile>
