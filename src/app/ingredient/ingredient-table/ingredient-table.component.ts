@@ -27,7 +27,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   styleUrl: './ingredient-table.component.scss'
 })
 export class IngredientTableComponent extends ItemTableComponentAbstract<Ingredient, IngredientPatch> {
-  override displayedColumns: string[] = ['id', 'name', 'category', 'price', 'actions'];
+  override displayedColumns: string[] = ['id', 'name', 'actions'];
 
   constructor(service: IngredientService, route: ActivatedRoute, dialog: MatDialog) {
     super(service, route, dialog);
