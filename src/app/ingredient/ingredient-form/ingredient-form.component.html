@@ -1,7 +1,12 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2>{{ form.controls.id.value ? 'Edit' : 'New' }} Ingredient</h2>
+      <span class="d-flex align-items-center mb-2">
+          <h2 class="m-0">{{ form.controls.name.value }}</h2>
+          <button (click)="onNameEditClick()" class="ml-2" mat-icon-button>
+            <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+          </button>
+        </span>
     </mat-card-title>
     <mat-card-subtitle>
       Use this form to add a new ingredient to your meal planning database. Fill in the details accurately to ensure

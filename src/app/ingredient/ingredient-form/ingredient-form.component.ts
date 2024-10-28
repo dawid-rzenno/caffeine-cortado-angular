@@ -12,6 +12,7 @@ import { IngredientService } from "../ingredient.service";
 import { Ingredient, IngredientPatch } from "../ingredient";
 
 import { SearchResult } from "../../shared/models/search-result";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 export type IngredientForm = {
   id: FormControl<number | undefined>,
@@ -46,15 +47,16 @@ export const createIngredientForm = (ingredient: Ingredient) => new FormGroup<In
 @Component({
   selector: 'cortado-ingredient-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    NgForOf,
-    MatCardModule,
-    MatButtonModule
-  ],
+	imports: [
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		NgForOf,
+		MatCardModule,
+		MatButtonModule,
+		FaIconComponent
+	],
   templateUrl: './ingredient-form.component.html',
   styleUrl: './ingredient-form.component.scss'
 })

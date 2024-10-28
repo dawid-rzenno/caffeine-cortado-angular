@@ -1,13 +1,15 @@
 import { ActivatedRoute, Data } from "@angular/router";
-import { debounceTime, filter, map, mergeMap, Observable, shareReplay, takeUntil } from "rxjs";
+import { debounceTime, filter, map, mergeMap, Observable, shareReplay, switchMap, takeUntil } from "rxjs";
 import { FormControl, UntypedFormGroup } from "@angular/forms";
-import { Directive, OnInit } from "@angular/core";
+import { Directive, inject, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
 import { PaginatedResponse } from "../models/paginated-response";
 import { ITEM_KEY } from "../../shopping-list/shopping-list.routes";
 import { ItemBase } from "../models/item-base";
 import { SearchResult } from "../models/search-result";
 import { PaginationParams } from "../models/mat-paginator-config";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { NameChangeModalComponent } from "../../diet/diet-form/name-change-modal/name-change-modal.component";
 
 export type FormComponentAbstractService<Item extends ItemBase, ItemPatch extends ItemBase> = {
   create(item: Item): Observable<Item>;
@@ -44,6 +46,8 @@ export abstract class ItemFormComponentAbstract<
   protected get nameControl(): FormControl<string> {
     return this.form.get('name') as FormControl<string>;
   }
+
+  protected readonly matDialog: MatDialog = inject(MatDialog);
 
   protected constructor(
     protected route: ActivatedRoute,
@@ -84,5 +88,27 @@ export abstract class ItemFormComponentAbstract<
 
   onResetClick(): void {
     this.item$.subscribe((initialFormValue: Item) => this.form.reset(initialFormValue))
+  }
+
+  onNameEditClick(): void {
+    const dialogRef: MatDialogRef<NameChangeModalComponent, string> = this.matDialog.open(
+      NameChangeModalComponent,
+      { data: { name: this.nameControl.value } }
+    );
+
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter((newName: string | undefined) => Boolean(newName)),
+        switchMap((newName: string | undefined) => this.service.patch({
+          id: this.idControl.value,
+          name: newName
+        } as ItemPatch)),
+      )
+      .subscribe((response: ItemPatch) => {
+        if (response.name) {
+          this.nameControl.patchValue(response.name);
+        }
+      });
   }
 }

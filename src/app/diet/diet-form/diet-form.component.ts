@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { Diet, DietPatch } from "../diet";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -13,11 +13,8 @@ import { Meal } from "../../meal/meal";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
 import { NumberToAdjectivePipe } from "../../shared/pipes/number-to-adjective.pipe";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { MatIconModule } from "@angular/material/icon";
-import { NameChangeModalComponent } from "./name-change-modal/name-change-modal.component";
-import { filter, switchMap } from "rxjs";
 import { NutritionTableComponent } from "../../nutrition-table/nutrition-table.component";
 import { DietForm } from "./diet-form";
 
@@ -56,8 +53,6 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
 
   defaultFormValue: Diet | undefined;
 
-  protected readonly matDialog: MatDialog = inject(MatDialog);
-
   constructor(route: ActivatedRoute, service: DietService) {
     super(route, service);
   }
@@ -71,29 +66,6 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
         this.addNewMeal(meal);
       }
     });
-  }
-
-  onNameEditClick(): void {
-    const dialogRef: MatDialogRef<NameChangeModalComponent, string> = this.matDialog.open(
-      NameChangeModalComponent,
-      { data: { name: this.nameControl.value } }
-    );
-
-
-    dialogRef.afterClosed()
-      .pipe(
-        filter((newName: string | undefined) => Boolean(newName)),
-        switchMap((newName: string | undefined) => this.service.patch({
-          id: this.idControl.value,
-          // @ts-ignore, filter already handles checking if the name is defined
-          name: newName
-        })),
-      )
-      .subscribe((response: DietPatch) => {
-        if (response.name) {
-          this.nameControl.patchValue(response.name);
-        }
-      });
   }
 
   protected addNewMeal(meal: Meal): void {
