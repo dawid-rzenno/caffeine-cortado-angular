@@ -16,6 +16,7 @@ import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 import { SearchResult } from "../../shared/models/search-result";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 export type MealForm = {
   id: FormControl<number | undefined>,
@@ -35,17 +36,18 @@ export const createMealForm = (meal: Meal) => new FormGroup<MealForm>({
 @Component({
   selector: 'cortado-meal-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgForOf,
-    MatCardModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    AsyncPipe,
-    MatButtonToggleModule
-  ],
+	imports: [
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		NgForOf,
+		MatCardModule,
+		MatButtonModule,
+		MatAutocompleteModule,
+		AsyncPipe,
+		MatButtonToggleModule,
+		FaIconComponent
+	],
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.scss'
 })
