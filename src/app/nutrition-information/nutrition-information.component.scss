@@ -23,3 +23,12 @@ $border: 1px gray solid;
   background: #f6f6f6;
   font-weight: bold;
 }
+
+.component {
+  font-weight: normal;
+}
+
+::ng-deep .mat-grid-tile-content {
+  flex-direction: column;
+  justify-content: space-evenly !important;
+}

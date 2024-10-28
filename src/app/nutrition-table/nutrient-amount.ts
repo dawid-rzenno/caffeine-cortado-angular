@@ -1,8 +1,10 @@
 import { ItemBase } from "../shared/models/item-base";
 import { AmountBase } from "./amount";
 
-export type NutrientAmountBase = {
+export type NutrientAmount = ItemBase & NutrientAmountBase;
+
+export type NutrientAmountBase = AmountBase & {
   /** (R)ecommended (D)aily (A)mount percentage. */
   rdaPercentage: number;
 };
-export type NutrientAmount = ItemBase & AmountBase & NutrientAmountBase;
+

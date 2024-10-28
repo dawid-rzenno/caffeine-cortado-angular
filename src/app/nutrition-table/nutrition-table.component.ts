@@ -4,7 +4,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
 import { RouterLink } from "@angular/router";
 import { Nutrition, NutritionBase } from "./nutrition";
-import { NutritionTableCellComponent } from "./nutrition-table-column/nutrition-table-cell.component";
 
 @Component({
   selector: 'cortado-nutrition-table',
@@ -14,7 +13,6 @@ import { NutritionTableCellComponent } from "./nutrition-table-column/nutrition-
     MatButtonModule,
     MatTableModule,
     RouterLink,
-    NutritionTableCellComponent,
   ],
   templateUrl: './nutrition-table.component.html',
   styleUrl: './nutrition-table.component.scss',

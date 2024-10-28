@@ -15,9 +15,34 @@
   <mat-grid-tile colspan="2">{{ item.energy[1].value }} {{ item.energy[1].unit }}</mat-grid-tile>
 
   @for (macronutrient of item.macronutrients; track macronutrient.id) {
-    <mat-grid-tile class="subcategory">{{ macronutrient.name }}</mat-grid-tile>
-    <mat-grid-tile>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</mat-grid-tile>
-    <mat-grid-tile>{{ macronutrient.amount.rdaPercentage }} %</mat-grid-tile>
+    @if (macronutrient.components) {
+      <mat-grid-tile [rowspan]="1 + macronutrient.components.length" class="subcategory">
+        <span>{{ macronutrient.name }}</span>
+
+        @for (component of macronutrient.components; track component.id) {
+          <span class="component">{{ component.name }}</span>
+        }
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1 + macronutrient.components.length">
+        <span>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</span>
+
+        @for (component of macronutrient.components; track component.id) {
+          <span class="component">{{ component.amount.value }} {{ component.amount.unit }}</span>
+        }
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1 + macronutrient.components.length">
+        <span>{{ macronutrient.amount.rdaPercentage }} %</span>
+
+        @for (component of macronutrient.components; track component.id) {
+          <span class="component">{{ component.amount.rdaPercentage }} %</span>
+        }
+      </mat-grid-tile>
+
+    } @else {
+      <mat-grid-tile class="subcategory">{{ macronutrient.name }}</mat-grid-tile>
+      <mat-grid-tile>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</mat-grid-tile>
+      <mat-grid-tile>{{ macronutrient.amount.rdaPercentage }} %</mat-grid-tile>
+    }
   }
 
   <mat-grid-tile colspan="3" class="category">Vitamins</mat-grid-tile>

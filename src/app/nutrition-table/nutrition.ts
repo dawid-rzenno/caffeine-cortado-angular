@@ -10,4 +10,3 @@ export type NutritionBase = {
   vitamins: Nutrient[],
   minerals: Nutrient[]
 }
-

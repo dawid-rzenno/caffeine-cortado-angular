@@ -1,10 +1,10 @@
 import { ItemBase } from "../shared/models/item-base";
-import { Amount } from "./amount";
+import { NutrientAmountBase } from "./nutrient-amount";
 
 export type Nutrient = ItemBase & NutrientBase;
 
 export type NutrientBase = {
   name: string;
-  amount: Amount;
-  subnutrients?: Nutrient[];
+  amount: NutrientAmountBase;
+  components?: Nutrient[];
 };
