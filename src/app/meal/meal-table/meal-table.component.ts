@@ -27,7 +27,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   styleUrl: './meal-table.component.scss'
 })
 export class MealTableComponent extends ItemTableComponentAbstract<Meal, MealPatch> {
-  override displayedColumns: string[] = ["id", "name", "description", "rating", "actions"];
+  override displayedColumns: string[] = ["id", "name", "rating", "actions"];
 
   constructor(service: MealService, route: ActivatedRoute, dialog: MatDialog) {
     super(service, route, dialog);

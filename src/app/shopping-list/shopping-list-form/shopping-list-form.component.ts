@@ -24,7 +24,6 @@ import { SearchResult } from "../../shared/models/search-result";
 export type ShoppingListForm = {
   id: FormControl<number | undefined>,
   name: FormControl<string>,
-  description: FormControl<string>,
 }
 
 export type ShoppingListDetailsForm = ShoppingListForm & {
@@ -60,7 +59,6 @@ export class ShoppingListFormComponent extends ItemFormComponentAbstract<Shoppin
   readonly form: FormGroup<ShoppingListDetailsForm> = new FormGroup<ShoppingListDetailsForm>({
     id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
     name: new FormControl<string>('', {nonNullable: true}),
-    description: new FormControl<string>('', {nonNullable: true}),
     ingredients: this.ingredientsFormArray,
   })
 
