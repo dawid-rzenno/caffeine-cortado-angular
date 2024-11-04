@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IngredientFormComponent } from './ingredient-form.component';
+import { provideRouter } from "@angular/router";
+import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { FontAwesomeIconLibraryModule } from "../../core/libraries/font-awesome-icon-library.module";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('IngredientFormComponent', () => {
   let component: IngredientFormComponent;
@@ -8,7 +13,12 @@ describe('IngredientFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IngredientFormComponent]
+      imports: [IngredientFormComponent, FontAwesomeIconLibraryModule, NoopAnimationsModule],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
     })
     .compileComponents();
 

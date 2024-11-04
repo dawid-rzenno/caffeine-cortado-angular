@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ShoppingListDetailsComponent } from './shopping-list-details.component';
 import { provideRouter } from "@angular/router";
+import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 
-describe('ShoppingListComponent', () => {
+describe('ShoppingListDetailsComponent', () => {
   let component: ShoppingListDetailsComponent;
   let fixture: ComponentFixture<ShoppingListDetailsComponent>;
 
@@ -11,7 +12,9 @@ describe('ShoppingListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ShoppingListDetailsComponent],
       providers: [
-        provideRouter([])
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
     .compileComponents();

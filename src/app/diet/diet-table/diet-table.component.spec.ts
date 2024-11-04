@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DietTableComponent } from './diet-table.component';
 import { provideHttpClient } from "@angular/common/http";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideRouter } from "@angular/router";
 
 describe('DietTableComponent', () => {
   let component: DietTableComponent;
@@ -12,6 +13,7 @@ describe('DietTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DietTableComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting()
       ]

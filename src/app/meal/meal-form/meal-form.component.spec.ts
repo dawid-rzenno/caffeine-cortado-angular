@@ -5,6 +5,7 @@ import { provideRouter } from "@angular/router";
 import { provideHttpClient } from "@angular/common/http";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { FontAwesomeIconLibraryModule } from "../../core/libraries/font-awesome-icon-library.module";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('MealFormComponent', () => {
   let component: MealFormComponent;
@@ -12,7 +13,7 @@ describe('MealFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MealFormComponent, FontAwesomeIconLibraryModule],
+      imports: [MealFormComponent, FontAwesomeIconLibraryModule, NoopAnimationsModule],
       providers: [
         provideRouter([]),
         provideHttpClient(),
