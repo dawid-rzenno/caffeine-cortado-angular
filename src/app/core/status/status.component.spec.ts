@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StatusComponent } from './status.component';
+import { StatusService } from "./status.service";
 
 describe('LoadingComponent', () => {
   let component: StatusComponent;
@@ -8,7 +9,8 @@ describe('LoadingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StatusComponent ]
+      declarations: [ StatusComponent ],
+      providers: [ StatusService ]
     })
     .compileComponents();
   });

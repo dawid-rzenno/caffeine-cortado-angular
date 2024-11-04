@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NutritionTableComponent } from './nutrition-table.component';
+import { MatGridListModule } from "@angular/material/grid-list";
 
 describe('NutritionTableComponent', () => {
   let component: NutritionTableComponent;
@@ -8,7 +9,10 @@ describe('NutritionTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NutritionTableComponent]
+      imports: [
+        NutritionTableComponent,
+        MatGridListModule
+      ]
     })
     .compileComponents();
 
