@@ -11,7 +11,7 @@ describe('IngredientFormComponent', () => {
       imports: [IngredientFormComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(IngredientFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

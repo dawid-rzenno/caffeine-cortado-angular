@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-
-import { beverageResolver } from './beverage.resolver';
 import { Beverage } from "./beverage";
+import { beveragesResolver } from "./beverages.resolver";
 
-describe('beverageResolver', () => {
+describe('beveragesResolver', () => {
   const executeResolver: ResolveFn<Beverage> = (...resolverParameters) =>
-      TestBed.runInInjectionContext(() => beverageResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => beveragesResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

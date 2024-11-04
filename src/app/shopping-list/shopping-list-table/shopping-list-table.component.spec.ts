@@ -11,7 +11,7 @@ describe('ShoppingListTableComponent', () => {
       imports: [ShoppingListTableComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ShoppingListTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

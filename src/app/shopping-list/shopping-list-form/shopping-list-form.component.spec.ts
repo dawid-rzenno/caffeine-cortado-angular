@@ -11,7 +11,7 @@ describe('ShoppingListFormComponent', () => {
       imports: [ShoppingListFormComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ShoppingListFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

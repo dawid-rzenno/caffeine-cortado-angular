@@ -4,7 +4,8 @@ import { inject } from "@angular/core";
 import { ExerciseService } from "./exercise.service";
 
 import { ItemBase } from "../shared/models/item-base";
+import { Exercise } from "./exercise";
 
-export const exerciseResolver: ResolveFn<unknown | PaginatedResponse<ItemBase>> = (route) => {
+export const exerciseResolver: ResolveFn<Exercise> = (route) => {
   return inject(ExerciseService).get(route.paramMap.get('id') as string);
 };

@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-
-import { exerciseResolver } from './exercise.resolver';
 import { Exercise } from "./exercise";
+import { exercisesResolver } from "./exercises.resolver";
 
-describe('exerciseResolver', () => {
+describe('exercisesResolver', () => {
   const executeResolver: ResolveFn<Exercise> = (...resolverParameters) =>
-      TestBed.runInInjectionContext(() => exerciseResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => exercisesResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

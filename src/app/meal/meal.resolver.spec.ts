@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { mealResolver } from './meal.resolver';
-import { Meal, Meal } from "./meal";
+import { Meal } from "./meal";
 
 describe('mealResolver', () => {
   const executeResolver: ResolveFn<Meal[] | Meal> = (...resolverParameters) =>
