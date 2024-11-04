@@ -4,7 +4,7 @@ import { Ingredient } from "../ingredient";
 import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
-import { NutritionComponent } from "../../nutrition-information/nutrition.component";
+import { NutritionComponent } from "../../nutrition/nutrition.component";
 
 @Component({
   selector: 'cortado-ingredient-details',
@@ -13,7 +13,6 @@ import { NutritionComponent } from "../../nutrition-information/nutrition.compon
     MatCardModule,
     MatGridListModule,
     NutritionComponent,
-    NutritionComponent
   ],
   templateUrl: './ingredient-details.component.html',
   styleUrl: './ingredient-details.component.scss'

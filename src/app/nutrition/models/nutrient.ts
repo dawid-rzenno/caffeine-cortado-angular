@@ -6,5 +6,3 @@ export type Nutrient = ItemBase & NutrientBase;
 export type NutrientBase = NutrientComponentBase & {
   components?: NutrientComponent[];
 };
-
-
