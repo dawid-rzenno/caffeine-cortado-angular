@@ -3,7 +3,6 @@ import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-detail
 import { Ingredient } from "../ingredient";
 import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
-import { MatGridListModule } from "@angular/material/grid-list";
 import { NutritionComponent } from "../../nutrition/nutrition.component";
 
 @Component({
@@ -11,7 +10,6 @@ import { NutritionComponent } from "../../nutrition/nutrition.component";
   standalone: true,
   imports: [
     MatCardModule,
-    MatGridListModule,
     NutritionComponent,
   ],
   templateUrl: './ingredient-details.component.html',

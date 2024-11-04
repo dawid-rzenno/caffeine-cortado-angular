@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ItemDetailsComponentAbstract } from "../../shared/abstracts/item-details-component.abstract";
+import { Beverage } from "../beverage";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'cortado-beverage-details',
@@ -7,6 +10,9 @@ import { Component } from '@angular/core';
   templateUrl: './beverage-details.component.html',
   styleUrl: './beverage-details.component.scss'
 })
-export class BeverageDetailsComponent {
+export class BeverageDetailsComponent extends ItemDetailsComponentAbstract<Beverage> {
 
+  constructor(route: ActivatedRoute) {
+    super(route);
+  }
 }

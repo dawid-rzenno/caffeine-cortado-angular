@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BeverageDetailsComponent } from './beverage-details.component';
-import { provideRouter } from "@angular/router";
+import { ActivatedRoute, provideRouter } from "@angular/router";
+import { createFakeActivatedRoute } from "../../shopping-list/shopping-list-table/shopping-list-table.component.spec";
 
 describe('BeverageDetailsComponent', () => {
   let component: BeverageDetailsComponent;
@@ -11,7 +12,8 @@ describe('BeverageDetailsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [BeverageDetailsComponent],
       providers: [
-        provideRouter([])
+        provideRouter([]),
+        { provide: ActivatedRoute, useValue: createFakeActivatedRoute([{ id: 0, name: '' }]) },
       ],
     })
     .compileComponents();
