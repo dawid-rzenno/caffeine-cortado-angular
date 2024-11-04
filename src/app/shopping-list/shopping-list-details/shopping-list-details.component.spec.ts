@@ -13,7 +13,7 @@ describe('ShoppingListDetailsComponent', () => {
       providers: [
         provideRouter([]),
         { provide: ActivatedRoute, useValue: createFakeActivatedRoute([{ id: 0, name: '' }]) },
-      ]
+      ],
     })
     .compileComponents();
 
