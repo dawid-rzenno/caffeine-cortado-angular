@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShoppingListDetailsComponent } from './shopping-list-details.component';
 import { ActivatedRoute, provideRouter } from "@angular/router";
-import { createFakeActivatedRoute } from "../shopping-list-table/shopping-list-table.component.spec";
+
+import { createFakeActivatedRoute } from "../shopping-list-table/create-fake-activated-route";
 
 describe('ShoppingListDetailsComponent', () => {
   let component: ShoppingListDetailsComponent;
