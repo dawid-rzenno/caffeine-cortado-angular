@@ -2,10 +2,9 @@ import { ResolveFn } from '@angular/router';
 import { PaginatedResponse } from "../shared/models/paginated-response";
 import { inject } from "@angular/core";
 import { ExerciseService } from "./exercise.service";
+import { Exercise } from "./exercise";
 
-import { ItemBase } from "../shared/models/item-base";
-
-export const exercisesResolver: ResolveFn<unknown | PaginatedResponse<ItemBase>> = () => {
+export const exercisesResolver: ResolveFn<PaginatedResponse<Exercise>> = () => {
   const service: ExerciseService = inject(ExerciseService);
   return service.getAll()
 };
