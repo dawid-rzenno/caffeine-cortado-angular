@@ -3,7 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DietTableComponent } from './diet-table.component';
 import { provideHttpClient } from "@angular/common/http";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
-import { provideRouter } from "@angular/router";
+import { ActivatedRoute, provideRouter } from "@angular/router";
+import { createFakeActivatedRoute } from "../../shopping-list/shopping-list-table/shopping-list-table.component.spec";
+import { FontAwesomeIconLibraryModule } from "../../core/libraries/font-awesome-icon-library.module";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('DietTableComponent', () => {
   let component: DietTableComponent;
@@ -11,11 +14,12 @@ describe('DietTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DietTableComponent],
+      imports: [DietTableComponent, FontAwesomeIconLibraryModule, NoopAnimationsModule],
       providers: [
         provideRouter([]),
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        { provide: ActivatedRoute, useValue: createFakeActivatedRoute([]) },
       ]
     })
     .compileComponents();

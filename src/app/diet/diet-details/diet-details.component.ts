@@ -17,6 +17,7 @@ import { MealTableComponent } from "../../meal/meal-table/meal-table.component";
   styleUrl: './diet-details.component.scss'
 })
 export class DietDetailsComponent extends ItemDetailsComponentAbstract<Diet> {
+
   constructor(route: ActivatedRoute) {
     super(route);
   }

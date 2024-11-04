@@ -20,8 +20,9 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle }
   templateUrl: './shopping-list-details.component.html',
   styleUrl: './shopping-list-details.component.scss'
 })
-export class ShoppingListDetailsComponent {
+export class ShoppingListDetailsComponent extends ItemDetailsComponentAbstract<ShoppingList> {
 
   constructor(route: ActivatedRoute) {
+    super(route);
   }
 }

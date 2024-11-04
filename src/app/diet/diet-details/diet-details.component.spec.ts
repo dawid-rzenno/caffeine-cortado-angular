@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DietDetailsComponent } from './diet-details.component';
-import { provideRouter } from "@angular/router";
+import { ActivatedRoute, provideRouter } from "@angular/router";
+import { createFakeActivatedRoute } from "../../shopping-list/shopping-list-table/shopping-list-table.component.spec";
 
-describe('DietComponent', () => {
+describe('DietDetailsComponent', () => {
   let component: DietDetailsComponent;
   let fixture: ComponentFixture<DietDetailsComponent>;
 
@@ -11,7 +12,8 @@ describe('DietComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DietDetailsComponent],
       providers: [
-        provideRouter([])
+        provideRouter([]),
+        { provide: ActivatedRoute, useValue: createFakeActivatedRoute([{ id: 0, name: '' }]) },
       ],
     })
     .compileComponents();
