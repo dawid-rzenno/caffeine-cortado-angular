@@ -10,7 +10,7 @@ import { Workout, WorkoutPatch } from "./workout";
 export class WorkoutService extends ItemServiceAbstract<Workout, WorkoutPatch> {
   protected readonly endpointUrl: string = `${environment.apiUrl}/fitness/workout`;
 
-  constructor(protected override http: HttpClient) {
+  constructor(http: HttpClient) {
     super(http);
   }
 }
