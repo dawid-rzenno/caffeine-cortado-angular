@@ -1,7 +1,7 @@
 import { ItemBase } from "../../shared/models/item-base";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list.routes";
 
 import { createFakePaginatedResponse } from "./create-fake-paginated-response";
+import { ITEM_KEY, ITEMS_KEY } from "../route-data-keys";
 
 export function createFakeActivatedRoute<T extends ItemBase>(content: T[]) {
   return {

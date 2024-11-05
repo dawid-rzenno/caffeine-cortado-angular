@@ -5,7 +5,8 @@ import { ExerciseTableComponent } from "./exercise-table/exercise-table.componen
 import { exerciseResolver } from "./exercise.resolver";
 import { exercisesResolver } from "./exercises.resolver";
 import { exerciseFormGuard } from "./exercise-form.guard";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const exerciseRoutes: Route[] = [
   {

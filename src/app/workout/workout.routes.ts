@@ -5,7 +5,8 @@ import { WorkoutTableComponent } from "./workout-table/workout-table.component";
 import { workoutResolver } from "./workout.resolver";
 import { workoutsResolver } from "./workouts.resolver";
 import { workoutFormGuard } from "./workout-form.guard";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const workoutRoutes: Route[] = [
   {

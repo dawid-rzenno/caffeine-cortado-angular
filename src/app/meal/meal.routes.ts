@@ -4,8 +4,8 @@ import { mealResolver } from "./meal.resolver";
 import { MealTableComponent } from "./meal-table/meal-table.component";
 import { mealsResolver } from "./meals.resolver";
 import { mealFormGuard } from "./meal-form.guard";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
 import { MealDetailsComponent } from "./meal-details/meal-details.component";
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const mealRoutes: Route[] = [
   {

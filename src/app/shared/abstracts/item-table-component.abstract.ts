@@ -7,9 +7,9 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
 import { MatPaginatorConfig, PaginationParams } from "../models/mat-paginator-config";
 import { PaginatedResponse } from "../models/paginated-response";
-import { ITEMS_KEY } from "../../shopping-list/shopping-list.routes";
 import { ItemBase } from "../models/item-base";
 import { ItemServiceAbstract } from "./item-service.abstract";
+import { ITEMS_KEY } from "../../shopping-list/route-data-keys";
 
 @Directive()
 export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPatch extends ItemBase> extends ObservingComponentAbstract {

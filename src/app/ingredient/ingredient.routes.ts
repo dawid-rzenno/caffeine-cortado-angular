@@ -5,7 +5,8 @@ import { IngredientFormComponent } from "./ingredient-form/ingredient-form.compo
 import { IngredientTableComponent } from "./ingredient-table/ingredient-table.component";
 import { ingredientsResolver } from "./ingredients.resolver";
 import { ingredientFormGuard } from "./ingredient-form.guard";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const ingredientRoutes: Route[] = [
   {

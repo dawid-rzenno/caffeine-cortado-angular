@@ -4,7 +4,8 @@ import { DietFormComponent } from "./diet-form/diet-form.component";
 import { Routes } from "@angular/router";
 import { DietTableComponent } from "./diet-table/diet-table.component";
 import { dietsResolver } from "./diets.resolver";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const dietRoutes: Routes = [
   {

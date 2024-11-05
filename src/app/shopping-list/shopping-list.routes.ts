@@ -5,9 +5,7 @@ import { ShoppingListFormComponent } from "./shopping-list-form/shopping-list-fo
 import { ShoppingListTableComponent } from "./shopping-list-table/shopping-list-table.component";
 import { shoppingListsResolver } from "./shopping-lists.resolver";
 import { shoppingListFormGuard } from "./shopping-list-form.guard";
-
-export const ITEMS_KEY: string = 'ITEMS';
-export const ITEM_KEY: string = 'ITEM';
+import { ITEM_KEY, ITEMS_KEY } from "./route-data-keys";
 
 export const shoppingListRoutes: Routes = [
   {

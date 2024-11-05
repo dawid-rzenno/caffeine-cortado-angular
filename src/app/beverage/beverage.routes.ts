@@ -5,7 +5,8 @@ import { BeverageDetailsComponent } from "./beverage-details/beverage-details.co
 import { beverageResolver } from "./beverage.resolver";
 import { beveragesResolver } from "./beverages.resolver";
 import { beverageFormGuard } from "./beverage-form.guard";
-import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/shopping-list.routes";
+
+import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const beverageRoutes: Route[] = [
   {
