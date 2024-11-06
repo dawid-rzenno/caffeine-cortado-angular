@@ -1,5 +1,7 @@
 # Cortado
 
+![pipeline](https://github.com/dawid-rzenno/caffeine-cortado-angular/actions/workflows/main.yml/badge.svg)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1 (currently 18.2.1).
 
 ## Development server

@@ -4,13 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --poll=2000",
+    "lint": "ng lint",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "ci:build": "ng build --configuration production",
     "test": "ng test",
+    "ci:test": "ng test --configuration production",
     "e2e": "ng e2e",
+    "ci:e2e": "ng e2e --configuration production",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "lint": "ng lint"
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {

@@ -117,6 +117,17 @@
               ]
             },
             "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "browsers": "ChromeHeadlessCI",
+              "watch": false,
+              "sourceMap": false
+            },
+            "development": {
+              "browsers": "Chrome",
+              "watch": true
+            }
           }
         },
         "cypress-run": {
