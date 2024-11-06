@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from "@angular/forms";
 import { ShoppingList, ShoppingListPatch } from "../shopping-list";
 import { ActivatedRoute } from "@angular/router";
 import { ShoppingListService } from "../shopping-list.service";
@@ -9,12 +14,15 @@ import { MatInputModule } from "@angular/material/input";
 import { AsyncPipe, NgForOf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
-import { createSearchResultForm, SearchResultForm } from "../../ingredient/ingredient-form/ingredient-form.component";
+import {
+  createSearchResultForm,
+  SearchResultForm,
+} from "../../ingredient/ingredient-form/ingredient-form.component";
 import {
   MatAutocomplete,
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
-  MatOption
+  MatOption,
 } from "@angular/material/autocomplete";
 import { map, Observable, startWith } from "rxjs";
 import { IngredientService } from "../../ingredient/ingredient.service";
@@ -22,16 +30,16 @@ import { IngredientService } from "../../ingredient/ingredient.service";
 import { SearchResult } from "../../shared/models/search-result";
 
 export type ShoppingListForm = {
-  id: FormControl<number | undefined>,
-  name: FormControl<string>,
-}
+  id: FormControl<number | undefined>;
+  name: FormControl<string>;
+};
 
 export type ShoppingListDetailsForm = ShoppingListForm & {
-  ingredients: FormArray<FormGroup<SearchResultForm>>
-}
+  ingredients: FormArray<FormGroup<SearchResultForm>>;
+};
 
 @Component({
-  selector: 'cortado-shopping-list-form',
+  selector: "cortado-shopping-list-form",
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -45,32 +53,45 @@ export type ShoppingListDetailsForm = ShoppingListForm & {
     MatAutocompleteTrigger,
     MatOption,
   ],
-  templateUrl: './shopping-list-form.component.html',
-  styleUrl: './shopping-list-form.component.scss'
+  templateUrl: "./shopping-list-form.component.html",
+  styleUrl: "./shopping-list-form.component.scss",
 })
-export class ShoppingListFormComponent extends ItemFormComponentAbstract<ShoppingList, ShoppingListPatch> implements OnInit {
-  readonly ingredientsFormArray: FormArray<FormGroup<SearchResultForm>> = new FormArray<FormGroup<SearchResultForm>>([])
+export class ShoppingListFormComponent
+  extends ItemFormComponentAbstract<ShoppingList, ShoppingListPatch>
+  implements OnInit
+{
+  readonly ingredientsFormArray: FormArray<FormGroup<SearchResultForm>> =
+    new FormArray<FormGroup<SearchResultForm>>([]);
   readonly ingredients$: Observable<SearchResult[]> =
     this.ingredientsFormArray.valueChanges.pipe(
       startWith(() => this.ingredientsFormArray.getRawValue()),
-      map(() => this.ingredientsFormArray.getRawValue())
+      map(() => this.ingredientsFormArray.getRawValue()),
     ) as Observable<SearchResult[]>;
 
-  readonly form: FormGroup<ShoppingListDetailsForm> = new FormGroup<ShoppingListDetailsForm>({
-    id: new FormControl<number | undefined>(undefined, {nonNullable: true}),
-    name: new FormControl<string>('', {nonNullable: true}),
-    ingredients: this.ingredientsFormArray,
-  })
+  readonly form: FormGroup<ShoppingListDetailsForm> =
+    new FormGroup<ShoppingListDetailsForm>({
+      id: new FormControl<number | undefined>(undefined, {
+        nonNullable: true,
+      }),
+      name: new FormControl<string>("", { nonNullable: true }),
+      ingredients: this.ingredientsFormArray,
+    });
 
   readonly defaultFormValue: ShoppingList | undefined;
 
-  readonly ingredientSearchFormControl: FormControl<string> = new FormControl<string>('', {nonNullable: true})
-  readonly ingredientAutocompleteOptions$: Observable<SearchResult[]> = this.createAutocompleteOptions$(
-    this.ingredientSearchFormControl,
-    this.ingredientService
-  );
+  readonly ingredientSearchFormControl: FormControl<string> =
+    new FormControl<string>("", { nonNullable: true });
+  readonly ingredientAutocompleteOptions$: Observable<SearchResult[]> =
+    this.createAutocompleteOptions$(
+      this.ingredientSearchFormControl,
+      this.ingredientService,
+    );
 
-  constructor(route: ActivatedRoute, service: ShoppingListService, private ingredientService: IngredientService) {
+  constructor(
+    route: ActivatedRoute,
+    service: ShoppingListService,
+    private ingredientService: IngredientService,
+  ) {
     super(route, service);
   }
 
@@ -85,12 +106,12 @@ export class ShoppingListFormComponent extends ItemFormComponentAbstract<Shoppin
   }
 
   onOptionSelected(event: MatAutocompleteSelectedEvent): void {
-    this.form.controls.ingredients.push(createSearchResultForm(event.option.value))
+    this.form.controls.ingredients.push(
+      createSearchResultForm(event.option.value),
+    );
   }
 
   protected addNewIngredient(ingredient: SearchResult): void {
-    this.ingredientsFormArray.push(
-      createSearchResultForm(ingredient)
-    )
+    this.ingredientsFormArray.push(createSearchResultForm(ingredient));
   }
 }

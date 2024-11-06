@@ -1,8 +1,8 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn } from "@angular/router";
 import { TestBed } from "@angular/core/testing";
 import { mealFormGuard } from "./meal-form.guard";
 
-describe('mealFormGuard', () => {
+describe("mealFormGuard", () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => mealFormGuard(...guardParameters));
 
@@ -10,7 +10,7 @@ describe('mealFormGuard', () => {
     TestBed.configureTestingModule({});
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(executeGuard).toBeTruthy();
   });
 });

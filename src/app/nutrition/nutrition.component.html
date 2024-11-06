@@ -1,5 +1,9 @@
-<mat-grid-list gutterSize="0" cols="3" rowHeight="fit" class="nutrition-grid-list">
-
+<mat-grid-list
+  gutterSize="0"
+  cols="3"
+  rowHeight="fit"
+  class="nutrition-grid-list"
+>
   <mat-grid-tile colspan="3" class="name">Nutrition Information</mat-grid-tile>
 
   <!-- HEADERS -->
@@ -11,12 +15,21 @@
   <!-- CELLS -->
 
   <mat-grid-tile rowspan="2" class="subcategory">Energy</mat-grid-tile>
-  <mat-grid-tile colspan="2">{{ nutrition.energy[0].value }} {{ nutrition.energy[0].unit }}</mat-grid-tile>
-  <mat-grid-tile colspan="2">{{ nutrition.energy[1].value }} {{ nutrition.energy[1].unit }}</mat-grid-tile>
+  <mat-grid-tile colspan="2"
+    >{{ nutrition.energy[0].value }}
+    {{ nutrition.energy[0].unit }}</mat-grid-tile
+  >
+  <mat-grid-tile colspan="2"
+    >{{ nutrition.energy[1].value }}
+    {{ nutrition.energy[1].unit }}</mat-grid-tile
+  >
 
   @for (macronutrient of nutrition.macronutrients; track macronutrient.id) {
     @if (macronutrient.components) {
-      <mat-grid-tile [rowspan]="1 + macronutrient.components.length" class="subcategory">
+      <mat-grid-tile
+        [rowspan]="1 + macronutrient.components.length"
+        class="subcategory"
+      >
         <span>{{ macronutrient.name }}</span>
 
         @for (component of macronutrient.components; track component.id) {
@@ -24,10 +37,15 @@
         }
       </mat-grid-tile>
       <mat-grid-tile [rowspan]="1 + macronutrient.components.length">
-        <span>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</span>
+        <span
+          >{{ macronutrient.amount.value }}
+          {{ macronutrient.amount.unit }}</span
+        >
 
         @for (component of macronutrient.components; track component.id) {
-          <span class="component">{{ component.amount.value }} {{ component.amount.unit }}</span>
+          <span class="component"
+            >{{ component.amount.value }} {{ component.amount.unit }}</span
+          >
         }
       </mat-grid-tile>
       <mat-grid-tile [rowspan]="1 + macronutrient.components.length">
@@ -37,10 +55,14 @@
           <span class="component">{{ component.amount.rdaPercentage }} %</span>
         }
       </mat-grid-tile>
-
     } @else {
-      <mat-grid-tile class="subcategory">{{ macronutrient.name }}</mat-grid-tile>
-      <mat-grid-tile>{{ macronutrient.amount.value }} {{ macronutrient.amount.unit }}</mat-grid-tile>
+      <mat-grid-tile class="subcategory">{{
+        macronutrient.name
+      }}</mat-grid-tile>
+      <mat-grid-tile
+        >{{ macronutrient.amount.value }}
+        {{ macronutrient.amount.unit }}</mat-grid-tile
+      >
       <mat-grid-tile>{{ macronutrient.amount.rdaPercentage }} %</mat-grid-tile>
     }
   }
@@ -49,7 +71,9 @@
 
   @for (vitamin of nutrition.vitamins; track vitamin.id) {
     <mat-grid-tile class="subcategory">{{ vitamin.name }}</mat-grid-tile>
-    <mat-grid-tile>{{ vitamin.amount.value }} {{ vitamin.amount.unit }}</mat-grid-tile>
+    <mat-grid-tile
+      >{{ vitamin.amount.value }} {{ vitamin.amount.unit }}</mat-grid-tile
+    >
     <mat-grid-tile>{{ vitamin.amount.rdaPercentage }} %</mat-grid-tile>
   }
 
@@ -57,8 +81,9 @@
 
   @for (mineral of nutrition.minerals; track mineral.id) {
     <mat-grid-tile class="subcategory">{{ mineral.name }}</mat-grid-tile>
-    <mat-grid-tile>{{ mineral.amount.value }} {{ mineral.amount.unit }}</mat-grid-tile>
+    <mat-grid-tile
+      >{{ mineral.amount.value }} {{ mineral.amount.unit }}</mat-grid-tile
+    >
     <mat-grid-tile>{{ mineral.amount.rdaPercentage }} %</mat-grid-tile>
   }
-
 </mat-grid-list>

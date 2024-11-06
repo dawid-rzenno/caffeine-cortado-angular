@@ -3,38 +3,35 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    basePath: "",
+    frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require("karma-jasmine"),
+      require("karma-chrome-launcher"),
+      require("karma-jasmine-html-reporter"),
+      require("karma-coverage"),
+      require("@angular-devkit/build-angular/plugins/karma"),
     ],
     client: {
       jasmine: {
         // See link for more information
         // https://jasmine.github.io/api/edge/Configuration.html
       },
-      clearContext: false
+      clearContext: false,
     },
     jasmineHtmlReporter: {
-      suppressAll: true
+      suppressAll: true,
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/caffeine-mocha'),
-      subdir: '.',
-      reporters: [
-        {type: 'html'},
-        {type: 'text-summary'}
-      ]
+      dir: require("path").join(__dirname, "./coverage/caffeine-mocha"),
+      subdir: ".",
+      reporters: [{ type: "html" }, { type: "text-summary" }],
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ["progress", "kjhtml"],
     reportSlowerThan: 250,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    browsers: ['Chrome', 'ChromeHeadless'],
+    browsers: ["Chrome", "ChromeHeadless"],
   });
 };

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component.abstract";
 import { MatDialog } from "@angular/material/dialog";
 import { IngredientService } from "../ingredient.service";
@@ -12,7 +12,7 @@ import { NgIf } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'cortado-ingredient-table',
+  selector: "cortado-ingredient-table",
   standalone: true,
   imports: [
     MatTableModule,
@@ -21,15 +21,22 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
     RouterModule,
     MatCardModule,
     NgIf,
-    FaIconComponent
+    FaIconComponent,
   ],
-  templateUrl: './ingredient-table.component.html',
-  styleUrl: './ingredient-table.component.scss'
+  templateUrl: "./ingredient-table.component.html",
+  styleUrl: "./ingredient-table.component.scss",
 })
-export class IngredientTableComponent extends ItemTableComponentAbstract<Ingredient, IngredientPatch> {
-  override displayedColumns: string[] = ['id', 'name', 'actions'];
+export class IngredientTableComponent extends ItemTableComponentAbstract<
+  Ingredient,
+  IngredientPatch
+> {
+  override displayedColumns: string[] = ["id", "name", "actions"];
 
-  constructor(service: IngredientService, route: ActivatedRoute, dialog: MatDialog) {
+  constructor(
+    service: IngredientService,
+    route: ActivatedRoute,
+    dialog: MatDialog,
+  ) {
     super(service, route, dialog);
   }
 }

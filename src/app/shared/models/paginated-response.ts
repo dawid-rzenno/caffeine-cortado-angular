@@ -4,7 +4,10 @@ import { ItemBase } from "./item-base";
 import { Sort } from "./sort";
 import { Pageable } from "./pageable";
 
-type PaginatedResponseArgs<T extends ItemBase> = Omit<PaginatedResponse<T>, 'createMatPaginatorConfig'>
+type PaginatedResponseArgs<T extends ItemBase> = Omit<
+  PaginatedResponse<T>,
+  "createMatPaginatorConfig"
+>;
 
 export class PaginatedResponse<Item extends ItemBase> {
   totalElements: number;
@@ -34,6 +37,10 @@ export class PaginatedResponse<Item extends ItemBase> {
   }
 
   createMatPaginatorConfig(): MatPaginatorConfig {
-    return new MatPaginatorConfig(this.pageable.pageNumber, this.pageable.pageSize, this.totalElements)
+    return new MatPaginatorConfig(
+      this.pageable.pageNumber,
+      this.pageable.pageSize,
+      this.totalElements,
+    );
   }
 }

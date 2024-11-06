@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
@@ -12,7 +12,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgIf } from "@angular/common";
 
 @Component({
-  selector: 'cortado-diet-table',
+  selector: "cortado-diet-table",
   standalone: true,
   imports: [
     MatTableModule,
@@ -21,12 +21,15 @@ import { NgIf } from "@angular/common";
     RouterModule,
     MatCardModule,
     FaIconComponent,
-    NgIf
+    NgIf,
   ],
-  templateUrl: './diet-table.component.html',
-  styleUrl: './diet-table.component.scss'
+  templateUrl: "./diet-table.component.html",
+  styleUrl: "./diet-table.component.scss",
 })
-export class DietTableComponent extends ItemTableComponentAbstract<Diet, DietPatch> {
+export class DietTableComponent extends ItemTableComponentAbstract<
+  Diet,
+  DietPatch
+> {
   constructor(service: DietService, route: ActivatedRoute, dialog: MatDialog) {
     super(service, route, dialog);
   }

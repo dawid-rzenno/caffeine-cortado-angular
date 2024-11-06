@@ -5,10 +5,14 @@ type ShoppingListBase = {
   name: string;
 };
 
-export type ShoppingList = ItemBase & ShoppingListBase & {
-  ingredients: Ingredient[]
-};
+export type ShoppingList = ItemBase &
+  ShoppingListBase & {
+    ingredients: Ingredient[];
+  };
 
-export type ShoppingListPatch = ItemBase & Partial<ShoppingListBase & {
-  ingredients: IngredientPatch[]
-}>;
+export type ShoppingListPatch = ItemBase &
+  Partial<
+    ShoppingListBase & {
+      ingredients: IngredientPatch[];
+    }
+  >;

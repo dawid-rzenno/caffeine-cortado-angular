@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { ShoppingList, ShoppingListPatch } from "../shopping-list";
 import { ItemTableComponentAbstract } from "../../shared/abstracts/item-table-component.abstract";
 import { MatButtonModule } from "@angular/material/button";
@@ -12,7 +12,7 @@ import { NgIf } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'cortado-shopping-list-table',
+  selector: "cortado-shopping-list-table",
   standalone: true,
   imports: [
     MatTableModule,
@@ -23,11 +23,18 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
     NgIf,
     FaIconComponent,
   ],
-  templateUrl: './shopping-list-table.component.html',
-  styleUrl: './shopping-list-table.component.scss'
+  templateUrl: "./shopping-list-table.component.html",
+  styleUrl: "./shopping-list-table.component.scss",
 })
-export class ShoppingListTableComponent extends ItemTableComponentAbstract<ShoppingList, ShoppingListPatch> {
-  constructor(service: ShoppingListService, route: ActivatedRoute, dialog: MatDialog) {
+export class ShoppingListTableComponent extends ItemTableComponentAbstract<
+  ShoppingList,
+  ShoppingListPatch
+> {
+  constructor(
+    service: ShoppingListService,
+    route: ActivatedRoute,
+    dialog: MatDialog,
+  ) {
     super(service, route, dialog);
   }
 }

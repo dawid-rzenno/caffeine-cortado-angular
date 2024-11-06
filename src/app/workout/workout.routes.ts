@@ -10,32 +10,30 @@ import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const workoutRoutes: Route[] = [
   {
-    path: 'list',
+    path: "list",
     component: WorkoutTableComponent,
     resolve: {
-      [ITEMS_KEY]: workoutsResolver
+      [ITEMS_KEY]: workoutsResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: WorkoutDetailsComponent,
     resolve: {
-      [ITEM_KEY]: workoutResolver
+      [ITEM_KEY]: workoutResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: WorkoutFormComponent,
-    canActivate: [
-      workoutFormGuard
-    ],
+    canActivate: [workoutFormGuard],
     resolve: {
-      [ITEM_KEY]: workoutResolver
+      [ITEM_KEY]: workoutResolver,
     },
   },
   {
-    path: 'form',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "form",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

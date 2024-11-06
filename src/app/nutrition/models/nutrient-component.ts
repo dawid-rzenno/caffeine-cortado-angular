@@ -6,4 +6,4 @@ export type NutrientComponent = ItemBase & NutrientComponentBase;
 export type NutrientComponentBase = {
   name: string;
   amount: NutrientAmountBase;
-}
+};

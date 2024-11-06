@@ -10,32 +10,30 @@ import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const beverageRoutes: Route[] = [
   {
-    path: 'list',
+    path: "list",
     component: BeverageTableComponent,
     resolve: {
-      [ITEMS_KEY]: beveragesResolver
+      [ITEMS_KEY]: beveragesResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: BeverageDetailsComponent,
     resolve: {
-      [ITEM_KEY]: beverageResolver
+      [ITEM_KEY]: beverageResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: BeverageFormComponent,
-    canActivate: [
-      beverageFormGuard
-    ],
+    canActivate: [beverageFormGuard],
     resolve: {
-      [ITEM_KEY]: beverageResolver
+      [ITEM_KEY]: beverageResolver,
     },
   },
   {
-    path: 'form',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "form",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

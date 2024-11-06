@@ -9,32 +9,30 @@ import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const mealRoutes: Route[] = [
   {
-    path: 'list',
+    path: "list",
     component: MealTableComponent,
     resolve: {
-      [ITEMS_KEY]: mealsResolver
+      [ITEMS_KEY]: mealsResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: MealDetailsComponent,
     resolve: {
-      [ITEM_KEY]: mealResolver
+      [ITEM_KEY]: mealResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: MealFormComponent,
-    canActivate: [
-      mealFormGuard
-    ],
+    canActivate: [mealFormGuard],
     resolve: {
-      [ITEM_KEY]: mealResolver
+      [ITEM_KEY]: mealResolver,
     },
   },
   {
-    path: 'form',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "form",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

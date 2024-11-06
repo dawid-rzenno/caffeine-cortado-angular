@@ -1,5 +1,14 @@
 import { ActivatedRoute, Data } from "@angular/router";
-import { debounceTime, filter, map, mergeMap, Observable, shareReplay, switchMap, takeUntil } from "rxjs";
+import {
+  debounceTime,
+  filter,
+  map,
+  mergeMap,
+  Observable,
+  shareReplay,
+  switchMap,
+  takeUntil,
+} from "rxjs";
 import { FormControl, UntypedFormGroup } from "@angular/forms";
 import { Directive, inject, OnInit } from "@angular/core";
 import { ObservingComponentAbstract } from "./observing-component.abstract";
@@ -11,61 +20,70 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { NameChangeModalComponent } from "../../diet/diet-form/name-change-modal/name-change-modal.component";
 import { ITEM_KEY } from "../../shopping-list/route-data-keys";
 
-export type FormComponentAbstractService<Item extends ItemBase, ItemPatch extends ItemBase> = {
+export type FormComponentAbstractService<
+  Item extends ItemBase,
+  ItemPatch extends ItemBase,
+> = {
   create(item: Item): Observable<Item>;
   patch(item: ItemPatch): Observable<ItemPatch>;
-  delete(id: number): Observable<void>
-}
+  delete(id: number): Observable<void>;
+};
 
-export type SearchParams = { name: string }
+export type SearchParams = { name: string };
 
 export type SearchComponentAbstractService<Item extends SearchResult> = {
-  getAll(params: Partial<PaginationParams>): Observable<PaginatedResponse<Item>>;
-  search(params: Partial<PaginationParams & SearchParams>): Observable<PaginatedResponse<SearchResult>>;
-}
+  getAll(
+    params: Partial<PaginationParams>,
+  ): Observable<PaginatedResponse<Item>>;
+  search(
+    params: Partial<PaginationParams & SearchParams>,
+  ): Observable<PaginatedResponse<SearchResult>>;
+};
 
 @Directive()
 export abstract class ItemFormComponentAbstract<
-  Item extends ItemBase,
-  ItemPatch extends ItemBase
-> extends ObservingComponentAbstract implements OnInit {
-
+    Item extends ItemBase,
+    ItemPatch extends ItemBase,
+  >
+  extends ObservingComponentAbstract
+  implements OnInit
+{
   abstract form: UntypedFormGroup;
 
   readonly item$: Observable<Item> = this.route.data.pipe(
     map((routeData: Data) => routeData[ITEM_KEY]),
     filter((item: Item) => Boolean(item)),
     shareReplay(1),
-    takeUntil(this.destroy$)
+    takeUntil(this.destroy$),
   );
 
   protected get idControl(): FormControl<number> {
-    return this.form.get('id') as FormControl<number>;
+    return this.form.get("id") as FormControl<number>;
   }
 
   protected get nameControl(): FormControl<string> {
-    return this.form.get('name') as FormControl<string>;
+    return this.form.get("name") as FormControl<string>;
   }
 
   protected readonly matDialog: MatDialog = inject(MatDialog);
 
   protected constructor(
     protected route: ActivatedRoute,
-    protected service: FormComponentAbstractService<Item, ItemPatch>
+    protected service: FormComponentAbstractService<Item, ItemPatch>,
   ) {
     super();
   }
 
   createAutocompleteOptions$(
     searchFormControl: FormControl<string>,
-    service: SearchComponentAbstractService<SearchResult>
+    service: SearchComponentAbstractService<SearchResult>,
   ): Observable<SearchResult[]> {
     return searchFormControl.valueChanges.pipe(
       debounceTime(250),
       mergeMap((search: string) => service.search({ name: search })),
       map((response: PaginatedResponse<SearchResult>) => response.content),
-      takeUntil(this.destroy$)
-    )
+      takeUntil(this.destroy$),
+    );
   }
 
   optionToNameMapper<T extends { name: string }>(value: T) {
@@ -79,7 +97,7 @@ export abstract class ItemFormComponentAbstract<
   }
 
   onCreateClick(): void {
-    this.service.create(this.form.getRawValue()).subscribe()
+    this.service.create(this.form.getRawValue()).subscribe();
   }
 
   onSaveClick(): void {
@@ -87,23 +105,27 @@ export abstract class ItemFormComponentAbstract<
   }
 
   onResetClick(): void {
-    this.item$.subscribe((initialFormValue: Item) => this.form.reset(initialFormValue))
+    this.item$.subscribe((initialFormValue: Item) =>
+      this.form.reset(initialFormValue),
+    );
   }
 
   onNameEditClick(): void {
-    const dialogRef: MatDialogRef<NameChangeModalComponent, string> = this.matDialog.open(
-      NameChangeModalComponent,
-      { data: { name: this.nameControl.value } }
-    );
+    const dialogRef: MatDialogRef<NameChangeModalComponent, string> =
+      this.matDialog.open(NameChangeModalComponent, {
+        data: { name: this.nameControl.value },
+      });
 
-
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(
         filter((newName: string | undefined) => Boolean(newName)),
-        switchMap((newName: string | undefined) => this.service.patch({
-          id: this.idControl.value,
-          name: newName
-        } as ItemPatch)),
+        switchMap((newName: string | undefined) =>
+          this.service.patch({
+            id: this.idControl.value,
+            name: newName,
+          } as ItemPatch),
+        ),
       )
       .subscribe((response: ItemPatch) => {
         if (response.name) {

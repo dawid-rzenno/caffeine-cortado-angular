@@ -5,12 +5,16 @@ import { NutritionBase } from "../nutrition/models/nutrition";
 type MealBase = NutritionBase & {
   name: string;
   rating: number;
-}
+};
 
-export type Meal = ItemBase & MealBase & {
-  ingredients: Ingredient[]
-}
+export type Meal = ItemBase &
+  MealBase & {
+    ingredients: Ingredient[];
+  };
 
-export type MealPatch = ItemBase & Partial<MealBase & {
-  ingredients: IngredientPatch[]
-}>;
+export type MealPatch = ItemBase &
+  Partial<
+    MealBase & {
+      ingredients: IngredientPatch[];
+    }
+  >;

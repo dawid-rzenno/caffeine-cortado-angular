@@ -9,29 +9,29 @@ import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const dietRoutes: Routes = [
   {
-    path: 'list',
+    path: "list",
     component: DietTableComponent,
     resolve: {
-      [ITEMS_KEY]: dietsResolver
+      [ITEMS_KEY]: dietsResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: DietDetailsComponent,
     resolve: {
-      [ITEM_KEY]: dietResolver
+      [ITEM_KEY]: dietResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: DietFormComponent,
     resolve: {
-      [ITEM_KEY]: dietResolver
+      [ITEM_KEY]: dietResolver,
     },
   },
   {
-    path: 'new',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "new",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

@@ -7,156 +7,155 @@ export type Nutrition = ItemBase & NutritionBase;
 export type NutritionBase = {
   energy: AmountBase[];
   macronutrients: Nutrient[];
-  vitamins: Nutrient[],
-  minerals: Nutrient[]
-}
+  vitamins: Nutrient[];
+  minerals: Nutrient[];
+};
 
 export const NutritionExample: NutritionBase = {
   macronutrients: [
     {
       id: 0,
-      name: 'Protein',
+      name: "Protein",
       amount: {
         rdaPercentage: 54,
         value: 23,
-        unit: 'g'
-      }
+        unit: "g",
+      },
     },
     {
       id: 1,
-      name: 'Fat',
+      name: "Fat",
       amount: {
         rdaPercentage: 78,
         value: 23,
-        unit: 'g'
+        unit: "g",
       },
       components: [
         {
           id: 0,
-          name: 'of which saturates',
+          name: "of which saturates",
           amount: {
             rdaPercentage: 2,
             value: 13,
-            unit: 'g'
-          }
+            unit: "g",
+          },
         },
         {
           id: 0,
-          name: 'of which mono-unsaturates',
+          name: "of which mono-unsaturates",
           amount: {
             rdaPercentage: 12,
             value: 2,
-            unit: 'g'
-          }
+            unit: "g",
+          },
         },
         {
           id: 0,
-          name: 'polyunsaturates',
+          name: "polyunsaturates",
           amount: {
             rdaPercentage: 8,
             value: 14,
-            unit: 'g'
-          }
+            unit: "g",
+          },
         },
-      ]
+      ],
     },
     {
       id: 2,
-      name: 'Carbohydrates',
+      name: "Carbohydrates",
       amount: {
         rdaPercentage: 12,
         value: 78,
-        unit: 'g'
+        unit: "g",
       },
       components: [
         {
           id: 0,
-          name: 'of which sugars',
+          name: "of which sugars",
           amount: {
             rdaPercentage: 33,
             value: 22,
-            unit: 'g'
-          }
+            unit: "g",
+          },
         },
         {
           id: 0,
-          name: 'of which starch',
+          name: "of which starch",
           amount: {
             rdaPercentage: 33,
             value: 22,
-            unit: 'g'
-          }
+            unit: "g",
+          },
         },
-      ]
-    }
+      ],
+    },
   ],
   minerals: [
     {
       id: 1,
-      name: 'Calcium',
+      name: "Calcium",
       amount: {
         rdaPercentage: 19,
         value: 12,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
     {
       id: 2,
-      name: 'Iron',
+      name: "Iron",
       amount: {
         rdaPercentage: 66,
         value: 12,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
     {
       id: 3,
-      name: 'Magnesium',
+      name: "Magnesium",
       amount: {
         rdaPercentage: 33,
         value: 22,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
-
   ],
   vitamins: [
     {
       id: 1,
-      name: 'Vitamin C',
+      name: "Vitamin C",
       amount: {
         rdaPercentage: 12,
         value: 56,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
     {
       id: 2,
-      name: 'Vitamin A',
+      name: "Vitamin A",
       amount: {
         rdaPercentage: 34,
         value: 76,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
     {
       id: 4,
-      name: 'Vitamin D',
+      name: "Vitamin D",
       amount: {
         rdaPercentage: 45,
         value: 33,
-        unit: 'mg'
-      }
+        unit: "mg",
+      },
     },
   ],
   energy: [
     {
       value: 1123,
-      unit: 'kcal'
+      unit: "kcal",
     },
     {
       value: 662,
-      unit: 'kJ'
+      unit: "kJ",
     },
-  ]
-}
+  ],
+};

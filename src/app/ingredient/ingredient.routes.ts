@@ -10,32 +10,30 @@ import { ITEM_KEY, ITEMS_KEY } from "../shopping-list/route-data-keys";
 
 export const ingredientRoutes: Route[] = [
   {
-    path: 'list',
+    path: "list",
     component: IngredientTableComponent,
     resolve: {
-      [ITEMS_KEY]: ingredientsResolver
+      [ITEMS_KEY]: ingredientsResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: IngredientDetailsComponent,
     resolve: {
-      [ITEM_KEY]: ingredientResolver
+      [ITEM_KEY]: ingredientResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: IngredientFormComponent,
-    canActivate: [
-      ingredientFormGuard
-    ],
+    canActivate: [ingredientFormGuard],
     resolve: {
-      [ITEM_KEY]: ingredientResolver
+      [ITEM_KEY]: ingredientResolver,
     },
   },
   {
-    path: 'form',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "form",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

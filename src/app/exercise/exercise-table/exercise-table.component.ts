@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'cortado-exercise-table',
+  selector: "cortado-exercise-table",
   standalone: true,
   imports: [],
-  templateUrl: './exercise-table.component.html',
-  styleUrl: './exercise-table.component.scss'
+  templateUrl: "./exercise-table.component.html",
+  styleUrl: "./exercise-table.component.scss",
 })
-export class ExerciseTableComponent {
-
-}
+export class ExerciseTableComponent {}

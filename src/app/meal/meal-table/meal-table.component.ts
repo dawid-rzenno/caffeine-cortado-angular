@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
 import { Meal, MealPatch } from "../meal";
@@ -12,7 +12,7 @@ import { NgIf } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'cortado-meal-table',
+  selector: "cortado-meal-table",
   standalone: true,
   imports: [
     MatTableModule,
@@ -21,12 +21,15 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
     RouterModule,
     MatCardModule,
     NgIf,
-    FaIconComponent
+    FaIconComponent,
   ],
-  templateUrl: './meal-table.component.html',
-  styleUrl: './meal-table.component.scss'
+  templateUrl: "./meal-table.component.html",
+  styleUrl: "./meal-table.component.scss",
 })
-export class MealTableComponent extends ItemTableComponentAbstract<Meal, MealPatch> {
+export class MealTableComponent extends ItemTableComponentAbstract<
+  Meal,
+  MealPatch
+> {
   override displayedColumns: string[] = ["id", "name", "rating", "actions"];
 
   constructor(service: MealService, route: ActivatedRoute, dialog: MatDialog) {

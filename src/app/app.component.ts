@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterLink, RouterOutlet } from "@angular/router";
 import { MainComponent } from "./core/layout/main/main.component";
 import { FooterComponent } from "./core/layout/footer/footer.component";
 import { AuthModule } from "./core/auth/auth.module";
@@ -9,7 +9,7 @@ import { NAVIGATION_SERVICE_TOKEN } from "./core/navigation/navigation-service.i
 import { NavigationService } from "./shared/services/navigation.service";
 
 @Component({
-  selector: 'cortado-root',
+  selector: "cortado-root",
   standalone: true,
   imports: [
     RouterOutlet,
@@ -18,12 +18,14 @@ import { NavigationService } from "./shared/services/navigation.service";
     FooterComponent,
     AuthModule,
     BreadcrumbsComponent,
-    SideNavComponent
+    SideNavComponent,
   ],
-  providers: [{ provide: NAVIGATION_SERVICE_TOKEN, useClass: NavigationService}],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  providers: [
+    { provide: NAVIGATION_SERVICE_TOKEN, useClass: NavigationService },
+  ],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-  title = 'cortado';
+  title = "cortado";
 }

@@ -1,18 +1,22 @@
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from "@fortawesome/angular-fontawesome";
 import { NgModule } from "@angular/core";
 import {
   faCaretDown,
   faChevronRight,
-  faClose, faEdit,
+  faClose,
+  faEdit,
   faHeartPulse,
   faMugHot,
   faPlus,
-  faWarning
+  faWarning,
 } from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   imports: [FontAwesomeModule],
-  exports: [FontAwesomeModule]
+  exports: [FontAwesomeModule],
 })
 export class FontAwesomeIconLibraryModule {
   constructor(library: FaIconLibrary) {
@@ -24,7 +28,7 @@ export class FontAwesomeIconLibraryModule {
       faWarning,
       faHeartPulse,
       faChevronRight,
-      faEdit
+      faEdit,
     );
   }
 }

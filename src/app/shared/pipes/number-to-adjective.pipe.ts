@@ -1,24 +1,23 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'numberToAdjective',
-  standalone: true
+  name: "numberToAdjective",
+  standalone: true,
 })
 export class NumberToAdjectivePipe implements PipeTransform {
-
   transform(value: number): string {
-    switch(value) {
+    switch (value) {
       case 1:
-        return '1st'
+        return "1st";
 
       case 2:
-        return '2nd'
+        return "2nd";
 
       case 3:
-        return '3rd'
+        return "3rd";
 
       default:
-        return value + 'th';
+        return value + "th";
     }
   }
 }

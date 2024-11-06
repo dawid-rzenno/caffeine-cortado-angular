@@ -1,4 +1,4 @@
-import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
+import { CanActivateFn, RedirectCommand, Router } from "@angular/router";
 import { inject } from "@angular/core";
 import { map } from "rxjs";
 import { BeverageService } from "./beverage.service";
@@ -9,11 +9,16 @@ export const beverageFormGuard: CanActivateFn = (route, state) => {
   const service: BeverageService = inject(BeverageService);
   const router: Router = inject(Router);
 
-  return route.paramMap.get('id')
+  return route.paramMap.get("id")
     ? true
-    : service.create().pipe(
-    map((beverage: ItemBase) => new RedirectCommand(
-      router.createUrlTree([state.url, beverage.id])
-    ))
-  );
+    : service
+        .create()
+        .pipe(
+          map(
+            (beverage: ItemBase) =>
+              new RedirectCommand(
+                router.createUrlTree([state.url, beverage.id]),
+              ),
+          ),
+        );
 };

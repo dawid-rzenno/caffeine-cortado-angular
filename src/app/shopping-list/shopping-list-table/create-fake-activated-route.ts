@@ -9,7 +9,7 @@ export function createFakeActivatedRoute<T extends ItemBase>(content: T[]) {
       data: {
         [ITEMS_KEY]: createFakePaginatedResponse<T>(content),
         [ITEM_KEY]: content.length ? content[0] : undefined,
-      }
-    }
-  }
+      },
+    },
+  };
 }

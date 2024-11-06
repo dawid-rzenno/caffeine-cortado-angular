@@ -9,32 +9,30 @@ import { ITEM_KEY, ITEMS_KEY } from "./route-data-keys";
 
 export const shoppingListRoutes: Routes = [
   {
-    path: 'all',
+    path: "all",
     component: ShoppingListTableComponent,
     resolve: {
-      [ITEMS_KEY]: shoppingListsResolver
+      [ITEMS_KEY]: shoppingListsResolver,
     },
   },
   {
-    path: 'details/:id',
+    path: "details/:id",
     component: ShoppingListDetailsComponent,
     resolve: {
-      [ITEM_KEY]: shoppingListResolver
+      [ITEM_KEY]: shoppingListResolver,
     },
   },
   {
-    path: 'form/:id',
+    path: "form/:id",
     component: ShoppingListFormComponent,
-    canActivate: [
-      shoppingListFormGuard
-    ],
+    canActivate: [shoppingListFormGuard],
     resolve: {
-      [ITEM_KEY]: shoppingListResolver
+      [ITEM_KEY]: shoppingListResolver,
     },
   },
   {
-    path: 'form',
-    pathMatch: 'full',
-    redirectTo: 'form/'
+    path: "form",
+    pathMatch: "full",
+    redirectTo: "form/",
   },
-]
+];

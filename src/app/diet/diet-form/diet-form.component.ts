@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { Diet, DietPatch } from "../diet";
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { DietService } from "../diet.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -19,7 +24,7 @@ import { NutritionTableComponent } from "../../nutrition-table/nutrition-table.c
 import { DietForm } from "./diet-form";
 
 @Component({
-  selector: 'cortado-diet-form',
+  selector: "cortado-diet-form",
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -35,20 +40,25 @@ import { DietForm } from "./diet-form";
     NumberToAdjectivePipe,
     FaIconComponent,
     MatIconModule,
-    NutritionTableComponent
+    NutritionTableComponent,
   ],
-  templateUrl: './diet-form.component.html',
-  styleUrl: './diet-form.component.scss'
+  templateUrl: "./diet-form.component.html",
+  styleUrl: "./diet-form.component.scss",
 })
-export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch> implements OnInit {
+export class DietFormComponent
+  extends ItemFormComponentAbstract<Diet, DietPatch>
+  implements OnInit
+{
   get mealControls(): FormArray<FormControl<Meal>> {
-    return this.form.get('meals') as FormArray<FormControl<Meal>>;
+    return this.form.get("meals") as FormArray<FormControl<Meal>>;
   }
 
   readonly form: FormGroup<DietForm> = new FormGroup<DietForm>({
-    id: new FormControl<number | undefined>(undefined, { nonNullable: true }),
+    id: new FormControl<number | undefined>(undefined, {
+      nonNullable: true,
+    }),
     name: new FormControl<string>("", { nonNullable: true }),
-    meals: new FormArray<FormControl<Meal>>([])
+    meals: new FormArray<FormControl<Meal>>([]),
   });
 
   defaultFormValue: Diet | undefined;
@@ -69,8 +79,6 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
   }
 
   protected addNewMeal(meal: Meal): void {
-    this.mealControls.push(
-      new FormControl<Meal>(meal) as FormControl<Meal>
-    )
+    this.mealControls.push(new FormControl<Meal>(meal) as FormControl<Meal>);
   }
 }

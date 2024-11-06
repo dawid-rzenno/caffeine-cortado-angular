@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MealDetailsComponent } from './meal-details.component';
+import { MealDetailsComponent } from "./meal-details.component";
 import { ActivatedRoute, provideRouter } from "@angular/router";
 
 import { createFakeActivatedRoute } from "../../shopping-list/shopping-list-table/create-fake-activated-route";
 
-describe('MealDetailsComponent', () => {
+describe("MealDetailsComponent", () => {
   let component: MealDetailsComponent;
   let fixture: ComponentFixture<MealDetailsComponent>;
 
@@ -14,17 +14,19 @@ describe('MealDetailsComponent', () => {
       imports: [MealDetailsComponent],
       providers: [
         provideRouter([]),
-        { provide: ActivatedRoute, useValue: createFakeActivatedRoute([{ id: 0, name: '' }]) },
+        {
+          provide: ActivatedRoute,
+          useValue: createFakeActivatedRoute([{ id: 0, name: "" }]),
+        },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MealDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -2,15 +2,16 @@
   <mat-card-header>
     <mat-card-title>
       <span class="d-flex align-items-center mb-2">
-          <h2 class="m-0">{{ form.controls.name.value }}</h2>
-          <button (click)="onNameEditClick()" class="ml-2" mat-icon-button>
-            <fa-icon [icon]="['fas', 'edit']"></fa-icon>
-          </button>
-        </span>
+        <h2 class="m-0">{{ form.controls.name.value }}</h2>
+        <button (click)="onNameEditClick()" class="ml-2" mat-icon-button>
+          <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+        </button>
+      </span>
     </mat-card-title>
     <mat-card-subtitle>
-      Use this form to add a new ingredient to your meal planning database. Fill in the details accurately to ensure
-      proper tracking and usage of the ingredient in recipes and nutritional analysis.
+      Use this form to add a new ingredient to your meal planning database. Fill
+      in the details accurately to ensure proper tracking and usage of the
+      ingredient in recipes and nutritional analysis.
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
@@ -20,7 +21,7 @@
           <div class="col-6">
             <mat-form-field class="w-100">
               <mat-label>Name</mat-label>
-              <input matInput formControlName="name">
+              <input matInput formControlName="name" />
             </mat-form-field>
           </div>
 
@@ -28,7 +29,11 @@
             <mat-form-field class="w-100">
               <mat-label>Category</mat-label>
               <mat-select>
-                <mat-option *ngFor="let categoryOption of categoryOptions" [value]="categoryOption">{{ categoryOption }}</mat-option>
+                <mat-option
+                  *ngFor="let categoryOption of categoryOptions"
+                  [value]="categoryOption"
+                  >{{ categoryOption }}</mat-option
+                >
               </mat-select>
             </mat-form-field>
           </div>
@@ -36,38 +41,37 @@
           <div class="col-3">
             <mat-form-field class="w-100">
               <mat-label>Price</mat-label>
-              <input matInput formControlName="price">
+              <input matInput formControlName="price" />
             </mat-form-field>
           </div>
 
           <div class="col-3">
             <mat-form-field class="w-100">
               <mat-label>Calories</mat-label>
-              <input matInput formControlName="calories">
+              <input matInput formControlName="calories" />
             </mat-form-field>
           </div>
 
           <div class="col-3">
             <mat-form-field class="w-100">
               <mat-label>Proteins</mat-label>
-              <input matInput formControlName="proteins">
+              <input matInput formControlName="proteins" />
             </mat-form-field>
           </div>
 
           <div class="col-3">
             <mat-form-field class="w-100">
               <mat-label>Carbohydrates</mat-label>
-              <input matInput formControlName="carbohydrates">
+              <input matInput formControlName="carbohydrates" />
             </mat-form-field>
           </div>
 
           <div class="col-3">
             <mat-form-field class="w-100">
               <mat-label>Fats</mat-label>
-              <input matInput formControlName="fats">
+              <input matInput formControlName="fats" />
             </mat-form-field>
           </div>
-
         </div>
       </div>
     </form>

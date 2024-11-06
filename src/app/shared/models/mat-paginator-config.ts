@@ -1,7 +1,7 @@
 export type PaginationParams = {
-  size: number,
-  page: number
-}
+  size: number;
+  page: number;
+};
 
 export class MatPaginatorConfig {
   pageIndex: number;
@@ -22,17 +22,14 @@ export class MatPaginatorConfig {
   static get defaultPaginationParams(): PaginationParams {
     return {
       page: MatPaginatorConfig.DefaultPageIndex,
-      size: MatPaginatorConfig.DefaultPageSize
-    }
+      size: MatPaginatorConfig.DefaultPageSize,
+    };
   }
 
   get paginationParams(): PaginationParams {
     return {
       page: this.pageIndex,
-      size: this.pageSize
-    }
+      size: this.pageSize,
+    };
   }
 }
-
-
-

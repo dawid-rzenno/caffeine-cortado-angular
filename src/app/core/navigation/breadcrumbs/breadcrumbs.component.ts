@@ -1,17 +1,20 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from "@angular/common";
 import { Observable } from "rxjs";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { NAVIGATION_SERVICE_TOKEN, NavigationServiceInterface } from "../navigation-service.interface";
+import {
+  NAVIGATION_SERVICE_TOKEN,
+  NavigationServiceInterface,
+} from "../navigation-service.interface";
 
 export type Breadcrumb = {
-  label: string,
-  url: string,
+  label: string;
+  url: string;
 };
 
 @Component({
-  selector: 'cortado-breadcrumbs',
+  selector: "cortado-breadcrumbs",
   standalone: true,
   imports: [
     NgForOf,
@@ -19,13 +22,17 @@ export type Breadcrumb = {
     AsyncPipe,
     NgIf,
     NgTemplateOutlet,
-    FaIconComponent
+    FaIconComponent,
   ],
-  templateUrl: './breadcrumbs.component.html',
-  styleUrl: './breadcrumbs.component.scss'
+  templateUrl: "./breadcrumbs.component.html",
+  styleUrl: "./breadcrumbs.component.scss",
 })
 export class BreadcrumbsComponent {
-  public breadcrumbs$: Observable<Breadcrumb[]> = this.navigationService.breadcrumbs$;
+  public breadcrumbs$: Observable<Breadcrumb[]> =
+    this.navigationService.breadcrumbs$;
 
-  constructor(@Inject(NAVIGATION_SERVICE_TOKEN) private navigationService: NavigationServiceInterface) {}
+  constructor(
+    @Inject(NAVIGATION_SERVICE_TOKEN)
+    private navigationService: NavigationServiceInterface,
+  ) {}
 }

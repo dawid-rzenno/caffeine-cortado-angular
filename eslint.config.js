@@ -2,7 +2,7 @@
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
-const eslintConfigPrettier = require("eslint-config-prettier");
+const prettierConfig = require("eslint-config-prettier");
 
 module.exports = tseslint.config(
   {
@@ -34,6 +34,7 @@ module.exports = tseslint.config(
       "@typescript-eslint/consistent-type-definitions": ["off"],
       "@typescript-eslint/no-inferrable-types": ["off"],
       "@angular-eslint/no-input-rename": ["off"],
+      "@angular-eslint/": ["off"],
     },
   },
   {
@@ -44,5 +45,5 @@ module.exports = tseslint.config(
     ],
     rules: {},
   },
-  eslintConfigPrettier,
+  prettierConfig,
 );

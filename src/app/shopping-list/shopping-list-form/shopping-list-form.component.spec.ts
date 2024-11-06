@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ShoppingListFormComponent } from './shopping-list-form.component';
+import { ShoppingListFormComponent } from "./shopping-list-form.component";
 import { provideHttpClient } from "@angular/common/http";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { provideRouter } from "@angular/router";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
-describe('ShoppingListFormComponent', () => {
+describe("ShoppingListFormComponent", () => {
   let component: ShoppingListFormComponent;
   let fixture: ComponentFixture<ShoppingListFormComponent>;
 
@@ -17,16 +17,15 @@ describe('ShoppingListFormComponent', () => {
         provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShoppingListFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

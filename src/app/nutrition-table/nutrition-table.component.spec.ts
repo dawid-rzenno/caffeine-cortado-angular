@@ -1,27 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NutritionTableComponent } from './nutrition-table.component';
+import { NutritionTableComponent } from "./nutrition-table.component";
 import { MatGridListModule } from "@angular/material/grid-list";
 
-describe('NutritionTableComponent', () => {
+describe("NutritionTableComponent", () => {
   let component: NutritionTableComponent;
   let fixture: ComponentFixture<NutritionTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        NutritionTableComponent,
-        MatGridListModule
-      ]
-    })
-    .compileComponents();
+      imports: [NutritionTableComponent, MatGridListModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NutritionTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

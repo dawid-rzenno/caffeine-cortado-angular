@@ -1,3 +1,3 @@
 export enum StatusMapKeys {
-  BudgetForm = 'BudgetForm'
+  BudgetForm = "BudgetForm",
 }

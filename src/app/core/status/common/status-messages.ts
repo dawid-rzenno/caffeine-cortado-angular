@@ -1,3 +1,3 @@
 export enum StatusMessages {
-  Default = 'Loading',
+  Default = "Loading",
 }

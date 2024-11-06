@@ -14,7 +14,9 @@
       <!-- ToDo -->
     </mat-card-content>
     <mat-card-actions>
-      <ng-template [ngTemplateOutlet]="form.controls.id.value ? saveButton : createButton"></ng-template>
+      <ng-template
+        [ngTemplateOutlet]="form.controls.id.value ? saveButton : createButton"
+      ></ng-template>
 
       <ng-template #createButton>
         <button mat-button (click)="onCreateClick()">Create</button>

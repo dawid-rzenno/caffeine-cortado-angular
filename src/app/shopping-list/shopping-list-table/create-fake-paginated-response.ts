@@ -15,19 +15,19 @@ export function createFakePaginatedResponse<T extends ItemBase>(content: T[]) {
       sort: {
         empty: false,
         sorted: false,
-        unsorted: false
+        unsorted: false,
       },
       offset: 0,
       paged: false,
-      unpaged: false
+      unpaged: false,
     },
     size: 0,
     sort: {
       empty: false,
       sorted: false,
-      unsorted: false
+      unsorted: false,
     },
     totalElements: 0,
-    totalPages: 0
+    totalPages: 0,
   });
 }

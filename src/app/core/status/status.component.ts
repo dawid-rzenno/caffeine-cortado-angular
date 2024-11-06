@@ -1,18 +1,17 @@
-import {Component} from '@angular/core';
-import {StatusService} from "./status.service";
-import {Observable} from "rxjs";
-import {InstantiatedStatus} from "./common/instantiated-status";
+import { Component } from "@angular/core";
+import { StatusService } from "./status.service";
+import { Observable } from "rxjs";
+import { InstantiatedStatus } from "./common/instantiated-status";
 
 @Component({
-  selector: 'cortado-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.scss']
+  selector: "cortado-status",
+  templateUrl: "./status.component.html",
+  styleUrls: ["./status.component.scss"],
 })
 export class StatusComponent {
   readonly statuses$: Observable<InstantiatedStatus[]> = this.service.statuses$;
 
-  constructor(private service: StatusService) {
-  }
+  constructor(private service: StatusService) {}
 
   close(statusId: number): void {
     this.service.closeStatusWithId(statusId);

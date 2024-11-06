@@ -7,4 +7,3 @@ export type NutrientAmountBase = AmountBase & {
   /** (R)ecommended (D)aily (A)mount percentage. */
   rdaPercentage: number;
 };
-

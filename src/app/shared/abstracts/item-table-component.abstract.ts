@@ -5,14 +5,20 @@ import { Directive } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
-import { MatPaginatorConfig, PaginationParams } from "../models/mat-paginator-config";
+import {
+  MatPaginatorConfig,
+  PaginationParams,
+} from "../models/mat-paginator-config";
 import { PaginatedResponse } from "../models/paginated-response";
 import { ItemBase } from "../models/item-base";
 import { ItemServiceAbstract } from "./item-service.abstract";
 import { ITEMS_KEY } from "../../shopping-list/route-data-keys";
 
 @Directive()
-export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPatch extends ItemBase> extends ObservingComponentAbstract {
+export abstract class ItemTableComponentAbstract<
+  Item extends ItemPatch,
+  ItemPatch extends ItemBase,
+> extends ObservingComponentAbstract {
   items: Item[] = [];
 
   displayedColumns: string[] = ["id", "name", "actions"];
@@ -23,11 +29,12 @@ export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPat
   protected constructor(
     private service: ItemServiceAbstract<Item, ItemPatch>,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
 
-    const paginatedResponse: PaginatedResponse<Item> = this.route.snapshot.data[ITEMS_KEY];
+    const paginatedResponse: PaginatedResponse<Item> =
+      this.route.snapshot.data[ITEMS_KEY];
     this.matPaginatorConfig = paginatedResponse.createMatPaginatorConfig();
     this.items = paginatedResponse.content;
   }
@@ -37,7 +44,11 @@ export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPat
   }
 
   onPageChange(pageEvent: PageEvent): void {
-    this.matPaginatorConfig = new MatPaginatorConfig(pageEvent.pageIndex, pageEvent.pageSize, pageEvent.length);
+    this.matPaginatorConfig = new MatPaginatorConfig(
+      pageEvent.pageIndex,
+      pageEvent.pageSize,
+      pageEvent.length,
+    );
     this.getAll(this.matPaginatorConfig.paginationParams);
   }
 
@@ -52,20 +63,24 @@ export abstract class ItemTableComponentAbstract<Item extends ItemPatch, ItemPat
   }
 
   protected delete(item: Item): void {
-    const dialogRef: MatDialogRef<ConfirmationDialogComponent, unknown> = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        title: "Delete item",
-        content: "Are you sure you want to delete this item? This is a permanent action.",
-        buttonText: "Delete"
-      }
-    });
+    const dialogRef: MatDialogRef<ConfirmationDialogComponent, unknown> =
+      this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          title: "Delete item",
+          content:
+            "Are you sure you want to delete this item? This is a permanent action.",
+          buttonText: "Delete",
+        },
+      });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result && item.id) {
         this.service
           .delete(item.id)
           .pipe(takeUntil(this.destroy$))
-          .subscribe(() => this.getAll(this.matPaginatorConfig.paginationParams));
+          .subscribe(() =>
+            this.getAll(this.matPaginatorConfig.paginationParams),
+          );
       }
     });
   }

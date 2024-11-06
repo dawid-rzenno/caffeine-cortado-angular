@@ -2,7 +2,7 @@ import { CanActivateFn } from "@angular/router";
 import { TestBed } from "@angular/core/testing";
 import { exerciseFormGuard } from "./exercise-form.guard";
 
-describe('exerciseFormGuard', () => {
+describe("exerciseFormGuard", () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => exerciseFormGuard(...guardParameters));
 
@@ -10,7 +10,7 @@ describe('exerciseFormGuard', () => {
     TestBed.configureTestingModule({});
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(executeGuard).toBeTruthy();
   });
 });

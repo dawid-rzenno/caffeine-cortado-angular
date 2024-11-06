@@ -14,27 +14,36 @@
           <div class="col-6">
             <mat-form-field class="w-100">
               <mat-label>Name</mat-label>
-              <input matInput formControlName="name">
+              <input matInput formControlName="name" />
             </mat-form-field>
           </div>
           <div class="col-6">
             <mat-form-field class="w-100">
               <mat-label>Search for an ingredient</mat-label>
-              <input [formControl]="ingredientSearchFormControl" [matAutocomplete]="auto" matInput>
+              <input
+                [formControl]="ingredientSearchFormControl"
+                [matAutocomplete]="auto"
+                matInput
+              />
               <mat-autocomplete
                 (optionSelected)="onOptionSelected($event)"
                 [displayWith]="optionToNameMapper"
                 [hideSingleSelectionIndicator]="true"
                 #auto="matAutocomplete"
               >
-                @for (ingredientOption of ingredientAutocompleteOptions$ | async; track ingredientOption.id) {
-                  <mat-option [value]="ingredientOption">{{ingredientOption.name}}</mat-option>
+                @for (
+                  ingredientOption of ingredientAutocompleteOptions$ | async;
+                  track ingredientOption.id
+                ) {
+                  <mat-option [value]="ingredientOption">{{
+                    ingredientOption.name
+                  }}</mat-option>
                 }
               </mat-autocomplete>
             </mat-form-field>
           </div>
           <div class="col-6">
-<!--            <cortado-ingredient-table [dataSource]="ingredientTableDataSource$ | async"></cortado-ingredient-table>-->
+            <!--            <cortado-ingredient-table [dataSource]="ingredientTableDataSource$ | async"></cortado-ingredient-table>-->
           </div>
           <div class="col-6">
             <mat-button-toggle-group formControlName="rating">
