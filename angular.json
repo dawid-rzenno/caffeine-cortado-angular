@@ -120,7 +120,7 @@
           },
           "configurations": {
             "production": {
-              "browsers": "ChromeHeadlessCI",
+              "browsers": "ChromeHeadless",
               "watch": false,
               "sourceMap": false
             },
