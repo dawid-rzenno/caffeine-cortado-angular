@@ -4,9 +4,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1 (currently 18.2.1).
 
-## Development server
+## Development Tools
+
+### Server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+### Linting, coding style and testing
+The project uses 
+[Eslint](https://eslint.org/) (syntax check), 
+[Prettier](https://prettier.io/) (code style check), 
+[Jasmine](https://www.cypress.io/) + [Karma](https://karma-runner.github.io/) (unit tests) and 
+[Cypress](https://www.cypress.io/) (end-to-end tests).
 
 ## Code scaffolding
 
