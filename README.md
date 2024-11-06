@@ -12,10 +12,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ### Linting, coding style and testing
 The project uses 
-[Eslint](https://eslint.org/) (syntax check), 
-[Prettier](https://prettier.io/) (code style check), 
-[Jasmine](https://www.cypress.io/) + [Karma](https://karma-runner.github.io/) (unit tests) and 
-[Cypress](https://www.cypress.io/) (end-to-end tests).
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Jasmine](https://www.cypress.io/)
+- [Karma](https://karma-runner.github.io/) 
+- [Cypress](https://www.cypress.io/)
 
 ## Code scaffolding
 
