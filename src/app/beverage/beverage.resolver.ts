@@ -1,9 +1,6 @@
 import { ResolveFn } from '@angular/router';
-import { PaginatedResponse } from "../shared/models/paginated-response";
 import { inject } from "@angular/core";
 import { BeverageService } from "./beverage.service";
-
-import { ItemBase } from "../shared/models/item-base";
 import { Beverage } from "./beverage";
 
 export const beverageResolver: ResolveFn<Beverage> = (route) => {

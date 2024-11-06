@@ -26,27 +26,27 @@ export class AuthService {
     return this._authorizationToken || '';
   }
 
-  signIn(body: SignInBody): Observable<any> {
+  signIn(body: SignInBody): Observable<unknown> {
     return this.httpClient.post<string>(this.resourceUrl + 'sign-in', body).pipe(
       tap((token: string) => this._authorizationToken = token),
       catchError(this.catchError)
     );
   }
 
-  signOut(): Observable<any> {
+  signOut(): Observable<unknown> {
     return this.httpClient.post(this.resourceUrl + 'sign-out', undefined).pipe(
       tap(() => this._authorizationToken = undefined),
       catchError(this.catchError)
     );
   }
 
-  signUp(body: SignUpBody): Observable<any> {
+  signUp(body: SignUpBody): Observable<unknown> {
     return this.httpClient.post(this.resourceUrl + 'sign-up', body).pipe(
       catchError(this.catchError)
     );
   }
 
-  private catchError(error: any): Observable<any> {
+  private catchError(error: unknown): Observable<unknown> {
     return of(error)
   }
 }

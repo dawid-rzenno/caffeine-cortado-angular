@@ -28,6 +28,6 @@ import { FormsModule } from "@angular/forms";
   styleUrl: './name-change-modal.component.scss'
 })
 export class NameChangeModalComponent {
-  readonly data = inject<any>(MAT_DIALOG_DATA);
+  readonly data = inject<{ name: string }>(MAT_DIALOG_DATA);
   name = this.data.name;
 }

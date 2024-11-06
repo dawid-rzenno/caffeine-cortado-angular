@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-
-import { shoppingListResolver } from './shopping-list.resolver';
 import { ShoppingList } from "./shopping-list";
 import { PaginatedResponse } from "../shared/models/paginated-response";
 import { shoppingListsResolver } from "./shopping-lists.resolver";

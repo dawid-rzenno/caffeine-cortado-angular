@@ -12,9 +12,7 @@ export class SignOutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.signOut().subscribe({
-      next: () => {}
-    })
+    this.authService.signOut().subscribe();
   }
 
 }

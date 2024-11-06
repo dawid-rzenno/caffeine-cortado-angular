@@ -30,6 +30,9 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/consistent-type-definitions": ["off"],
+      "@typescript-eslint/no-inferrable-types": ["off"],
+      "@angular-eslint/no-input-rename": ["off"]
     },
   },
   {

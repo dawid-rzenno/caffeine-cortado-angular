@@ -1,5 +1,5 @@
 import { ItemBase } from "../shared/models/item-base";
 
-type BeverageBase = {}
+type BeverageBase = unknown;
 
-export type Beverage = ItemBase & BeverageBase & {}
+export type Beverage = ItemBase & BeverageBase & unknown;

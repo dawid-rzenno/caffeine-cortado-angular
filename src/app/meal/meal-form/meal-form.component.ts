@@ -14,7 +14,6 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/ma
 import { IngredientService } from "../../ingredient/ingredient.service";
 import { map, Observable, startWith } from "rxjs";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-
 import { SearchResult } from "../../shared/models/search-result";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
@@ -87,8 +86,10 @@ export class MealFormComponent extends ItemFormComponentAbstract<Meal, MealPatch
     super.ngOnInit();
 
     this.item$.subscribe((details: Meal) => {
-      for (let ingredient of details?.ingredients) {
-        this.addNewIngredient(ingredient);
+      if (details) {
+        for (const ingredient of details.ingredients) {
+          this.addNewIngredient(ingredient);
+        }
       }
     });
   }

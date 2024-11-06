@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ItemFormComponentAbstract } from "../../shared/abstracts/item-form-component.abstract";
 import { Exercise, ExercisePatch } from "../exercise";
 import { FormControl, FormGroup } from "@angular/forms";
-import { WorkoutForm } from "../../workout/workout-form/workout-form.component";
 import { ActivatedRoute } from "@angular/router";
 import { ExerciseService } from "../exercise.service";
 

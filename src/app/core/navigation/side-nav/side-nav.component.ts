@@ -41,7 +41,7 @@ export class SideNavComponent implements AfterViewInit {
   }
 
   protected expandTree(): void {
-    for (let node of this.navigationNodes) {
+    for (const node of this.navigationNodes) {
       this.tree.expandDescendants(node);
     }
   }

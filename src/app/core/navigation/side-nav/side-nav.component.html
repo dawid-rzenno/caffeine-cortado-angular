@@ -22,7 +22,7 @@
       [ngClass]="{'d-none': node.hideInTree}"
     >
       <!-- use a disabled button to provide padding for tree leaf -->
-      <button mat-icon-button disabled></button>
+      <button mat-icon-button disabled>&nbsp;</button>
       <a class="node" [routerLink]="node.url" routerLinkActive="node--link-active">{{node.label}}</a>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -32,7 +32,7 @@
       matTreeNodePaddingIndent="24px"
       [cdkTreeNodeTypeaheadLabel]="node.label"
     >
-      <button mat-icon-button disabled></button>
+      <button mat-icon-button disabled>&nbsp;</button>
       <a class="node">{{node.label}}</a>
     </mat-tree-node>
   </mat-tree>

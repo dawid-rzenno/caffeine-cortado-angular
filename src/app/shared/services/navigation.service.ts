@@ -64,7 +64,7 @@ export class NavigationService implements NavigationServiceInterface {
   readonly breadcrumbs$: Observable<Breadcrumb[]> = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
     map(() => {
-      let url: string = this.router.url;
+      const url: string = this.router.url;
 
       if (url.includes('details')) {
         const splitUrl: string[] = url.split('/');

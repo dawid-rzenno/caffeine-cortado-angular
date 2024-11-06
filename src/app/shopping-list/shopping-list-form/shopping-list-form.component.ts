@@ -78,7 +78,7 @@ export class ShoppingListFormComponent extends ItemFormComponentAbstract<Shoppin
     super.ngOnInit();
 
     this.item$.subscribe((details: ShoppingList) => {
-      for (let ingredient of details.ingredients) {
+      for (const ingredient of details.ingredients) {
         this.addNewIngredient(ingredient);
       }
     });

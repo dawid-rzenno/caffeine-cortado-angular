@@ -62,7 +62,7 @@ export class DietFormComponent extends ItemFormComponentAbstract<Diet, DietPatch
 
     this.item$.subscribe((diet: Diet) => {
       this.defaultFormValue = diet;
-      for (let meal of diet.meals) {
+      for (const meal of diet.meals) {
         this.addNewMeal(meal);
       }
     });
