@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { StatusComponent } from "./status.component";
 import { StatusService } from "./status.service";
 
-describe("LoadingComponent", () => {
+describe("StatusComponent", () => {
   let component: StatusComponent;
   let fixture: ComponentFixture<StatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StatusComponent],
+      imports: [StatusComponent],
       providers: [StatusService],
     }).compileComponents();
   });

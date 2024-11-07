@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { StatusModule } from "../../status/status.module";
+import { StatusComponent } from "../../status/status.component";
 
 @Component({
   selector: "cortado-main",
   standalone: true,
-  imports: [RouterModule, StatusModule],
+  imports: [RouterModule, StatusComponent],
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.scss"],
 })
