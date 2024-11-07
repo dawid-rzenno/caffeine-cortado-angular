@@ -15,3 +15,4 @@ Run `ng serve` and navigate to `http://localhost:4200/`. The application will au
 - [Prettier](https://prettier.io/) (code formatter)
 - [Jasmine](https://www.cypress.io/) + [Karma](https://karma-runner.github.io/) (unit testing library)
 - [Cypress](https://www.cypress.io/) (end-to-end testing library)
+- [lint-staged](https://www.npmjs.com/package/lint-staged) (pre-commit git hook)
