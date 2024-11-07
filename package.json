@@ -7,7 +7,7 @@
     "lint": "ng lint",
     "build": "ng build",
     "ci:build": "ng build --configuration production",
-    "test": "ng test",
+    "test": "ng test --poll=2000",
     "ci:test": "ng test --configuration production",
     "e2e": "ng e2e",
     "ci:e2e": "ng e2e --configuration production",
