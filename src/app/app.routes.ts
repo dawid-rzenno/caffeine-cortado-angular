@@ -1,8 +1,10 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./core/home/home.component";
-import { AuthModule } from "./core/auth/auth.module";
 import { NotFoundComponent } from "./core/not-found/not-found.component";
 import { createTitle } from "./shared/functions/create-title.funtion";
+import { SignInComponent } from "./core/auth/sign-in/sign-in.component";
+import { SignOutComponent } from "./core/auth/sign-out/sign-out.component";
+import { SignUpComponent } from "./core/auth/sign-up/sign-up.component";
 
 export const routes: Routes = [
   {
@@ -40,7 +42,23 @@ export const routes: Routes = [
     loadChildren: () =>
       import("./exercise/exercise.module").then((m) => m.ExerciseModule),
   },
-  ...AuthModule.routes,
+  {
+    path: "auth",
+    children: [
+      {
+        path: "sign-in",
+        component: SignInComponent,
+      },
+      {
+        path: "sign-out",
+        component: SignOutComponent,
+      },
+      {
+        path: "sign-up",
+        component: SignUpComponent,
+      },
+    ],
+  },
   {
     path: "home",
     pathMatch: "full",

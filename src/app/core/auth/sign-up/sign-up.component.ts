@@ -1,7 +1,22 @@
 import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
 import { AuthService, SignUpBody } from "../auth.service";
 import { controlValueMatches } from "./common/control-value-matches";
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+} from "@angular/material/card";
+import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
+import { MatButton } from "@angular/material/button";
+import { RouterLink } from "@angular/router";
 
 export type SignUpForm = {
   email: FormControl<string>;
@@ -15,6 +30,20 @@ export type SignUpForm = {
   selector: "cortado-sign-up",
   templateUrl: "./sign-up.component.html",
   styleUrls: ["./sign-up.component.scss"],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardSubtitle,
+    MatCardContent,
+    MatInput,
+    ReactiveFormsModule,
+    MatLabel,
+    MatFormField,
+    MatButton,
+    MatCardActions,
+    RouterLink,
+  ],
 })
 export class SignUpComponent {
   readonly passwordConfirmationControl: FormControl<string> =
