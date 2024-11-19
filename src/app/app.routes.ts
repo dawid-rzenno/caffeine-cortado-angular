@@ -1,10 +1,4 @@
 import { Routes } from "@angular/router";
-import { HomeComponent } from "./core/home/home.component";
-import { NotFoundComponent } from "./core/not-found/not-found.component";
-import { createTitle } from "./shared/functions/create-title.funtion";
-import { SignInComponent } from "./core/auth/sign-in/sign-in.component";
-import { SignOutComponent } from "./core/auth/sign-out/sign-out.component";
-import { SignUpComponent } from "./core/auth/sign-up/sign-up.component";
 
 export const routes: Routes = [
   {
@@ -43,27 +37,47 @@ export const routes: Routes = [
       import("./exercise/exercise.module").then((m) => m.ExerciseModule),
   },
   {
+    path: "user",
+    children: [
+      {
+        path: "settings",
+        loadComponent: () =>
+          import("./core/user/user-settings.component").then(
+            (m) => m.UserSettingsComponent,
+          ),
+      },
+    ],
+  },
+  {
     path: "auth",
     children: [
       {
         path: "sign-in",
-        component: SignInComponent,
+        loadComponent: () =>
+          import("./core/auth/sign-in/sign-in.component").then(
+            (m) => m.SignInComponent,
+          ),
       },
       {
         path: "sign-out",
-        component: SignOutComponent,
+        loadComponent: () =>
+          import("./core/auth/sign-out/sign-out.component").then(
+            (m) => m.SignOutComponent,
+          ),
       },
       {
         path: "sign-up",
-        component: SignUpComponent,
+        loadComponent: () =>
+          import("./core/auth/sign-up/sign-up.component").then(
+            (m) => m.SignUpComponent,
+          ),
       },
     ],
   },
   {
     path: "home",
-    pathMatch: "full",
-    component: HomeComponent,
-    title: createTitle("Home"),
+    loadComponent: () =>
+      import("./core/home/home.component").then((m) => m.HomeComponent),
   },
   {
     path: "",
@@ -72,8 +86,10 @@ export const routes: Routes = [
   },
   {
     path: "page-not-found",
-    component: NotFoundComponent,
-    title: createTitle("404 Page not found"),
+    loadComponent: () =>
+      import("./core/not-found/not-found.component").then(
+        (m) => m.NotFoundComponent,
+      ),
   },
   {
     path: "**",
