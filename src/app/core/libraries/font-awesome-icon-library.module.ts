@@ -4,13 +4,16 @@ import {
 } from "@fortawesome/angular-fontawesome";
 import { NgModule } from "@angular/core";
 import {
+  faBars,
   faCaretDown,
   faChevronRight,
   faClose,
   faEdit,
+  faGear,
   faHeartPulse,
   faMugHot,
   faPlus,
+  faRightFromBracket,
   faWarning,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,6 +32,9 @@ export class FontAwesomeIconLibraryModule {
       faHeartPulse,
       faChevronRight,
       faEdit,
+      faGear,
+      faRightFromBracket,
+      faBars,
     );
   }
 }

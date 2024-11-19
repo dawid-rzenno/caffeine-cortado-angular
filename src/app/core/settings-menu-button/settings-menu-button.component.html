@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="a button that opens a settings menu">
+    <fa-icon class="white-icon" [icon]="['fas', 'bars']"></fa-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/user/settings">
+      <fa-icon [icon]="['fas', 'gear']"></fa-icon>
+      <span class="ml-1">Settings</span>
+    </button>
+    <button mat-menu-item routerLink="/sign-out">
+      <fa-icon [icon]="['fas', 'right-from-bracket']"></fa-icon>
+      <span class="ml-1">Sign out</span>
+    </button>
+  </mat-menu>
+</div>

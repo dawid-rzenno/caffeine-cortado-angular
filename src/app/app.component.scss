@@ -1,4 +1,5 @@
 @import "core/layout/layout-variables";
+@import "theme";
 
 :host {
   display: flex;
@@ -7,13 +8,27 @@
   width: 100%;
 }
 
-.breadcrumbs {
-  height: $app-bars-height;
+$settings-size: $app-bar-height;
+
+.app-bar {
+  height: $app-bar-height;
   width: 100%;
+  display: flex;
+}
+
+.breadcrumbs {
+  height: $app-bar-height;
+  width: calc(100% - #{$settings-size});
+}
+
+.settings {
+  height: $settings-size;
+  width: $settings-size;
+  background: $primary-800;
 }
 
 .main {
-  height: calc(100% - $app-bars-height);
+  height: calc(100% - $app-bar-height);
 }
 
 .side-nav {

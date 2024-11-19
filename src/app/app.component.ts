@@ -6,6 +6,7 @@ import { BreadcrumbsComponent } from "./core/navigation/breadcrumbs/breadcrumbs.
 import { SideNavComponent } from "./core/navigation/side-nav/side-nav.component";
 import { NAVIGATION_SERVICE_TOKEN } from "./core/navigation/navigation-service.interface";
 import { NavigationService } from "./shared/services/navigation.service";
+import { SettingsMenuButtonComponent } from "./core/settings-menu-button/settings-menu-button.component";
 
 @Component({
   selector: "cortado-root",
@@ -17,6 +18,7 @@ import { NavigationService } from "./shared/services/navigation.service";
     FooterComponent,
     BreadcrumbsComponent,
     SideNavComponent,
+    SettingsMenuButtonComponent,
   ],
   providers: [
     { provide: NAVIGATION_SERVICE_TOKEN, useClass: NavigationService },
