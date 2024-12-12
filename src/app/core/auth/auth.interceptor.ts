@@ -7,9 +7,17 @@ export function authInterceptor(
   request: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> {
-  return next(
-    request.clone({
-      setHeaders: { Authorization: inject(AuthService).authorizationToken },
-    }),
-  );
+  const authService: AuthService = inject(AuthService);
+
+  if (authService.accessToken) {
+    return next(
+      request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authService.accessToken}`,
+        },
+      }),
+    );
+  }
+
+  return next(request);
 }

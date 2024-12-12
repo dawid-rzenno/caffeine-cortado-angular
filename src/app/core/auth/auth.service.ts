@@ -20,24 +20,27 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private _authorizationToken: string | undefined = undefined;
+  private _accessToken: string | undefined = undefined;
 
-  get authorizationToken(): string {
-    return this._authorizationToken || "";
+  get accessToken(): string {
+    return this._accessToken || "";
   }
 
   signIn(body: SignInBody): Observable<unknown> {
     return this.httpClient
-      .post<string>(`${this.endpointUrl}/sign-in`, body)
+      .post<{ accessToken: string }>(`${this.endpointUrl}/login`, body)
       .pipe(
-        tap((token: string) => (this._authorizationToken = token)),
+        tap(
+          (response: { accessToken: string }) =>
+            (this._accessToken = response.accessToken),
+        ),
         catchError(this.catchError),
       );
   }
 
   signOut(): Observable<unknown> {
     return this.httpClient.post(`${this.endpointUrl}/sign-out`, undefined).pipe(
-      tap(() => (this._authorizationToken = undefined)),
+      tap(() => (this._accessToken = undefined)),
       catchError(this.catchError),
     );
   }

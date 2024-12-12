@@ -3,13 +3,17 @@
     <fa-icon class="white-icon" [icon]="['fas', 'bars']"></fa-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/user/settings">
+    <button mat-menu-item routerLink="auth/user/settings">
       <fa-icon [icon]="['fas', 'gear']"></fa-icon>
       <span class="ml-1">Settings</span>
     </button>
-    <button mat-menu-item routerLink="/sign-out">
+    <button mat-menu-item routerLink="/auth/sign-out">
       <fa-icon [icon]="['fas', 'right-from-bracket']"></fa-icon>
       <span class="ml-1">Sign out</span>
+    </button>
+    <button mat-menu-item routerLink="/auth/sign-in">
+      <fa-icon [icon]="['fas', 'right-from-bracket']"></fa-icon>
+      <span class="ml-1">Sign in</span>
     </button>
   </mat-menu>
 </div>

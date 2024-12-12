@@ -21,7 +21,6 @@ import { RouterLink } from "@angular/router";
 export type SignUpForm = {
   email: FormControl<string>;
   username: FormControl<string>;
-  displayName: FormControl<string>;
   password: FormControl<string>;
   passwordConfirmation: FormControl<string>;
 };
@@ -76,7 +75,6 @@ export class SignUpComponent {
         validators: [Validators.required],
         nonNullable: true,
       }),
-      displayName: new FormControl<string>("", { nonNullable: true }),
       password: new FormControl<string>("", {
         validators: [Validators.required],
         nonNullable: true,

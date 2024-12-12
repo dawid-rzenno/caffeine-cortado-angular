@@ -19,9 +19,12 @@ import { MatCheckbox } from "@angular/material/checkbox";
 import { MatButton } from "@angular/material/button";
 import { RouterLink } from "@angular/router";
 
-export type SignInForm = {
-  login: FormControl<string>;
+export type SignUpForm = {
+  username: FormControl<string>;
   password: FormControl<string>;
+};
+
+export type SignInForm = SignUpForm & {
   rememberMe: FormControl<boolean>;
 };
 
@@ -46,11 +49,11 @@ export type SignInForm = {
 })
 export class SignInComponent {
   readonly formGroup: FormGroup<SignInForm> = new FormGroup<SignInForm>({
-    login: new FormControl<string>("", {
+    username: new FormControl<string>("dawid", {
       validators: [Validators.required],
       nonNullable: true,
     }),
-    password: new FormControl<string>("", {
+    password: new FormControl<string>("password", {
       validators: [Validators.required],
       nonNullable: true,
     }),
