@@ -1,3 +1,8 @@
-<p>
-  <button mat-button (click)="close()">Toggle</button>
-</p>
+<div style="padding-left: 1rem; padding-right: 1rem;">
+  <h2>Menu</h2>
+  <mat-nav-list>
+    @for (link of links; track link) {
+      <a class="link" (click)="close()" mat-list-item [routerLink]="link.url" [activated]="isActive(link.url)">{{ link.label }}</a>
+    }
+  </mat-nav-list>
+</div>
