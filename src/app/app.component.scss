@@ -1,0 +1,22 @@
+.app-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+$footer-height: 32px;
+$toolbar-height: 64px;
+
+.toolbar {
+	height: 64px;
+}
+
+.main {
+	height: calc(100% - ($toolbar-height + $footer-height));
+}
+
+.footer {
+	height: $footer-height;
+}

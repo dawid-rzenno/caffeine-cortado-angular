@@ -1,3 +1,17 @@
-<app-toolbar></app-toolbar>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<mat-sidenav-container class="app-container" (backdropClick)="close()">
+	<mat-sidenav #sidenav (keydown.escape)="close()" disableClose>
+		<app-side-nav></app-side-nav>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<div class="toolbar">
+			<app-toolbar></app-toolbar>
+		</div>
+		<main class="main">
+			<router-outlet></router-outlet>
+		</main>
+		<footer class="footer">
+			<app-footer></app-footer>
+		</footer>
+	</mat-sidenav-content>
+</mat-sidenav-container>
