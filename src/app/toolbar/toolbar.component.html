@@ -2,5 +2,15 @@
 	<button (click)="openSideNav()" mat-icon-button>
 		<mat-icon>menu</mat-icon>
 	</button>
+	&nbsp;
 	<span>Cortado</span>
+	<span class="spacer"></span>
+
+	@if (user$ | async; as user) {
+		<small>Hello, {{user.username}}</small>
+		&nbsp;
+		<button mat-icon-button>
+			<mat-icon>person</mat-icon>
+		</button>
+	}
 </mat-toolbar>
