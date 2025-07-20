@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AuthComponent } from "./auth/auth.component";
+import { SignInFormComponent } from "./auth/sign-in-form/sign-in-form.component";
 
 export const routes: Routes = [
 	{
@@ -7,7 +9,17 @@ export const routes: Routes = [
 	},
 	{
 		path: 'auth',
-		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+		component: AuthComponent,
+		children: [
+			{
+				path: 'sign-in',
+				component: SignInFormComponent,
+			},
+			{
+				path: 'sign-up',
+				loadComponent: () => import('./auth/sign-up-form/sign-up-form.component').then(m => m.SignUpFormComponent)
+			},
+		]
 	},
 	{
 		path: 'not-found',

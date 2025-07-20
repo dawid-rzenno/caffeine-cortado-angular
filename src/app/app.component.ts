@@ -16,7 +16,7 @@ import { SideNavComponent } from "./side-nav/side-nav.component";
 		RouterOutlet,
 		MatSidenavModule,
 		MatButtonModule,
-		SideNavComponent
+		SideNavComponent,
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss'

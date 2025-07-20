@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-	readonly isSideNavOpen$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+	readonly isSideNavOpen$: Subject<boolean> = new Subject();
 
   constructor() { }
 }
