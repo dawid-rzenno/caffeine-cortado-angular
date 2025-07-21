@@ -20,14 +20,18 @@ export type Link = {
 export class SideNavComponent {
 	readonly links: Link[] = [
 		{
-			url: "auth/sign-in",
-			label: "Sign In",
+			url: "goals",
+			label: "Goals",
 		},
 		{
-			url: "auth/sign-up",
-			label: "Sign Up",
+			url: "diets",
+			label: "Diets",
 		},
-	]
+		{
+			url: "trainings",
+			label: "Trainings",
+		}
+	];
 
 	constructor(private appService: AppService, private router: Router) {
 	}
