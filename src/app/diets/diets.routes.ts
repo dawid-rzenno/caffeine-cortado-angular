@@ -8,6 +8,10 @@ export const DietsRoutes: Routes = [
 		component: DietsComponent,
 	},
 	{
+		path: 'new',
+		component: DietComponent,
+	},
+	{
 		path: ':id',
 		component: DietComponent,
 	}

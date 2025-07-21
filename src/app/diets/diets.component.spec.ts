@@ -6,18 +6,13 @@ describe('DietsComponent', () => {
   let component: DietsComponent;
   let fixture: ComponentFixture<DietsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [DietsComponent]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
     fixture = TestBed.createComponent(DietsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should compile', () => {
     expect(component).toBeTruthy();
   });
 });
