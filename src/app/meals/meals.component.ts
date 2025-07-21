@@ -6,12 +6,13 @@ import { Meal } from "./meal";
 import { MealsService } from "./meals.service";
 import { MatButton } from "@angular/material/button";
 import { RouterLink } from "@angular/router";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-meals',
   templateUrl: './meals.component.html',
   styleUrl: './meals.component.scss',
-	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButton, RouterLink]
+	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButton, RouterLink, DatePipe]
 })
 export class MealsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -9,6 +9,7 @@ import { DietMealsService } from "./diet-meals.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DietMealsSearchDialogComponent } from "./diet-meals-search-dialog/diet-meals-search-dialog.component";
 import { MatIconModule } from "@angular/material/icon";
+import { DatePipe } from "@angular/common";
 
 @Component({
 	selector: 'app-diet-meals',
@@ -18,7 +19,8 @@ import { MatIconModule } from "@angular/material/icon";
 		MatSortModule,
 		MatButtonModule,
 		RouterLink,
-		MatIconModule
+		MatIconModule,
+		DatePipe
 	],
 	templateUrl: './diet-meals.component.html',
 	styleUrl: './diet-meals.component.scss'

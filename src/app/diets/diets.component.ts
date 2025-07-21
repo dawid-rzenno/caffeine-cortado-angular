@@ -6,12 +6,13 @@ import { DietsService } from "./diets.service";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink } from "@angular/router";
 import { Diet } from "./diet";
+import { DatePipe } from "@angular/common";
 
 @Component({
 	selector: 'app-diets',
 	templateUrl: './diets.component.html',
 	styleUrl: './diets.component.scss',
-	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink]
+	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink, DatePipe]
 })
 export class DietsComponent implements AfterViewInit {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
