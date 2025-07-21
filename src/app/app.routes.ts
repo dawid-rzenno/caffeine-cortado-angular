@@ -5,7 +5,11 @@ import { SignInFormComponent } from "./auth/sign-in-form/sign-in-form.component"
 export const routes: Routes = [
 	{
 		path: '',
-		loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+		loadComponent: () => import('./core/dashboard/dashboard.component').then(m => m.DashboardComponent),
+	},
+	{
+		path: 'dashboard',
+		loadComponent: () => import('./core/dashboard/dashboard.component').then(m => m.DashboardComponent),
 	},
 	{
 		path: 'auth',
@@ -22,12 +26,20 @@ export const routes: Routes = [
 		]
 	},
 	{
+		path: 'dashboard',
+		loadComponent: () => import('./core/dashboard/dashboard.component').then(m => m.DashboardComponent),
+	},
+	{
 		path: 'diets',
 		loadChildren: () => import('./diets/diets.module').then(m => m.DietsModule),
 	},
 	{
 		path: 'meals',
 		loadChildren: () => import('./meals/meals.module').then(m => m.MealsModule),
+	},
+	{
+		path: 'ingredients',
+		loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule),
 	},
 	{
 		path: 'trainings',

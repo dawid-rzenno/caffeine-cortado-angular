@@ -20,6 +20,10 @@ export type Link = {
 export class SideNavComponent {
 	readonly links: Link[] = [
 		{
+			url: "dashboard",
+			label: "Dashboard",
+		},
+		{
 			url: "goals",
 			label: "Goals",
 		},
@@ -30,6 +34,10 @@ export class SideNavComponent {
 		{
 			url: "meals",
 			label: "Meals",
+		},
+		{
+			url: "ingredients",
+			label: "Ingredients",
 		},
 		{
 			url: "trainings",

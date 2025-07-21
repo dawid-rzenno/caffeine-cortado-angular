@@ -1,4 +1,4 @@
-import { Ingredient } from "./meal/meal.component";
+import { Ingredient } from "../ingredients/ingredient";
 
 export type Meal = {
 	id: number;

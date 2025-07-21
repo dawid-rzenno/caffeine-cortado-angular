@@ -1,7 +1,7 @@
-@if (diet$ | async; as diet) {
+@if (ingredient$ | async; as ingredient) {
 	<form [formGroup]="form" (submit)="onSubmit()">
 		<div class="flex justify-space-between align-center">
-			<h2>Diet {{ idControl.value }}</h2>
+			<h2>Ingredient {{ idControl.value }}</h2>
 			<div>
 				<button mat-stroked-button type="submit">
 					<span>Save</span>
@@ -9,15 +9,15 @@
 				</button>
 				&nbsp;
 
-				@if (diet.id) {
-					<button mat-stroked-button (click)="onDelete(diet.id)">
+				@if (ingredient.id) {
+					<button mat-stroked-button (click)="onDelete(ingredient.id)">
 						<span>Delete</span>
 						<mat-icon>delete</mat-icon>
 					</button>
 					&nbsp;
 				}
 
-				<button mat-stroked-button type="button" routerLink="/diets">
+				<button mat-stroked-button type="button" routerLink="/ingredients">
 					<span>Cancel</span>
 					<mat-icon>close</mat-icon>
 				</button>
@@ -30,7 +30,7 @@
 		</mat-form-field>
 	</form>
 
-	@if (diet.id) {
-		<app-diet-meals [dietId]="diet.id" [meals]="diet.meals"></app-diet-meals>
+	@if (ingredient.id) {
+		<app-ingredient-nutrients [ingredientId]="ingredient.id" [nutrients]="ingredient.nutrients"></app-ingredient-nutrients>
 	}
 }

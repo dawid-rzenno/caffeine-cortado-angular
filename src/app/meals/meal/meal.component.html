@@ -26,11 +26,11 @@
 
 		<mat-form-field>
 			<mat-label>Name</mat-label>
-			<input matInput [formControl]="nameControl" autocomplete="username">
+			<input matInput [formControl]="nameControl">
 		</mat-form-field>
 	</form>
 
-<!--	@if (meal.id) {-->
-<!--		<app-meal-ingredients [mealId]="meal.id" [ingredients]="meal.ingredients"></app-meal-ingredients>-->
-<!--	}-->
+	@if (meal.id) {
+		<app-meal-ingredients [mealId]="meal.id" [ingredients]="meal.ingredients"></app-meal-ingredients>
+	}
 }

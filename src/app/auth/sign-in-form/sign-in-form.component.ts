@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { AuthService } from "../auth.service";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { Router } from "@angular/router";
 
 type SignInFormControls = {
 	username: FormControl<string>,
@@ -27,7 +28,7 @@ export class SignInFormComponent {
 		password: this.passwordControl,
 	});
 
-	constructor(private authService: AuthService) {
+	constructor(private authService: AuthService, private router: Router) {
 	}
 
 	onSubmit() {
@@ -37,7 +38,9 @@ export class SignInFormComponent {
 			this.authService.signIn$({
 				username: this.form.value.username ?? "",
 				password: this.form.value.password ?? "",
-			}).subscribe();
+			}).subscribe(() => {
+				this.router.navigate(['/dashboard']);
+			});
 		}
 	}
 }

@@ -1,29 +1,22 @@
 import { Component, inject, ViewChild } from '@angular/core';
+import { Nutrient } from "../../../ingredients.service";
+import { MatTable, MatTableModule } from "@angular/material/table";
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Ingredient } from "../../../ingredient";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
-import {
-	MAT_DIALOG_DATA,
-	MatDialogActions,
-	MatDialogClose,
-	MatDialogContent, MatDialogModule,
-	MatDialogRef,
-	MatDialogTitle
-} from "@angular/material/dialog";
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Diet } from "../../../diet";
-import { Meal } from "../../../../meals/meal";
 import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { RouterModule } from "@angular/router";
 import { MatCheckbox } from "@angular/material/checkbox";
-import { MealsService } from "../../../../meals/meals.service";
+import { NutrientsService } from "../../../nutrients.service";
 
 @Component({
-	selector: 'app-diet-meals-search-dialog',
-	imports: [
+  selector: 'app-ingredient-nutrients-search-dialog',
+  imports: [
 		MatFormFieldModule,
 		MatInputModule,
 		FormsModule,
@@ -37,15 +30,15 @@ import { MealsService } from "../../../../meals/meals.service";
 		MatCheckbox,
 		ReactiveFormsModule
 	],
-	templateUrl: './diet-meals-search-dialog.component.html',
-	styleUrl: './diet-meals-search-dialog.component.scss'
+  templateUrl: './ingredient-nutrients-search-dialog.component.html',
+  styleUrl: './ingredient-nutrients-search-dialog.component.scss'
 })
-export class DietMealsSearchDialogComponent {
-	@ViewChild(MatTable) table!: MatTable<Meal>;
+export class IngredientNutrientsSearchDialogComponent {
+	@ViewChild(MatTable) table!: MatTable<Nutrient>;
 
-	readonly dialogRef = inject(MatDialogRef<DietMealsSearchDialogComponent>);
-	readonly data = inject<{ diet: Diet }>(MAT_DIALOG_DATA);
-	readonly mealsService: MealsService = inject(MealsService);
+	readonly dialogRef = inject(MatDialogRef<IngredientNutrientsSearchDialogComponent>);
+	readonly data = inject<{ ingredient: Ingredient }>(MAT_DIALOG_DATA);
+	readonly nutrientsService: NutrientsService = inject(NutrientsService);
 
 	readonly displayedColumns = ['name', 'actions'];
 
@@ -57,15 +50,15 @@ export class DietMealsSearchDialogComponent {
 		globalSearch: this.globalSearchControl,
 	})
 
-	selected?: Meal;
+	selected?: Nutrient;
 
 	search() {
 		if (this.form.invalid) {
 			return;
 		}
 
-		this.mealsService.getAll$().subscribe((meals) => {
-			this.table.dataSource = meals;
+		this.nutrientsService.getAll$().subscribe((nutrients) => {
+			this.table.dataSource = nutrients;
 		});
 	}
 

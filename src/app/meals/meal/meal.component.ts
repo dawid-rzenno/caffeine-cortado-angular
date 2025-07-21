@@ -9,19 +9,20 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { AsyncPipe } from "@angular/common";
-
-export type Ingredient = {};
+import { Ingredient } from "../../ingredients/ingredient";
+import { MealIngredientsComponent } from "./meal-ingredients/meal-ingredients.component";
 
 @Component({
   selector: 'app-meal',
-  imports: [
+	imports: [
 		MatButtonModule,
 		MatFormFieldModule,
 		MatInput,
 		ReactiveFormsModule,
 		MatIconModule,
 		RouterLink,
-		AsyncPipe
+		AsyncPipe,
+		MealIngredientsComponent
 	],
   templateUrl: './meal.component.html',
   styleUrl: './meal.component.scss'
