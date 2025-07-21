@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Observable } from 'rxjs';
-
-export type Diet = {
-	id: number,
-	name: string,
-	userId: number,
-	timestamp: Date,
-}
+import { Diet } from "./diet";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +26,9 @@ export class DietsService {
 
 	update$(form: Diet): Observable<Diet> {
 		return this.http.put<Diet>(`${this.apiUrl}`, form);
+	}
+
+	delete$(id: number): Observable<Diet> {
+		return this.http.delete<Diet>(`${this.apiUrl}/${id}`);
 	}
 }
