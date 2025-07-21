@@ -40,6 +40,12 @@ export class AuthService {
 			)
 	}
 
+	signOut() {
+		SessionStorageService.removeItem("token")
+		SessionStorageService.removeItem("expiration")
+		this.user$.next(undefined);
+	}
+
 	signUp$(request: SignUpRequest): Observable<void> {
 		return this.http.post<void>(`${this.apiUrl}/sign-up`, request)
 	}

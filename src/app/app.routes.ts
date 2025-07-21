@@ -22,6 +22,18 @@ export const routes: Routes = [
 		]
 	},
 	{
+		path: 'diets',
+		loadChildren: () => import('./diets/diets.module').then(m => m.DietsModule),
+	},
+	{
+		path: 'trainings',
+		loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule),
+	},
+	{
+		path: 'goals',
+		loadChildren: () => import('./goals/goals.module').then(m => m.GoalsModule),
+	},
+	{
 		path: 'not-found',
 		loadComponent: () => import('./not-found/not-found.component').then(m => m.NotFoundComponent),
 	},

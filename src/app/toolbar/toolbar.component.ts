@@ -7,6 +7,7 @@ import { AuthService } from "../auth/auth.service";
 import { User } from "../auth/user";
 import { BehaviorSubject } from "rxjs";
 import { AsyncPipe } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
 	selector: 'app-toolbar',
@@ -14,7 +15,8 @@ import { AsyncPipe } from "@angular/common";
 		MatToolbarModule,
 		MatButtonModule,
 		MatIconModule,
-		AsyncPipe
+		AsyncPipe,
+		RouterLink
 	],
 	templateUrl: './toolbar.component.html',
 	styleUrl: './toolbar.component.scss'
@@ -28,5 +30,9 @@ export class ToolbarComponent {
 
 	openSideNav(): void {
 		this.appService.isSideNavOpen$.next(true);
+	}
+
+	signOut(): void {
+		this.authService.signOut();
 	}
 }

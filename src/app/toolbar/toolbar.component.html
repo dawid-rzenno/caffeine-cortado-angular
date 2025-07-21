@@ -11,8 +11,13 @@
 			<mat-icon>person</mat-icon>
 			<span>{{user.username}}</span>
 		</button>
+		&nbsp;
+		<button (click)="signOut()" mat-stroked-button>
+			<mat-icon>login</mat-icon>
+			<span>Sign Out</span>
+		</button>
 	} @else {
-		<button mat-stroked-button>
+		<button mat-stroked-button routerLink="/auth/sign-in">
 			<mat-icon>login</mat-icon>
 			<span>Sign In</span>
 		</button>
