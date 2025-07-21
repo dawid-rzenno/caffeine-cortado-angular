@@ -7,10 +7,14 @@
 	<span class="spacer"></span>
 
 	@if (user$ | async; as user) {
-		<small>Hello, {{user.username}}</small>
-		&nbsp;
-		<button mat-icon-button>
+		<button mat-flat-button>
 			<mat-icon>person</mat-icon>
+			<span>{{user.username}}</span>
+		</button>
+	} @else {
+		<button mat-stroked-button>
+			<mat-icon>login</mat-icon>
+			<span>Sign In</span>
 		</button>
 	}
 </mat-toolbar>
