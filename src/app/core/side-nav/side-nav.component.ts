@@ -28,6 +28,10 @@ export class SideNavComponent {
 			label: "Diets",
 		},
 		{
+			url: "meals",
+			label: "Meals",
+		},
+		{
 			url: "trainings",
 			label: "Trainings",
 		}

@@ -18,7 +18,7 @@ export class DietsComponent implements AfterViewInit {
 	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild(MatTable) table!: MatTable<Diet>;
 
-	readonly displayedColumns = ['id', 'name', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: DietsService) {}
 

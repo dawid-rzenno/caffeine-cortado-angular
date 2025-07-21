@@ -10,7 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { DietMealsComponent } from "./diet-meals/diet-meals.component";
 import { Diet } from "../diet";
 import { AsyncPipe } from "@angular/common";
-import { Meal } from "./diet-meals/meal";
+import { Meal } from "../../meals/meal";
 
 @Component({
 	selector: 'app-diet',

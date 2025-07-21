@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, inject, Input, ViewChild } from '@angular/core';
-import { Meal } from "./meal";
+import { Meal } from "../../../meals/meal";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatSort, MatSortModule } from "@angular/material/sort";
@@ -33,7 +33,7 @@ export class DietMealsComponent implements AfterViewInit {
 
 	readonly dialog = inject(MatDialog)
 
-	readonly displayedColumns = ['id', 'name', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: DietMealsService) {
 	}
@@ -44,9 +44,14 @@ export class DietMealsComponent implements AfterViewInit {
 	}
 
 	openSearchDialog(): void {
-		const dialogRef = this.dialog.open(DietMealsSearchDialogComponent, {
-			data: { dietId: this.dietId },
-		});
+		const dialogRef = this.dialog.open(
+			DietMealsSearchDialogComponent,
+			{
+				data: {
+					dietId: this.dietId
+				}
+			}
+		);
 
 		dialogRef.afterClosed().subscribe((meal?: Meal) => {
 			if (meal) {
