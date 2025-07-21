@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { FooterComponent } from "./footer/footer.component";
+import { ToolbarComponent } from "./core/toolbar/toolbar.component";
+import { FooterComponent } from "./core/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
 import { AppService } from "./app.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatButtonModule } from "@angular/material/button";
-import { SideNavComponent } from "./side-nav/side-nav.component";
+import { SideNavComponent } from "./core/side-nav/side-nav.component";
 
 @Component({
 	selector: 'app-root',

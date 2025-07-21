@@ -6,7 +6,7 @@ import { SignInRequest } from "./sign-in-request";
 import { environment } from "../../environments/environment";
 import { SignUpRequest } from "./sign-up-request";
 import { User } from "./user";
-import { SessionStorageService } from "../session-storage/session-storage.service";
+import { SessionStorageService } from "../core/session-storage/session-storage.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Injectable({

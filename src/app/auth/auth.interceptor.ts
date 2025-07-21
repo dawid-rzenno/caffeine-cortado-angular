@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { SessionStorageService } from "../session-storage/session-storage.service";
+import { SessionStorageService } from "../core/session-storage/session-storage.service";
 
 export function authInterceptor(
 	request: HttpRequest<unknown>,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from "../app.service";
+import { AppService } from "../../app.service";
 import { MatListModule } from "@angular/material/list";
 import { IsActiveMatchOptions, Router, RouterLink } from "@angular/router";
 
