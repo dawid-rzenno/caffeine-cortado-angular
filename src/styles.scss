@@ -7,16 +7,53 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 }
 
+.uppercase-text {
+	text-transform: uppercase;
+}
+
+.italic-text {
+	font-style: italic;
+}
+
+.bold-text {
+	font-weight: bold;
+}
+
+.centered-text {
+	text-align: center;
+}
+
+.padding-1 {
+	padding: 1rem;
+}
+
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
 .full-width {
 	width: 100%;
+}
+
+.half-width {
+	width: 50%;
 }
 
 .full-height {
 	height: 100%;
 }
 
+.half-height {
+	height: 50%;
+}
+
 .flex {
 	display: flex;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
 }
 
 .justify-space-between {
