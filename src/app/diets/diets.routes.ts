@@ -5,6 +5,7 @@ import { DietComponent } from "./diet/diet.component";
 export const DietsRoutes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
 		component: DietsComponent,
 	},
 	{

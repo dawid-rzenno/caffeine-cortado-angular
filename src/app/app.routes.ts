@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 import { AuthComponent } from "./auth/auth.component";
 import { SignInFormComponent } from "./auth/sign-in-form/sign-in-form.component";
+import { UsersComponent } from "./users/users.component";
+import { UserComponent } from "./users/user/user.component";
 
 export const routes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
 		loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
 	},
 	{
@@ -22,6 +25,24 @@ export const routes: Routes = [
 			{
 				path: 'sign-up',
 				loadComponent: () => import('./auth/sign-up-form/sign-up-form.component').then(m => m.SignUpFormComponent)
+			},
+		]
+	},
+	{
+		path: 'users',
+		children: [
+			{
+				path: '',
+				pathMatch: 'full',
+				component: UsersComponent,
+			},
+			{
+				path: 'new',
+				component: UserComponent,
+			},
+			{
+				path: ':id',
+				component: UserComponent,
 			},
 		]
 	},

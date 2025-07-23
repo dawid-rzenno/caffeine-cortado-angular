@@ -5,9 +5,14 @@ import { SignInResponse } from "./sign-in-response";
 import { SignInRequest } from "./sign-in-request";
 import { environment } from "../../environments/environment";
 import { SignUpRequest } from "./sign-up-request";
-import { User } from "./user";
+import { User } from "../users/user";
 import { SessionStorageService } from "../core/session-storage/session-storage.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+
+export type ChangePasswordForm = {
+	id: number;
+	password: string;
+}
 
 @Injectable({
 	providedIn: 'root'
@@ -16,6 +21,10 @@ export class AuthService {
 
 	readonly apiUrl = `${environment.apiUrl}/auth`;
 	readonly user$ = new BehaviorSubject<User | undefined>(undefined);
+
+	get userId(): number | undefined {
+		return this.user$.value?.id;
+	}
 
 	constructor(private http: HttpClient) {
 		const initialToken = SessionStorageService.getItem<string>("token");
@@ -46,11 +55,15 @@ export class AuthService {
 		this.user$.next(undefined);
 	}
 
-	signUp$(request: SignUpRequest): Observable<void> {
-		return this.http.post<void>(`${this.apiUrl}/sign-up`, request)
+	signUp$(request: SignUpRequest): Observable<{ id: number }> {
+		return this.http.post<{ id: number }>(`${this.apiUrl}/sign-up`, request)
 	}
 
 	me$(): Observable<User> {
 		return this.http.get<User>(`${this.apiUrl}/me`)
+	}
+
+	changePassword$(form: ChangePasswordForm) {
+		return this.http.put<void>(`${this.apiUrl}/password`, form)
 	}
 }

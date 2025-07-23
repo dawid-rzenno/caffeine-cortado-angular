@@ -5,6 +5,7 @@ import { IngredientComponent } from "./ingredient/ingredient.component";
 export const ingredientsRoutes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
 		component: IngredientsComponent,
 	},
 	{

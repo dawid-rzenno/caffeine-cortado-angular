@@ -5,6 +5,7 @@ import { MealComponent } from "./meal/meal.component";
 export const MealsRoutes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
 		component: MealsComponent,
 	},
 	{

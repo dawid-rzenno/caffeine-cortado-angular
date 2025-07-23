@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from "@angular/material/icon";
 import { AppService } from "../../app.service";
 import { AuthService } from "../../auth/auth.service";
-import { User } from "../../auth/user";
+import { User } from "../../users/user";
 import { BehaviorSubject } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";

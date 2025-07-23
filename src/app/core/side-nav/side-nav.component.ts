@@ -42,6 +42,10 @@ export class SideNavComponent {
 		{
 			url: "trainings",
 			label: "Trainings",
+		},
+		{
+			url: "users",
+			label: "Users",
 		}
 	];
 

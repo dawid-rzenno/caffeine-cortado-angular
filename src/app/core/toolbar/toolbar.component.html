@@ -7,7 +7,7 @@
 	<span class="spacer"></span>
 
 	@if (user$ | async; as user) {
-		<button mat-flat-button>
+		<button mat-flat-button [routerLink]="'/users/' + user.id">
 			<mat-icon>person</mat-icon>
 			<span>{{user.username}}</span>
 		</button>

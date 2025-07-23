@@ -1,0 +1,55 @@
+<form [formGroup]="form" (submit)="onSubmit(id)">
+	<div class="flex justify-space-between align-center">
+		<h2 matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="!isCurrentUser">
+			User &#8212; {{usernameControl.value}}
+		</h2>
+		<div>
+			<button mat-stroked-button type="submit">
+				<span>Save</span>
+				<mat-icon>save</mat-icon>
+			</button>
+			&nbsp;
+
+			@if (id) {
+				<button mat-stroked-button type="button" (click)="openChangePasswordDialog(id)">
+					<span>Change password</span>
+					<mat-icon>password</mat-icon>
+				</button>
+				&nbsp;
+
+				<button mat-stroked-button type="button" (click)="onDelete(id)">
+					<span>Delete</span>
+					<mat-icon>delete</mat-icon>
+				</button>
+				&nbsp;
+			}
+
+			<button mat-stroked-button type="button" routerLink="/users">
+				<span>Cancel</span>
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+	</div>
+
+	<mat-form-field>
+		<mat-label>Username</mat-label>
+		<input matInput [formControl]="usernameControl">
+	</mat-form-field>
+	@if (!id) {
+		<br>
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input matInput type="password" [formControl]="passwordControl">
+		</mat-form-field>
+	} @else {
+		<br>
+		<mat-form-field>
+			<mat-label>Role</mat-label>
+			<mat-select [formControl]="roleIdControl">
+				@for (roleIdOption of userRoleOptions; track roleIdOption.value) {
+					<mat-option [value]="roleIdOption.value">{{ roleIdOption.viewValue }}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+	}
+</form>
