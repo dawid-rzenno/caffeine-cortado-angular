@@ -7,7 +7,7 @@ import { UsersService } from "../users.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInput } from "@angular/material/input";
-import { User, UserRole } from "../user";
+import { User, UserForm } from "../user";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { AuthService } from "../../auth/auth.service";
@@ -16,6 +16,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { UserRolesService } from "../../user-roles/user-roles.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { SelectOption } from "../../utils/select-option";
+import { UserRole } from "../user-role";
 
 export type UserFormControls = {
 	username: FormControl<string>;
@@ -69,6 +70,10 @@ export class UserComponent implements OnInit {
 	) {
 	}
 
+	get isAdmin(): boolean {
+		return this.authService.isAdmin;
+	}
+
 	get isCurrentUser(): boolean {
 		return (this.id !== undefined) && (this.id === this.authService.userId);
 	}
@@ -109,7 +114,7 @@ export class UserComponent implements OnInit {
 				id,
 				username: this.usernameControl.value,
 				roleId: this.roleIdControl.value,
-			} as User).subscribe(() => {
+			} as UserForm).subscribe(() => {
 				this.navigateToUsers();
 			});
 		} else {

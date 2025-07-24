@@ -14,12 +14,17 @@
 		&nbsp;
 		<button (click)="signOut()" mat-stroked-button>
 			<mat-icon>login</mat-icon>
-			<span>Sign Out</span>
+			<span>Sign out</span>
 		</button>
 	} @else {
-		<button mat-stroked-button routerLink="/auth/sign-in">
+		<button mat-flat-button routerLink="/auth/sign-in">
 			<mat-icon>login</mat-icon>
-			<span>Sign In</span>
+			<span>Sign in</span>
+		</button>
+		&nbsp;
+		<button mat-stroked-button routerLink="/auth/sign-up">
+			<mat-icon>person_add</mat-icon>
+			<span>Sign up</span>
 		</button>
 	}
 </mat-toolbar>

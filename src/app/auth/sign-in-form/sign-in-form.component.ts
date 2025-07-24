@@ -39,7 +39,7 @@ export class SignInFormComponent {
 				username: this.form.value.username ?? "",
 				password: this.form.value.password ?? "",
 			}).subscribe(() => {
-				this.router.navigate(['/dashboard']);
+				this.router.navigateByUrl("/dashboard");
 			});
 		}
 	}

@@ -10,7 +10,7 @@
 			</button>
 			&nbsp;
 
-			@if (id) {
+			@if (id && (isCurrentUser || isAdmin)) {
 				<button mat-stroked-button type="button" (click)="openChangePasswordDialog(id)">
 					<span>Change password</span>
 					<mat-icon>password</mat-icon>

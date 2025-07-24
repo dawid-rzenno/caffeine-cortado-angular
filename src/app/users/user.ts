@@ -1,14 +1,17 @@
+import { UserRole } from "./user-role";
+
 export type User = {
 	id: number;
 	username: string;
-	password?: string;
-	roleId: number;
 	role: UserRole;
 	timestamp: Date;
 	userId: number;
 }
 
-export type UserRole = {
+export type UserForm = {
 	id: number;
-	name: string;
+	username: string;
+	roleId: number;
+	timestamp: Date;
+	userId: number;
 }

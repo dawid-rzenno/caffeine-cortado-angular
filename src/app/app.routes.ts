@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AuthComponent } from "./auth/auth.component";
 import { SignInFormComponent } from "./auth/sign-in-form/sign-in-form.component";
 import { UsersComponent } from "./users/users.component";
 import { UserComponent } from "./users/user/user.component";
@@ -8,28 +7,31 @@ export const routes: Routes = [
 	{
 		path: '',
 		pathMatch: 'full',
-		loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+		redirectTo: 'dashboard',
 	},
 	{
 		path: 'dashboard',
+		title: "Dashboard",
 		loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
 	},
 	{
 		path: 'auth',
-		component: AuthComponent,
 		children: [
 			{
 				path: 'sign-in',
+				title: "Sign in",
 				component: SignInFormComponent,
 			},
 			{
 				path: 'sign-up',
+				title: "Sign up",
 				loadComponent: () => import('./auth/sign-up-form/sign-up-form.component').then(m => m.SignUpFormComponent)
 			},
 		]
 	},
 	{
 		path: 'users',
+		title: "Users",
 		children: [
 			{
 				path: '',
@@ -47,31 +49,33 @@ export const routes: Routes = [
 		]
 	},
 	{
-		path: 'dashboard',
-		loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
-	},
-	{
 		path: 'diets',
+		title: "Diets",
 		loadChildren: () => import('./diets/diets.module').then(m => m.DietsModule),
 	},
 	{
 		path: 'meals',
+		title: "Meals",
 		loadChildren: () => import('./meals/meals.module').then(m => m.MealsModule),
 	},
 	{
 		path: 'ingredients',
+		title: "Ingredients",
 		loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule),
 	},
 	{
 		path: 'trainings',
+		title: "Trainings",
 		loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule),
 	},
 	{
 		path: 'goals',
+		title: "Goals",
 		loadChildren: () => import('./goals/goals.module').then(m => m.GoalsModule),
 	},
 	{
 		path: 'not-found',
+		title: "Not found",
 		loadComponent: () => import('./core/not-found/not-found.component').then(m => m.NotFoundComponent),
 	},
 	{
