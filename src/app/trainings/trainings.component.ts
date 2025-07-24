@@ -1,11 +1,33 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+
+import { Training } from "./training";
+import { TrainingsService } from "./trainings.service";
+import { MatTable, MatTableModule } from "@angular/material/table";
+import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
+import { MatSort, MatSortModule } from "@angular/material/sort";
+import { MatButtonModule } from "@angular/material/button";
+import { RouterLink } from "@angular/router";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-trainings',
-  imports: [],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink, DatePipe],
   templateUrl: './trainings.component.html',
   styleUrl: './trainings.component.scss'
 })
-export class TrainingsComponent {
+export class TrainingsComponent implements AfterViewInit {
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
+	@ViewChild(MatSort) sort!: MatSort;
+	@ViewChild(MatTable) table!: MatTable<Training>;
 
+	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
+
+	constructor(private service: TrainingsService) {}
+
+	ngAfterViewInit(): void {
+		this.service.getAll$().subscribe((trainings: Training[]) => {
+			this.table.dataSource = trainings;
+			this.paginator.length = trainings.length;
+		})
+	}
 }

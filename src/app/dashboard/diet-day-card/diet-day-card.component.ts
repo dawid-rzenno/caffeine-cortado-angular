@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { Diet } from "../../diets/diet";
+import { DietDay } from "../dashboard";
 
 @Component({
-  selector: 'app-diet-card',
+  selector: 'app-diet-day-card',
 	imports: [MatCardModule, MatButtonModule, MatIconModule],
-  templateUrl: './diet-card.component.html',
-  styleUrl: './diet-card.component.scss'
+  templateUrl: './diet-day-card.component.html',
+  styleUrl: './diet-day-card.component.scss'
 })
-export class DietCardComponent {
-	@Input() diet?: Diet;
+export class DietDayCardComponent {
+	@Input() dietDay?: DietDay;
 }

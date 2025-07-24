@@ -1,14 +1,19 @@
 <div class="flex-column full-height">
 	<h2>Dashboard</h2>
-	<div class="padding-1">
-		<app-goals-card></app-goals-card>
+	<div class="flex">
+		<div class="padding-1 half-width">
+			<app-motivational-quote-card [motivationalQuote]="dashboard?.motivationalQuote"></app-motivational-quote-card>
+		</div>
+		<div class="padding-1 half-width">
+			<app-goals-card [goals]="dashboard?.goals"></app-goals-card>
+		</div>
 	</div>
 	<div class="flex">
 		<div class="padding-1 half-width">
-			<app-diet-card></app-diet-card>
+			<app-diet-day-card [dietDay]="dashboard?.dietDay"></app-diet-day-card>
 		</div>
 		<div class="padding-1 half-width">
-			<app-training-card></app-training-card>
+			<app-training-day-card [trainingDay]="dashboard?.trainingDay"></app-training-day-card>
 		</div>
 	</div>
 </div>
