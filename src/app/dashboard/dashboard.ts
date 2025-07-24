@@ -1,18 +1,6 @@
 import { Goal } from "../goals/goal";
-
-export type TrainingDay = {
-	id: number;
-	name: string;
-	userId: number;
-	timestamp: Date;
-}
-
-export type DietDay = {
-	id: number;
-	name: string;
-	userId: number;
-	timestamp: Date;
-}
+import { Diet } from "../diets/diet";
+import { Training } from "../trainings/training";
 
 export type MotivationalQuote = {
 	id: number;
@@ -25,6 +13,6 @@ export type MotivationalQuote = {
 export type Dashboard = {
 	motivationalQuote: MotivationalQuote;
 	goals: Goal[];
-	dietDay: DietDay;
-	trainingDay: TrainingDay;
+	diet: Diet;
+	training: Training;
 }

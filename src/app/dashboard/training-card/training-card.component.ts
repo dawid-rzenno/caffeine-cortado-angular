@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { TrainingDay } from "../dashboard";
+import { Training } from "../../trainings/training";
 
 @Component({
-  selector: 'app-training-day-card',
+  selector: 'app-training-card',
   imports: [MatCardModule, MatButtonModule, MatIconModule],
-  templateUrl: './training-day-card.component.html',
-  styleUrl: './training-day-card.component.scss'
+  templateUrl: './training-card.component.html',
+  styleUrl: './training-card.component.scss'
 })
-export class TrainingDayCardComponent {
-	@Input() trainingDay?: TrainingDay;
+export class TrainingCardComponent {
+	@Input() training?: Training;
 }

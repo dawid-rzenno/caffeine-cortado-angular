@@ -3,13 +3,13 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { GoalsCardComponent } from "./goals-card/goals-card.component";
 import { DashboardService } from "./dashboard.service";
 import { Dashboard } from "./dashboard";
-import { TrainingDayCardComponent } from "./training-day-card/training-day-card.component";
 import { MotivationalQuoteCardComponent } from "./motivational-quote-card/motivational-quote-card.component";
-import { DietDayCardComponent } from "./diet-day-card/diet-day-card.component";
+import { DietCardComponent } from "./diet-card/diet-card.component";
+import { TrainingCardComponent } from "./training-card/training-card.component";
 
 @Component({
   selector: 'app-dashboard',
-	imports: [MatGridListModule, TrainingDayCardComponent, DietDayCardComponent, GoalsCardComponent, TrainingDayCardComponent, MotivationalQuoteCardComponent],
+	imports: [MatGridListModule, TrainingCardComponent, DietCardComponent, GoalsCardComponent, TrainingCardComponent, MotivationalQuoteCardComponent, DietCardComponent, TrainingCardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

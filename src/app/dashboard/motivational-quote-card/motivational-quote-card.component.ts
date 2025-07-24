@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { DietDay, MotivationalQuote } from "../dashboard";
+import { MotivationalQuote } from "../dashboard";
 
 @Component({
   selector: 'app-motivational-quote-card',
