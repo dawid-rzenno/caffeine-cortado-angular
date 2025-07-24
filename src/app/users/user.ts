@@ -11,6 +11,4 @@ export type User = {
 export type UserRole = {
 	id: number;
 	name: string;
-	timestamp: Date;
-	userId: number;
 }
