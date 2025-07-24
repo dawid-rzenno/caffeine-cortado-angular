@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { Observable } from 'rxjs';
 import { Diet } from "./diet";
 
 @Injectable({
@@ -12,23 +11,23 @@ export class DietsService {
 
   constructor(private http: HttpClient) { }
 
-	getAll$(): Observable<Diet[]> {
+	getAll$() {
 		return this.http.get<Diet[]>(`${this.apiUrl}`);
 	}
 
-	getById$(id: number): Observable<Diet> {
+	getById$(id: number) {
 		return this.http.get<Diet>(`${this.apiUrl}/${id}`);
 	}
 
-	create$(form: Diet): Observable<Diet> {
+	create$(form: Diet) {
 		return this.http.post<Diet>(`${this.apiUrl}`, form);
 	}
 
-	update$(form: Diet): Observable<Diet> {
+	update$(form: Diet) {
 		return this.http.put<Diet>(`${this.apiUrl}`, form);
 	}
 
-	delete$(id: number): Observable<Diet> {
+	delete$(id: number) {
 		return this.http.delete<Diet>(`${this.apiUrl}/${id}`);
 	}
 }

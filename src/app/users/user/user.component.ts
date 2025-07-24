@@ -53,7 +53,7 @@ export class UserComponent implements OnInit {
 	readonly roleIdControl =
 		new FormControl<number | undefined>(undefined, { validators: Validators.required, nonNullable: true });
 
-	readonly form: FormGroup<UserFormControls> = new FormGroup<UserFormControls>({
+	readonly form = new FormGroup<UserFormControls>({
 		username: this.usernameControl,
 		roleId: this.roleIdControl,
 	});

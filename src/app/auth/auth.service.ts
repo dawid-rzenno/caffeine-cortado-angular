@@ -47,7 +47,7 @@ export class AuthService {
 		}
 	}
 
-	signIn$(request: SignInRequest): Observable<SignInResponse> {
+	signIn$(request: SignInRequest) {
 		return this.http
 			.post<SignInResponse>(`${this.apiUrl}/sign-in`, request)
 			.pipe(
@@ -79,7 +79,7 @@ export class AuthService {
 			)
 	}
 
-	me$(): Observable<User> {
+	me$() {
 		return this.http.get<User>(`${this.apiUrl}/me`)
 	}
 

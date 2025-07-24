@@ -38,14 +38,14 @@ export class IngredientNutrientsSearchDialogComponent {
 
 	readonly dialogRef = inject(MatDialogRef<IngredientNutrientsSearchDialogComponent>);
 	readonly data = inject<{ ingredient: Ingredient }>(MAT_DIALOG_DATA);
-	readonly nutrientsService: NutrientsService = inject(NutrientsService);
+	readonly nutrientsService = inject(NutrientsService);
 
 	readonly displayedColumns = ['name', 'actions'];
 
 	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required});
 	readonly globalSearchControl = new FormControl<boolean>(false, { nonNullable: true });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		term: this.termControl,
 		globalSearch: this.globalSearchControl,
 	})
@@ -57,7 +57,10 @@ export class IngredientNutrientsSearchDialogComponent {
 			return;
 		}
 
-		this.nutrientsService.getAll$().subscribe((nutrients) => {
+		this.nutrientsService.getAllByTerm$({
+			term: this.termControl.value,
+			globalSearch: this.globalSearchControl.value
+		}).subscribe((nutrients) => {
 			this.table.dataSource = nutrients;
 		});
 	}

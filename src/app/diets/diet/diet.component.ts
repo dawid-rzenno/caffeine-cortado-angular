@@ -34,7 +34,7 @@ export class DietComponent implements OnInit {
 	readonly nameControl =
 		new FormControl<string>("", { validators: Validators.required, nonNullable: true });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		id: this.idControl,
 		name: this.nameControl,
 	});

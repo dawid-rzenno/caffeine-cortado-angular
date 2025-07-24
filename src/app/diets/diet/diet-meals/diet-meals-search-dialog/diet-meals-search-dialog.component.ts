@@ -2,14 +2,7 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
-import {
-	MAT_DIALOG_DATA,
-	MatDialogActions,
-	MatDialogClose,
-	MatDialogContent, MatDialogModule,
-	MatDialogRef,
-	MatDialogTitle
-} from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Diet } from "../../../diet";
 import { Meal } from "../../../../meals/meal";
@@ -49,10 +42,10 @@ export class DietMealsSearchDialogComponent {
 
 	readonly displayedColumns = ['name', 'actions'];
 
-	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required});
+	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required });
 	readonly globalSearchControl = new FormControl<boolean>(false, { nonNullable: true });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		term: this.termControl,
 		globalSearch: this.globalSearchControl,
 	})
@@ -64,7 +57,10 @@ export class DietMealsSearchDialogComponent {
 			return;
 		}
 
-		this.mealsService.getAll$().subscribe((meals) => {
+		this.mealsService.getAllByTerm$({
+			term: this.termControl.value,
+			globalSearch: this.globalSearchControl.value
+		}).subscribe((meals) => {
 			this.table.dataSource = meals;
 		});
 	}

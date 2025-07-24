@@ -23,7 +23,7 @@ export class SignInFormComponent {
 	readonly usernameControl = new FormControl<string>("", { validators: Validators.required, nonNullable: true })
 	readonly passwordControl = new FormControl<string>("", { validators: Validators.required, nonNullable: true })
 
-	readonly form: FormGroup<SignInFormControls> = new FormGroup({
+	readonly form = new FormGroup<SignInFormControls>({
 		username: this.usernameControl,
 		password: this.passwordControl,
 	});

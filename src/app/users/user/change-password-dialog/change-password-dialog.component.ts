@@ -33,7 +33,7 @@ export class ChangePasswordDialogComponent {
 
 	readonly passwordControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		password: this.passwordControl,
 	});
 

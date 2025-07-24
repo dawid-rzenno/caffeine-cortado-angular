@@ -8,7 +8,6 @@ import { ActivatedRoute, Params, Router, RouterLink } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 import { IngredientNutrientsComponent } from "./ingredient-nutrients/ingredient-nutrients.component";
 import { BehaviorSubject, of, switchMap } from "rxjs";
-import { Meal } from "../../meals/meal";
 import { IngredientsService, Nutrient } from "../ingredients.service";
 import { Ingredient } from "../ingredient";
 
@@ -34,7 +33,7 @@ export class IngredientComponent implements OnInit {
 	readonly nameControl =
 		new FormControl<string>("", { validators: Validators.required, nonNullable: true });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		id: this.idControl,
 		name: this.nameControl,
 	});

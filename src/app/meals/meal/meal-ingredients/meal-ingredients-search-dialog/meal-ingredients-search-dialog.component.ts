@@ -45,7 +45,7 @@ export class MealIngredientsSearchDialogComponent {
 	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required});
 	readonly globalSearchControl = new FormControl<boolean>(false, { nonNullable: true });
 
-	readonly form: FormGroup = new FormGroup({
+	readonly form = new FormGroup({
 		term: this.termControl,
 		globalSearch: this.globalSearchControl,
 	});
@@ -57,7 +57,10 @@ export class MealIngredientsSearchDialogComponent {
 			return;
 		}
 
-		this.ingredientsService.getAll$().subscribe((ingredients) => {
+		this.ingredientsService.getAllByTerm$({
+			term: this.termControl.value,
+			globalSearch: this.globalSearchControl.value
+		}).subscribe((ingredients) => {
 			this.table.dataSource = ingredients;
 		});
 	}

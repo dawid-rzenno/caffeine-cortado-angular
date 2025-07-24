@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Ingredient } from "./ingredient";
@@ -19,23 +18,27 @@ export class IngredientsService {
 
   constructor(private http: HttpClient) { }
 
-	getAll$(): Observable<Ingredient[]> {
+	getAll$() {
 		return this.http.get<Ingredient[]>(`${this.apiUrl}`);
 	}
 
-	getById$(id: number): Observable<Ingredient> {
+	getAllByTerm$(params: { term: string, globalSearch: boolean }) {
+		return this.http.get<Ingredient[]>(`${this.apiUrl}`, { params });
+	}
+
+	getById$(id: number) {
 		return this.http.get<Ingredient>(`${this.apiUrl}/${id}`);
 	}
 
-	create$(form: Nutrient): Observable<Ingredient> {
+	create$(form: Nutrient) {
 		return this.http.post<Ingredient>(`${this.apiUrl}`, form);
 	}
 
-	update$(form: Nutrient): Observable<Ingredient> {
+	update$(form: Nutrient) {
 		return this.http.put<Ingredient>(`${this.apiUrl}`, form);
 	}
 
-	delete$(id: number): Observable<Ingredient> {
+	delete$(id: number) {
 		return this.http.delete<Ingredient>(`${this.apiUrl}/${id}`);
 	}
 }

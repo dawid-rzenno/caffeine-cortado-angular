@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,11 @@ export class IngredientNutrientsService {
 		return `${environment.apiUrl}/ingredients/${ingredientId}/nutrients/${nutrientId}`;
 	}
 
-	assign$(ingredientId: number, nutrientId: number): Observable<void> {
+	assign$(ingredientId: number, nutrientId: number) {
 		return this.http.post<void>(this.createApiUrl(ingredientId, nutrientId), undefined);
 	}
 
-	unassign$(ingredientId: number, nutrientId: number): Observable<void> {
+	unassign$(ingredientId: number, nutrientId: number) {
 		return this.http.delete<void>(this.createApiUrl(ingredientId, nutrientId));
 	}
 }
