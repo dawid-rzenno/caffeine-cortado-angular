@@ -28,6 +28,6 @@ export class DietsService {
 	}
 
 	delete$(id: number) {
-		return this.http.delete<Diet>(`${this.apiUrl}/${id}`);
+		return this.http.delete<void>(`${this.apiUrl}/${id}`);
 	}
 }

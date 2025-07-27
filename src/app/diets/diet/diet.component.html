@@ -1,36 +1,42 @@
-@if (diet$ | async; as diet) {
-	<form [formGroup]="form" (submit)="onSubmit()">
-		<div class="flex justify-space-between align-center">
-			<h2>Diet {{ idControl.value }}</h2>
-			<div>
+<form [formGroup]="form" (submit)="onSubmit()">
+	<div class="flex justify-space-between align-center">
+		<h2>Diet</h2>
+		<div>
+			@if (form.dirty) {
+				<button mat-stroked-button type="button" (click)="onReset()">
+					<span>Reset</span>
+					<mat-icon>undo</mat-icon>
+				</button>
+				&nbsp;
+
 				<button mat-stroked-button type="submit">
 					<span>Save</span>
 					<mat-icon>save</mat-icon>
 				</button>
 				&nbsp;
+			}
 
-				@if (diet.id) {
-					<button mat-stroked-button (click)="onDelete(diet.id)">
-						<span>Delete</span>
-						<mat-icon>delete</mat-icon>
-					</button>
-					&nbsp;
-				}
-
-				<button mat-stroked-button type="button" routerLink="/diets">
-					<span>Cancel</span>
-					<mat-icon>close</mat-icon>
+			@if (diet$ | async; as diet) {
+				<button mat-stroked-button (click)="onDelete(diet.id)">
+					<span>Delete</span>
+					<mat-icon>delete</mat-icon>
 				</button>
-			</div>
+				&nbsp;
+			}
+
+			<button mat-stroked-button type="button" routerLink="/diets">
+				<span>Cancel</span>
+				<mat-icon>close</mat-icon>
+			</button>
 		</div>
+	</div>
 
-		<mat-form-field>
-			<mat-label>Name</mat-label>
-			<input matInput [formControl]="nameControl">
-		</mat-form-field>
-	</form>
+	<mat-form-field>
+		<mat-label>Name</mat-label>
+		<input matInput [formControl]="nameControl">
+	</mat-form-field>
+</form>
 
-	@if (diet.id) {
-		<app-diet-meals [dietId]="diet.id" [meals]="diet.meals"></app-diet-meals>
-	}
+@if (diet$ | async; as diet) {
+	<app-diet-meals [diet]="diet" (dietChange)="onDietChange($event)"></app-diet-meals>
 }

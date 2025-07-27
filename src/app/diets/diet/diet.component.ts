@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute, Params, Router, RouterLink } from "@angular/router";
 import { DietsService } from "../diets.service";
 import { BehaviorSubject, of, switchMap } from "rxjs";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { DietMealsComponent } from "./diet-meals/diet-meals.component";
 import { Diet } from "../diet";
 import { AsyncPipe } from "@angular/common";
-import { Meal } from "../../meals/meal";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
 	selector: 'app-diet',
@@ -28,54 +28,70 @@ import { Meal } from "../../meals/meal";
 	styleUrl: './diet.component.scss'
 })
 export class DietComponent implements OnInit {
-	readonly idControl =
-		new FormControl<number | undefined>(undefined, { validators: Validators.required, nonNullable: true });
-
 	readonly nameControl =
 		new FormControl<string>("", { validators: Validators.required, nonNullable: true });
 
+	readonly dietMealsControl = new FormArray([]);
+
 	readonly form = new FormGroup({
-		id: this.idControl,
 		name: this.nameControl,
 	});
 
-	readonly diet$: BehaviorSubject<Diet> = new BehaviorSubject<Diet>({ meals: [] as Meal[] } as Diet);
+	readonly diet$ = new BehaviorSubject<Diet | undefined>(undefined);
 
-	constructor(private route: ActivatedRoute, private dietsService: DietsService, private router: Router) {}
+	constructor(
+		private route: ActivatedRoute,
+		private dietsService: DietsService,
+		private router: Router,
+		private destroyRef: DestroyRef
+	) {
+	}
 
 	ngOnInit() {
-		this.diet$.subscribe((diet: Diet | undefined) => this.updateForm(diet))
+		this.diet$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(diet => {
+			if (diet) {
+				this.form.patchValue(diet);
+				return;
+			}
+
+			this.form.reset();
+		})
 
 		this.route.params.pipe(
 			switchMap((params: Params) => {
-				const id: number | undefined = params['id'];
-				return id ? this.dietsService.getById$(id) : of(undefined)
+				return params['id']
+					? this.dietsService.getById$(params['id'])
+					: of(undefined)
 			})
 		).subscribe((diet?: Diet) => {
-			this.diet$.next(diet ?? { meals: [] as Meal[] } as Diet);
+			this.diet$.next(diet);
 		});
 	}
 
 	onSubmit() {
-		const diet: Diet = {} as Diet;
-
-		if (this.idControl.value) {
-			diet.id = this.idControl.value;
+		if (this.form.invalid) {
+			return;
 		}
 
-		if (this.nameControl.value) {
-			diet.name = this.nameControl.value;
+		if (this.diet$.value) {
+			this.dietsService.update$(this.form.value as Diet)
+				.pipe(takeUntilDestroyed(this.destroyRef))
+				.subscribe((diet: Diet) => this.diet$.next(diet));
+			return;
 		}
 
-		if (this.idControl.value) {
-			this.dietsService.update$(diet).subscribe(() => {
-				this.navigateToDiets();
-			})
-		} else {
-			this.dietsService.create$(diet).subscribe((diet: Diet) => {
-				this.navigateToDiet(diet.id);
-			})
+		this.dietsService.create$(this.form.value as Diet)
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((diet: Diet) => this.navigateToDiet(diet.id));
+	}
+
+	onReset() {
+		if (this.diet$.value) {
+			this.form.patchValue(this.diet$.value);
+			return;
 		}
+
+		this.form.reset();
 	}
 
 	navigateToDiets() {
@@ -86,16 +102,13 @@ export class DietComponent implements OnInit {
 		this.router.navigateByUrl(`/diets/${id}`);
 	}
 
-	updateForm(diet?: Diet) {
-		if (diet) {
-			this.idControl.setValue(diet.id);
-			this.nameControl.setValue(diet.name);
-		}
-	}
-
 	onDelete(id: number) {
 		this.dietsService.delete$(id).subscribe(() => {
 			this.navigateToDiets()
 		})
+	}
+
+	onDietChange(diet: Diet) {
+		this.diet$.next(diet);
 	}
 }

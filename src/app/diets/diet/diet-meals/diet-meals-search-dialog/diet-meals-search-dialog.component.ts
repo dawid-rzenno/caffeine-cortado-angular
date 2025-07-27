@@ -13,6 +13,8 @@ import { MatSortModule } from "@angular/material/sort";
 import { RouterModule } from "@angular/router";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MealsService } from "../../../../meals/meals.service";
+import { DietMealsService } from "../diet-meals.service";
+import { DietMealForm } from "../diet-meal-form";
 
 @Component({
 	selector: 'app-diet-meals-search-dialog',
@@ -37,8 +39,9 @@ export class DietMealsSearchDialogComponent {
 	@ViewChild(MatTable) table!: MatTable<Meal>;
 
 	readonly dialogRef = inject(MatDialogRef<DietMealsSearchDialogComponent>);
-	readonly data = inject<{ diet: Diet }>(MAT_DIALOG_DATA);
-	readonly mealsService: MealsService = inject(MealsService);
+	readonly data = inject<{ dietId: number }>(MAT_DIALOG_DATA);
+	readonly mealsService = inject(MealsService);
+	readonly dietMealsService = inject(DietMealsService);
 
 	readonly displayedColumns = ['name', 'actions'];
 
@@ -49,8 +52,6 @@ export class DietMealsSearchDialogComponent {
 		term: this.termControl,
 		globalSearch: this.globalSearchControl,
 	})
-
-	selected?: Meal;
 
 	search() {
 		if (this.form.invalid) {
@@ -63,6 +64,18 @@ export class DietMealsSearchDialogComponent {
 		}).subscribe((meals) => {
 			this.table.dataSource = meals;
 		});
+	}
+
+	assign(mealId: number) {
+		const form: DietMealForm = {
+			mealId,
+			mealIndex: 1,
+			mealDayIndex: 1
+		};
+
+		this.dietMealsService.assign$(this.data.dietId, form).subscribe((diet: Diet) => {
+			this.dialogRef.close(diet);
+		})
 	}
 
 	onNoClick() {

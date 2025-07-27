@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { Diet } from "../../diet";
+import { DietMealForm } from "./diet-meal-form";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class DietMealsService {
-	constructor(private http: HttpClient) { }
-
-	private createApiUrl(dietId: number, mealId: number) {
-		return `${environment.apiUrl}/diets/${dietId}/meals/${mealId}`;
+	constructor(private http: HttpClient) {
 	}
 
-	assign$(dietId: number, mealId: number) {
-		return this.http.post<void>(this.createApiUrl(dietId, mealId), undefined);
+	assign$(dietId: number, form: DietMealForm) {
+		return this.http.post<Diet>(`${environment.apiUrl}/diets/${dietId}/meals`, form);
 	}
 
 	unassign$(dietId: number, mealId: number) {
-		return this.http.delete<void>(this.createApiUrl(dietId, mealId));
+		return this.http.delete<Diet>(`${environment.apiUrl}/diets/${dietId}/meals/${mealId}`);
 	}
 }
