@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, inject, Input, ViewChild } from '@angular/core';
-import { Nutrient } from '../../ingredients.service';
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { MatSort, MatSortModule } from "@angular/material/sort";
@@ -12,6 +11,7 @@ import { DatePipe } from "@angular/common";
 import {
 	IngredientNutrientsSearchDialogComponent
 } from "./ingredient-nutrients-search-dialog/ingredient-nutrients-search-dialog.component";
+import { Nutrient } from "../../../nutrients/nutrient";
 
 @Component({
   selector: 'app-ingredient-nutrients',

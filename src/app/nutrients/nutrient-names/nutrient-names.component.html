@@ -1,9 +1,6 @@
 <div class="flex justify-space-between align-center">
-	<h2>Meals</h2>
-	<button mat-stroked-button (click)="openSearchDialog()">
-		<mat-icon>add</mat-icon>
-		<span>Assign</span>
-	</button>
+	<h2>Nutrient names</h2>
+	<button mat-stroked-button routerLink="/nutrients/nutrient-names/new">Create</button>
 </div>
 
 <table mat-table class="full-width-table" matSort>
@@ -11,16 +8,6 @@
 	<ng-container matColumnDef="name">
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
 		<td mat-cell *matCellDef="let row">{{ row.name }}</td>
-	</ng-container>
-
-	<ng-container matColumnDef="mealDayIndex">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header>Day of the diet</th>
-		<td mat-cell *matCellDef="let row">{{ row.dietMeal.mealDayIndex }}</td>
-	</ng-container>
-
-	<ng-container matColumnDef="mealIndex">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header>Order during the day</th>
-		<td mat-cell *matCellDef="let row">{{ row.dietMeal.mealIndex }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="timestamp">
@@ -37,9 +24,7 @@
 		<th mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let row">
 			<div class="flex full-height full-width align-center justify-end">
-				<button mat-stroked-button (click)="unassign(row.dietMeal.id)">Unassign</button>
-				&nbsp;
-				<button mat-stroked-button [routerLink]="'/meals/' + row.id">View</button>
+				<button mat-stroked-button [routerLink]="'/nutrients/nutrient-names/' + row.id">View</button>
 			</div>
 		</td>
 	</ng-container>

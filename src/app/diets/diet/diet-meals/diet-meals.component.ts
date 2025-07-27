@@ -36,7 +36,7 @@ export class DietMealsComponent implements AfterViewInit {
 	@ViewChild(MatTable) table!: MatTable<Meal>;
 
 	readonly dialog = inject(MatDialog)
-	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'mealDayIndex', 'mealIndex', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: DietMealsService, private destroyRef: DestroyRef) {
 	}

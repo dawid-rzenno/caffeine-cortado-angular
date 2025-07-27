@@ -8,8 +8,9 @@ import { ActivatedRoute, Params, Router, RouterLink } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 import { IngredientNutrientsComponent } from "./ingredient-nutrients/ingredient-nutrients.component";
 import { BehaviorSubject, of, switchMap } from "rxjs";
-import { IngredientsService, Nutrient } from "../ingredients.service";
+import { IngredientsService } from "../ingredients.service";
 import { Ingredient } from "../ingredient";
+import { Nutrient } from "../../nutrients/nutrient";
 
 @Component({
   selector: 'app-ingredient',

@@ -40,6 +40,14 @@ export class SideNavComponent {
 			label: "Ingredients",
 		},
 		{
+			url: "nutrients/nutrient-types",
+			label: "Nutrient types",
+		},
+		{
+			url: "nutrients/nutrient-names",
+			label: "Nutrient names",
+		},
+		{
 			url: "trainings",
 			label: "Trainings",
 		},

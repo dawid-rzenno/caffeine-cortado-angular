@@ -1,5 +1,4 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { Nutrient } from "../../../ingredients.service";
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
@@ -12,7 +11,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { RouterModule } from "@angular/router";
 import { MatCheckbox } from "@angular/material/checkbox";
-import { NutrientsService } from "../../../nutrients.service";
+import { NutrientsService } from "../../../../nutrients/nutrients.service";
+import { Nutrient } from "../../../../nutrients/nutrient";
 
 @Component({
   selector: 'app-ingredient-nutrients-search-dialog',

@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Ingredient } from "./ingredient";
-
-export type Nutrient = {
-	id: number;
-	name: string;
-	timestamp: Date;
-	userId: number;
-};
+import { Nutrient } from "../nutrients/nutrient";
 
 @Injectable({
   providedIn: 'root'

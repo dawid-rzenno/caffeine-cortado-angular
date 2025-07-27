@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Nutrient } from "./ingredients.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import { Nutrient } from "./nutrient";
 
 @Injectable({
   providedIn: 'root'

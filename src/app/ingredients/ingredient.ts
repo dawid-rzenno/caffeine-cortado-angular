@@ -1,4 +1,4 @@
-import { Nutrient } from "./ingredients.service";
+import { Nutrient } from "../nutrients/nutrient";
 
 export type Ingredient = {
 	id: number,

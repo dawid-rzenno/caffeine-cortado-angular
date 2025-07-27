@@ -45,11 +45,22 @@ export class DietMealsSearchDialogComponent {
 
 	readonly displayedColumns = ['name', 'actions'];
 
-	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required });
-	readonly globalSearchControl = new FormControl<boolean>(false, { nonNullable: true });
+	readonly termControl =
+		new FormControl<string>("", { nonNullable: true, validators: Validators.required });
+
+	readonly mealDayIndexControl =
+		new FormControl<number>(1, { nonNullable: true, validators: Validators.required });
+
+	readonly mealIndexControl =
+		new FormControl<number>(1, { nonNullable: true, validators: Validators.required });
+
+	readonly globalSearchControl =
+		new FormControl<boolean>(false, { nonNullable: true });
 
 	readonly form = new FormGroup({
 		term: this.termControl,
+		dayIndex: this.mealDayIndexControl,
+		indexControl: this.mealIndexControl,
 		globalSearch: this.globalSearchControl,
 	})
 
@@ -69,8 +80,8 @@ export class DietMealsSearchDialogComponent {
 	assign(mealId: number) {
 		const form: DietMealForm = {
 			mealId,
-			mealIndex: 1,
-			mealDayIndex: 1
+			mealIndex: this.mealIndexControl.value,
+			mealDayIndex: this.mealDayIndexControl.value
 		};
 
 		this.dietMealsService.assign$(this.data.dietId, form).subscribe((diet: Diet) => {

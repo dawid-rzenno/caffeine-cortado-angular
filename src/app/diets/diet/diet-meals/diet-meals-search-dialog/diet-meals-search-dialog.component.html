@@ -11,6 +11,19 @@
 				<mat-icon>search</mat-icon>
 			</button>
 		</mat-form-field>
+
+		<div class="flex">
+			<mat-form-field>
+				<mat-label>Day of the diet</mat-label>
+				<input matInput [formControl]="mealDayIndexControl" />
+			</mat-form-field>
+			&nbsp;
+			<mat-form-field>
+				<mat-label>Order during the day</mat-label>
+				<input matInput [formControl]="mealIndexControl" />
+			</mat-form-field>
+		</div>
+
 		<mat-checkbox [formControl]="globalSearchControl">Global search</mat-checkbox>
 	</form>
 
