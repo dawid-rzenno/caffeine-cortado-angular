@@ -31,7 +31,13 @@
 		<br>
 		<mat-form-field>
 			<mat-label>Mass unit</mat-label>
-			<input matInput [formControl]="massUnitIdControl">
+			<input matInput [formControl]="massUnitSearchControl" [matAutocomplete]="auto">
+
+			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+				<mat-option *ngFor="let option of massUnitSelectOptions | async" [value]="option.value">
+					{{ option.viewValue }}
+				</mat-option>
+			</mat-autocomplete>
 		</mat-form-field>
 	</form>
 }

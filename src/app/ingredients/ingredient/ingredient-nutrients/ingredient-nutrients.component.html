@@ -1,5 +1,5 @@
 <div class="flex justify-space-between align-center">
-	<h2>Nutrients</h2>
+	<h2>Nutrients per 100g</h2>
 	<button mat-stroked-button (click)="openSearchDialog()">
 		<mat-icon>add</mat-icon>
 		<span>Assign</span>
@@ -10,7 +10,12 @@
 
 	<ng-container matColumnDef="name">
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-		<td mat-cell *matCellDef="let row">{{ row.name }}</td>
+		<td mat-cell *matCellDef="let row">{{ row.type.name }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="amount">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+		<td mat-cell *matCellDef="let row">{{ row.amount }} {{ row.type.massUnit.name }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="timestamp">
@@ -27,8 +32,10 @@
 		<th mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let row">
 			<div class="flex full-height full-width align-center justify-end">
-				<button mat-stroked-button (click)="unassign(row.id)">Unassign</button>
-				<button mat-stroked-button [routerLink]="'/nutrients/' + row.id">View</button>
+				<button mat-stroked-button (click)="unassign(row.id)">
+					<mat-icon>remove</mat-icon>
+					<span>Unassign</span>
+				</button>
 			</div>
 		</td>
 	</ng-container>

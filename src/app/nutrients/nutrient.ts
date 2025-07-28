@@ -1,6 +1,11 @@
+import { MassUnit, NutrientType } from "./nutrient-types/nutrient-type";
+
 export type Nutrient = {
 	id: number;
-	name: string;
+	typeId: number;
+	type: NutrientType;
+	massUnitId: number;
+	massUnit: MassUnit;
 	timestamp: Date;
 	userId: number;
 };

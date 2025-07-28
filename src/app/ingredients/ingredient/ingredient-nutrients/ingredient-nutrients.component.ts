@@ -5,7 +5,6 @@ import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { IngredientNutrientsService } from "./ingredient-nutrients.service";
 import { MatButtonModule } from "@angular/material/button";
-import { RouterLink } from "@angular/router";
 import { MatIconModule } from "@angular/material/icon";
 import { DatePipe } from "@angular/common";
 import {
@@ -15,12 +14,11 @@ import { Nutrient } from "../../../nutrients/nutrient";
 
 @Component({
   selector: 'app-ingredient-nutrients',
-  imports: [
+	imports: [
 		MatTableModule,
 		MatPaginatorModule,
 		MatSortModule,
 		MatButtonModule,
-		RouterLink,
 		MatIconModule,
 		DatePipe
 	],
@@ -37,7 +35,7 @@ export class IngredientNutrientsComponent implements AfterViewInit {
 
 	readonly dialog = inject(MatDialog)
 
-	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'amount', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: IngredientNutrientsService) {
 	}

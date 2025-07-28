@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Ingredient } from "./ingredient";
-import { Nutrient } from "../nutrients/nutrient";
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +23,11 @@ export class IngredientsService {
 		return this.http.get<Ingredient>(`${this.apiUrl}/${id}`);
 	}
 
-	create$(form: Nutrient) {
+	create$(form: Ingredient) {
 		return this.http.post<Ingredient>(`${this.apiUrl}`, form);
 	}
 
-	update$(form: Nutrient) {
+	update$(form: Ingredient) {
 		return this.http.put<Ingredient>(`${this.apiUrl}`, form);
 	}
 

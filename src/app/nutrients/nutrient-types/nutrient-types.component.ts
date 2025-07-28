@@ -19,7 +19,7 @@ export class NutrientTypesComponent implements AfterViewInit {
 	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild(MatTable) table!: MatTable<NutrientType>;
 
-	readonly displayedColumns = ['name', 'massUnit', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: NutrientTypesService) {}
 
