@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { MatSort, MatSortModule } from "@angular/material/sort";
@@ -14,12 +14,12 @@ import { NutrientType } from "./nutrient-type";
   templateUrl: './nutrient-types.component.html',
   styleUrl: './nutrient-types.component.scss'
 })
-export class NutrientTypesComponent {
+export class NutrientTypesComponent implements AfterViewInit {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild(MatTable) table!: MatTable<NutrientType>;
 
-	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
+	readonly displayedColumns = ['name', 'massUnit', 'timestamp', 'userId', 'actions'];
 
 	constructor(private service: NutrientTypesService) {}
 

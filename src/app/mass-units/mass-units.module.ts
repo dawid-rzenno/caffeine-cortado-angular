@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { massUnitsRoutes } from "./mass-units.routes";
 import { RouterModule } from "@angular/router";
-import { nutrientsRoutes } from "./nutrient.routes";
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-		RouterModule.forChild(nutrientsRoutes),
+		RouterModule.forChild(massUnitsRoutes)
   ]
 })
-export class NutrientsModule { }
+export class MassUnitsModule { }

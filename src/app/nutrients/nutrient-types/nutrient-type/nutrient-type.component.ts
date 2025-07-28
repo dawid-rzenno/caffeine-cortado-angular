@@ -31,9 +31,13 @@ export class NutrientTypeComponent implements OnInit {
 	readonly nameControl =
 		new FormControl<string>("", { validators: Validators.required, nonNullable: true });
 
+	readonly massUnitIdControl =
+		new FormControl<number>(0, { validators: Validators.required, nonNullable: true });
+
 	readonly form = new FormGroup({
 		id: this.idControl,
 		name: this.nameControl,
+		massUnitId: this.massUnitIdControl,
 	});
 
 	readonly nutrientType$: BehaviorSubject<NutrientType> = new BehaviorSubject<NutrientType>({ } as NutrientType);

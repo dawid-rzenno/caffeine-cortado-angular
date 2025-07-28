@@ -69,6 +69,16 @@ export const routes: Routes = [
 		loadChildren: () => import('./nutrients/nutrients.module').then(m => m.NutrientsModule),
 	},
 	{
+		path: 'nutripedia',
+		title: "Nutripedia",
+		loadChildren: () => import('./nutripedia/nutripedia.module').then(m => m.NutripediaModule),
+	},
+	{
+		path: 'mass-units',
+		title: "Mass units",
+		loadChildren: () => import('./mass-units/mass-units.module').then(m => m.MassUnitsModule),
+	},
+	{
 		path: 'trainings',
 		title: "Trainings",
 		loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule),

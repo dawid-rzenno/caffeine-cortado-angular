@@ -7,7 +7,7 @@ import { NutrientType } from "./nutrient-type";
   providedIn: 'root'
 })
 export class NutrientTypesService {
-	readonly apiUrl = `${environment.apiUrl}/nutrients/types`;
+	readonly apiUrl = `${environment.apiUrl}/nutrient-types`;
 
   constructor(private http: HttpClient) { }
 

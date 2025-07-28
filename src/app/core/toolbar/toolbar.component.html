@@ -1,30 +1,37 @@
 <mat-toolbar>
-	<button (click)="openSideNav()" mat-icon-button>
+	<button mat-icon-button (click)="openSideNav()">
 		<mat-icon>menu</mat-icon>
 	</button>
-	&nbsp;
-	<span>Cortado</span>
+	&nbsp;&nbsp;
+	<a mat-stroked-button routerLink="/">
+		<span class="bold-text uppercase-text cortado">Cortado</span>
+	</a>
 	<span class="spacer"></span>
 
 	@if (user$ | async; as user) {
-		<button mat-flat-button [routerLink]="'/users/' + user.id">
+		<a mat-stroked-button routerLink="/nutripedia">
+			<mat-icon>menu_book</mat-icon>
+			<span>Nutripedia</span>
+		</a>
+		&nbsp;
+		<a mat-flat-button [routerLink]="'/users/' + user.id">
 			<mat-icon>person</mat-icon>
 			<span>{{user.username}}</span>
-		</button>
+		</a>
 		&nbsp;
-		<button (click)="signOut()" mat-stroked-button>
+		<button mat-stroked-button (click)="signOut()">
 			<mat-icon>login</mat-icon>
 			<span>Sign out</span>
 		</button>
 	} @else {
-		<button mat-flat-button routerLink="/auth/sign-in">
+		<a mat-flat-button routerLink="/auth/sign-in">
 			<mat-icon>login</mat-icon>
 			<span>Sign in</span>
-		</button>
+		</a>
 		&nbsp;
-		<button mat-stroked-button routerLink="/auth/sign-up">
+		<a mat-stroked-button routerLink="/auth/sign-up">
 			<mat-icon>person_add</mat-icon>
 			<span>Sign up</span>
-		</button>
+		</a>
 	}
 </mat-toolbar>

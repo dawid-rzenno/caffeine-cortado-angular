@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NutrientNameComponent } from './nutrient-name.component';
+import { NutripediaComponent } from './nutripedia.component';
 
-describe('NutrientNameComponent', () => {
-  let component: NutrientNameComponent;
-  let fixture: ComponentFixture<NutrientNameComponent>;
+describe('NutripediaComponent', () => {
+  let component: NutripediaComponent;
+  let fixture: ComponentFixture<NutripediaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NutrientNameComponent]
+      imports: [NutripediaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NutrientNameComponent);
+    fixture = TestBed.createComponent(NutripediaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

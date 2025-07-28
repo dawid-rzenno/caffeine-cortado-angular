@@ -44,8 +44,8 @@ export class SideNavComponent {
 			label: "Nutrient types",
 		},
 		{
-			url: "nutrients/nutrient-names",
-			label: "Nutrient names",
+			url: "mass-units",
+			label: "Mass units",
 		},
 		{
 			url: "trainings",

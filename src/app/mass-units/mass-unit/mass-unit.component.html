@@ -1,7 +1,7 @@
-@if (nutrientName$ | async; as nutrientName) {
+@if (massUnit$ | async; as massUnit) {
 	<form [formGroup]="form" (submit)="onSubmit()">
 		<div class="flex justify-space-between align-center">
-			<h2>Nutrient name {{ idControl.value }}</h2>
+			<h2>Mass unit {{ idControl.value }}</h2>
 			<div>
 				<button mat-stroked-button type="submit">
 					<span>Save</span>
@@ -9,15 +9,15 @@
 				</button>
 				&nbsp;
 
-				@if (nutrientName.id) {
-					<button mat-stroked-button (click)="onDelete(nutrientName.id)">
+				@if (massUnit.id) {
+					<button mat-stroked-button (click)="onDelete(massUnit.id)">
 						<span>Delete</span>
 						<mat-icon>delete</mat-icon>
 					</button>
 					&nbsp;
 				}
 
-				<button mat-stroked-button type="button" routerLink="/nutrients/nutrient-names">
+				<button mat-stroked-button type="button" routerLink="/mass-units">
 					<span>Cancel</span>
 					<mat-icon>close</mat-icon>
 				</button>
