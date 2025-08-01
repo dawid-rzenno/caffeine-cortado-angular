@@ -1,11 +1,14 @@
 import { Ingredient } from "../ingredients/ingredient";
-import { DietMeal } from "../diets/diet/diet-meals/diet-meal";
+import { ItemBase, ItemUpdateBase } from "../shared/item-base";
 
-export type Meal = {
-	id: number;
+export type Meal = ItemBase & {
 	name: string;
-	timestamp: Date;
-	userId: number;
-	ingredients: Ingredient[];
-	dietMeal: DietMeal;
 }
+
+export type MealDetails = Meal & {
+	ingredients: Ingredient[];
+}
+
+export type CreateMealPayload = Omit<Meal, keyof ItemBase>
+
+export type UpdateMealPayload = Omit<Meal, keyof ItemUpdateBase>

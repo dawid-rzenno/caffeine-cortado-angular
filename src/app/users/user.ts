@@ -1,17 +1,13 @@
 import { UserRole } from "./user-role";
+import { ItemBase, ItemUpdateBase } from "../shared/item-base";
 
-export type User = {
-	id: number;
+export type User = ItemBase & {
 	username: string;
 	role: UserRole;
-	timestamp: Date;
-	userId: number;
 }
 
-export type UserForm = {
-	id: number;
-	username: string;
-	roleId: number;
-	timestamp: Date;
-	userId: number;
-}
+export type UserDetails = User;
+
+export type CreateUserPayload = Omit<User, keyof ItemBase>
+
+export type UpdateUserPayload = Omit<User, keyof ItemUpdateBase>

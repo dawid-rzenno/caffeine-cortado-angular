@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, Input, ViewChild } from '@angular/core';
 import {
 	MealIngredientsSearchDialogComponent
 } from "./meal-ingredients-search-dialog/meal-ingredients-search-dialog.component";
@@ -12,10 +12,14 @@ import { DatePipe } from "@angular/common";
 import { MatDialog } from "@angular/material/dialog";
 import { MealIngredientsService } from "./meal-ingredients.service";
 import { Ingredient } from "../../../ingredients/ingredient";
+import { AssignationComponent } from "../../../shared/assignation/assignation.component.abstract";
+import { CreateAssignationPayloadBase } from "../../../shared/assignation/assignation.service.abstract";
+
+export type CreateMealIngredientPayload = CreateAssignationPayloadBase;
 
 @Component({
-  selector: 'app-meal-ingredients',
-  imports: [
+	selector: 'app-meal-ingredients',
+	imports: [
 		MatTableModule,
 		MatPaginatorModule,
 		MatSortModule,
@@ -24,12 +28,12 @@ import { Ingredient } from "../../../ingredients/ingredient";
 		MatIconModule,
 		DatePipe
 	],
-  templateUrl: './meal-ingredients.component.html',
-  styleUrl: './meal-ingredients.component.scss'
+	templateUrl: './meal-ingredients.component.html',
+	styleUrl: './meal-ingredients.component.scss'
 })
-export class MealIngredientsComponent implements AfterViewInit {
-	@Input({ required: true }) mealId!: number;
-	@Input({ required: true }) ingredients!: Ingredient[];
+export class MealIngredientsComponent extends AssignationComponent<Ingredient, CreateMealIngredientPayload> implements AfterViewInit {
+	@Input({ required: true }) parentId!: number;
+	@Input({ required: true }) children!: Ingredient[];
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
@@ -39,36 +43,16 @@ export class MealIngredientsComponent implements AfterViewInit {
 
 	readonly displayedColumns = ['name', 'timestamp', 'userId', 'actions'];
 
-	constructor(private service: MealIngredientsService) {
+	constructor(service: MealIngredientsService, destroyRef: DestroyRef) {
+		super(service, destroyRef);
 	}
 
 	ngAfterViewInit(): void {
-		this.table.dataSource = this.ingredients;
-		this.paginator.length = this.ingredients.length;
+		this.table.dataSource = this.children;
+		this.paginator.length = this.children.length;
 	}
 
-	openSearchDialog(): void {
-		const dialogRef = this.dialog.open(
-			MealIngredientsSearchDialogComponent,
-			{
-				data: {
-					mealId: this.mealId
-				}
-			}
-		);
-
-		dialogRef.afterClosed().subscribe((ingredient?: Ingredient) => {
-			if (ingredient) {
-				this.ingredients.push(ingredient)
-			}
-		});
-	}
-
-	assign(ingredientId: number) {
-		this.service.assign$(this.mealId, ingredientId).subscribe()
-	}
-
-	unassign(ingredientId: number) {
-		this.service.unassign$(this.mealId, ingredientId).subscribe()
+	getSearchDialogRef() {
+		return this.dialog.open(MealIngredientsSearchDialogComponent, this.dialogConfig);
 	}
 }

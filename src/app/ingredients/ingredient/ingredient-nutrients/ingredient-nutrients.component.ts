@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, inject, Input, ViewChild } from '@angular/core';
-import { MatDialog } from "@angular/material/dialog";
+import { AfterViewInit, Component, DestroyRef, inject, Input, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTable, MatTableModule } from "@angular/material/table";
@@ -11,9 +11,11 @@ import {
 	IngredientNutrientsSearchDialogComponent
 } from "./ingredient-nutrients-search-dialog/ingredient-nutrients-search-dialog.component";
 import { Nutrient } from "../../../nutrients/nutrient";
+import { AssignationComponent } from "../../../shared/assignation/assignation.component.abstract";
+import { CreateIngredientNutrientPayload } from "./create-ingredient-nutrient-payload";
 
 @Component({
-  selector: 'app-ingredient-nutrients',
+	selector: 'app-ingredient-nutrients',
 	imports: [
 		MatTableModule,
 		MatPaginatorModule,
@@ -22,51 +24,35 @@ import { Nutrient } from "../../../nutrients/nutrient";
 		MatIconModule,
 		DatePipe
 	],
-  templateUrl: './ingredient-nutrients.component.html',
-  styleUrl: './ingredient-nutrients.component.scss'
+	templateUrl: './ingredient-nutrients.component.html',
+	styleUrl: './ingredient-nutrients.component.scss'
 })
-export class IngredientNutrientsComponent implements AfterViewInit {
-	@Input({ required: true }) ingredientId!: number;
-	@Input({ required: true }) nutrients!: Nutrient[];
+export class IngredientNutrientsComponent
+	extends AssignationComponent<Nutrient, CreateIngredientNutrientPayload>
+	implements AfterViewInit {
+
+	@Input({ required: true }) parentId!: number;
+	@Input({ required: true }) children!: Nutrient[];
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild(MatTable) table!: MatTable<Nutrient>;
 
 	readonly dialog = inject(MatDialog)
-
 	readonly displayedColumns = ['name', 'amount', 'timestamp', 'userId', 'actions'];
 
-	constructor(private service: IngredientNutrientsService) {
+	constructor(service: IngredientNutrientsService, destroyRef: DestroyRef) {
+		super(service, destroyRef);
 	}
 
 	ngAfterViewInit(): void {
-		this.table.dataSource = this.nutrients;
-		this.paginator.length = this.nutrients.length;
+		this.updateDataSource();
 	}
 
-	openSearchDialog(): void {
-		const dialogRef = this.dialog.open(
+	override getSearchDialogRef(): MatDialogRef<any> {
+		return this.dialog.open(
 			IngredientNutrientsSearchDialogComponent,
-			{
-				data: {
-					ingredientId: this.ingredientId
-				}
-			}
+			this.dialogConfig
 		);
-
-		dialogRef.afterClosed().subscribe((nutrient?: Nutrient) => {
-			if (nutrient) {
-				this.nutrients.push(nutrient)
-			}
-		});
-	}
-
-	assign(nutrientId: number) {
-		this.service.assign$(this.ingredientId, nutrientId).subscribe()
-	}
-
-	unassign(nutrientId: number) {
-		this.service.unassign$(this.ingredientId, nutrientId).subscribe()
 	}
 }

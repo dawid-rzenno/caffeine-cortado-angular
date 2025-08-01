@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
-import { nutrientsRoutes } from "./nutrient.routes";
+import { nutrientsRoutes } from "./nutrients.routes";
 
 @NgModule({
   declarations: [],

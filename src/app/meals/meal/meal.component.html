@@ -1,7 +1,7 @@
-@if (meal$ | async; as meal) {
+@if (details$ | async; as meal) {
 	<form [formGroup]="form" (submit)="onSubmit()">
 		<div class="flex justify-space-between align-center">
-			<h2>Meal {{ idControl.value }}</h2>
+			<h2>Meal</h2>
 			<div>
 				<button mat-stroked-button type="submit">
 					<span>Save</span>
@@ -31,6 +31,6 @@
 	</form>
 
 	@if (meal.id) {
-		<app-meal-ingredients [mealId]="meal.id" [ingredients]="meal.ingredients"></app-meal-ingredients>
+		<app-meal-ingredients [parentId]="meal.id" [children]="meal.ingredients"></app-meal-ingredients>
 	}
 }

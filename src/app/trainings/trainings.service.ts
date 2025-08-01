@@ -1,34 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Training } from "./training";
+import { CreateTrainingPayload, Training, TrainingDetails, UpdateTrainingPayload } from "./training";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Goal } from "../goals/goal";
+import { CrudService } from "../shared/crud/crud.service.abstract";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
-export class TrainingsService {
+export class TrainingsService extends CrudService<Training, TrainingDetails, CreateTrainingPayload, UpdateTrainingPayload> {
 	readonly apiUrl = `${environment.apiUrl}/trainings`;
 
-  constructor(private http: HttpClient) { }
-
-	getAll$() {
-		return this.http.get<Training[]>(`${this.apiUrl}`);
-	}
-
-	getById$(id: number) {
-		return this.http.get<Training>(`${this.apiUrl}/${id}`);
-	}
-
-	create$(form: Goal) {
-		return this.http.post<Training>(`${this.apiUrl}`, form);
-	}
-
-	update$(form: Goal) {
-		return this.http.put<Training>(`${this.apiUrl}`, form);
-	}
-
-	delete$(id: number) {
-		return this.http.delete<Training>(`${this.apiUrl}/${id}`);
+	constructor(http: HttpClient) {
+		super(http);
 	}
 }

@@ -16,7 +16,7 @@
 				&nbsp;
 			}
 
-			@if (diet$ | async; as diet) {
+			@if (details$ | async; as diet) {
 				<button mat-stroked-button (click)="onDelete(diet.id)">
 					<span>Delete</span>
 					<mat-icon>delete</mat-icon>
@@ -37,6 +37,6 @@
 	</mat-form-field>
 </form>
 
-@if (diet$ | async; as diet) {
-	<app-diet-meals [diet]="diet" (dietChange)="onDietChange($event)"></app-diet-meals>
+@if (details$ | async; as details) {
+	<app-diet-meals [parentId]="details.id" [children]="details.meals"></app-diet-meals>
 }

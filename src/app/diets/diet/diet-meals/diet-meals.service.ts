@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from "../../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Diet } from "../../diet";
-import { DietMealForm } from "./diet-meal-form";
+import { DietDetails } from "../../diet";
+import { AssignationService } from "../../../shared/assignation/assignation.service.abstract";
+import { CreateDietMealPayload } from "./create-diet-meal-payload";
 
 @Injectable({
 	providedIn: 'root'
 })
-export class DietMealsService {
-	constructor(private http: HttpClient) {
-	}
-
-	assign$(dietId: number, form: DietMealForm) {
-		return this.http.post<Diet>(`${environment.apiUrl}/diets/${dietId}/meals`, form);
-	}
-
-	unassign$(dietId: number, mealId: number) {
-		return this.http.delete<Diet>(`${environment.apiUrl}/diets/${dietId}/meals/${mealId}`);
+export class DietMealsService extends AssignationService<DietDetails, CreateDietMealPayload>{
+	constructor(http: HttpClient) {
+		super(http, 'diets', 'meals')
 	}
 }

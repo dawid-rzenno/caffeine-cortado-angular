@@ -1,15 +1,14 @@
-export type MassUnit = {
-	id: number;
-	name: string;
-	userId: number;
-	timestamp: Date;
-}
+import { MassUnit } from "../../mass-units/mass-unit";
+import { ItemBase, ItemUpdateBase } from "../../shared/item-base";
 
-export type NutrientType = {
-	id: number;
+export type NutrientType = ItemBase & {
 	name: string;
 	massUnitId: number;
 	massUnit: MassUnit;
-	userId: number;
-	timestamp: Date;
 }
+
+export type NutrientTypeDetails = NutrientType;
+
+export type CreateNutrientTypePayload = Omit<NutrientType, keyof ItemBase>;
+
+export type UpdateNutrientTypePayload = Omit<NutrientType, keyof ItemUpdateBase>;

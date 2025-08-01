@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, Input, ViewChild } from '@angular/core';
 import { Meal } from "../../../meals/meal";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTable, MatTableModule } from "@angular/material/table";
@@ -10,8 +10,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { DietMealsSearchDialogComponent } from "./diet-meals-search-dialog/diet-meals-search-dialog.component";
 import { MatIconModule } from "@angular/material/icon";
 import { DatePipe } from "@angular/common";
-import { Diet } from "../../diet";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { AssignationComponent } from "../../../shared/assignation/assignation.component.abstract";
+import { CreateDietMealPayload } from "./create-diet-meal-payload";
+import { Id } from "../../../shared/item-base";
 
 @Component({
 	selector: 'app-diet-meals',
@@ -27,9 +28,10 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 	templateUrl: './diet-meals.component.html',
 	styleUrl: './diet-meals.component.scss'
 })
-export class DietMealsComponent implements AfterViewInit {
-	@Input({ required: true }) diet!: Diet;
-	@Output() dietChange = new EventEmitter<Diet>();
+export class DietMealsComponent extends AssignationComponent<Meal, CreateDietMealPayload> implements AfterViewInit {
+
+	@Input({ required: true }) parentId!: Id;
+	@Input({ required: true }) children!: Meal[];
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
@@ -38,41 +40,15 @@ export class DietMealsComponent implements AfterViewInit {
 	readonly dialog = inject(MatDialog)
 	readonly displayedColumns = ['name', 'mealDayIndex', 'mealIndex', 'timestamp', 'userId', 'actions'];
 
-	constructor(private service: DietMealsService, private destroyRef: DestroyRef) {
+	constructor(service: DietMealsService, destroyRef: DestroyRef) {
+		super(service, destroyRef)
 	}
 
-	ngAfterViewInit(): void {
-		this.updateTable(this.diet.meals);
+	ngAfterViewInit() {
+		this.updateDataSource();
 	}
 
-	updateTable(meals: Meal[]) {
-		this.table.dataSource = meals;
-		this.paginator.length = meals.length;
-		this.table.renderRows();
-	}
-
-	openSearchDialog(): void {
-		const dialogRef = this.dialog.open(
-			DietMealsSearchDialogComponent,
-			{ data: { dietId: this.diet.id } }
-		);
-
-		dialogRef.afterClosed()
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((diet?: Diet) => {
-				if (diet) {
-					this.dietChange.next(diet);
-					this.updateTable(diet.meals);
-				}
-			});
-	}
-
-	unassign(dietMealId: number) {
-		this.service.unassign$(this.diet.id, dietMealId)
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((diet: Diet) => {
-				this.dietChange.next(diet);
-				this.updateTable(diet.meals);
-			});
+	getSearchDialogRef() {
+		return this.dialog.open(DietMealsSearchDialogComponent, this.dialogConfig);
 	}
 }

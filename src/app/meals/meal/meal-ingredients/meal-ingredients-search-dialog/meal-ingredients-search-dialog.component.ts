@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
@@ -9,10 +9,15 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { RouterModule } from "@angular/router";
-import { MatCheckbox } from "@angular/material/checkbox";
-import { Meal } from "../../../meal";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { IngredientsService } from "../../../../ingredients/ingredients.service";
 import { Ingredient } from "../../../../ingredients/ingredient";
+import {
+	AssignationDialogComponent,
+	AssignationDialogData
+} from "../../../../shared/assignation-dialog/assignation-dialog.component.abstract";
+import { CreateMealIngredientPayload } from "../meal-ingredients.component";
+import { MealIngredientsService } from "../meal-ingredients.service";
 
 @Component({
 	selector: 'app-ingredient-ingredients-search-dialog',
@@ -27,22 +32,23 @@ import { Ingredient } from "../../../../ingredients/ingredient";
 		MatTableModule,
 		MatSortModule,
 		RouterModule,
-		MatCheckbox,
+		MatCheckboxModule,
 		ReactiveFormsModule
 	],
 	templateUrl: './meal-ingredients-search-dialog.component.html',
 	styleUrl: './meal-ingredients-search-dialog.component.scss'
 })
-export class MealIngredientsSearchDialogComponent {
-	@ViewChild(MatTable) table!: MatTable<Ingredient>;
+export class MealIngredientsSearchDialogComponent extends AssignationDialogComponent<Ingredient, CreateMealIngredientPayload> {
+	service = inject(MealIngredientsService)
+	matDialogRef = inject(MatDialogRef<MealIngredientsSearchDialogComponent>)
+	dialogData = inject<AssignationDialogData>(MAT_DIALOG_DATA);
+	childService = inject(IngredientsService)
 
-	readonly dialogRef = inject(MatDialogRef<MealIngredientsSearchDialogComponent>);
-	readonly data = inject<{ meal: Meal }>(MAT_DIALOG_DATA);
-	readonly ingredientsService: IngredientsService = inject(IngredientsService);
+	@ViewChild(MatTable) table!: MatTable<Ingredient>;
 
 	readonly displayedColumns = ['name', 'actions'];
 
-	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required});
+	readonly termControl = new FormControl<string>("", { nonNullable: true, validators: Validators.required });
 	readonly globalSearchControl = new FormControl<boolean>(false, { nonNullable: true });
 
 	readonly form = new FormGroup({
@@ -50,22 +56,7 @@ export class MealIngredientsSearchDialogComponent {
 		globalSearch: this.globalSearchControl,
 	});
 
-	selected?: Ingredient;
-
-	search() {
-		if (this.form.invalid) {
-			return;
-		}
-
-		this.ingredientsService.getAllByTerm$({
-			term: this.termControl.value,
-			globalSearch: this.globalSearchControl.value
-		}).subscribe((ingredients) => {
-			this.table.dataSource = ingredients;
-		});
-	}
-
-	onNoClick() {
-		this.dialogRef.close();
+	constructor(destroyRef: DestroyRef) {
+		super(destroyRef);
 	}
 }

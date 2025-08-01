@@ -1,7 +1,7 @@
-<form [formGroup]="form" (submit)="onSubmit(id)">
+<form [formGroup]="form" (submit)="onSubmit()">
 	<div class="flex justify-space-between align-center">
-		<h2 matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="!isCurrentUser">
-			User &#8212; {{usernameControl.value}}
+		<h2 matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="!isCurrentUser$">
+			User
 		</h2>
 		<div>
 			<button mat-stroked-button type="submit">
@@ -10,14 +10,14 @@
 			</button>
 			&nbsp;
 
-			@if (id && (isCurrentUser || isAdmin)) {
-				<button mat-stroked-button type="button" (click)="openChangePasswordDialog(id)">
+			@if ((canUpdateUser$ | async)) {
+				<button mat-stroked-button type="button" (click)="openChangePasswordDialog(details$.value!.id)">
 					<span>Change password</span>
 					<mat-icon>password</mat-icon>
 				</button>
 				&nbsp;
 
-				<button mat-stroked-button type="button" (click)="onDelete(id)">
+				<button mat-stroked-button type="button" (click)="onDelete(details$.value!.id)">
 					<span>Delete</span>
 					<mat-icon>delete</mat-icon>
 				</button>
@@ -35,7 +35,7 @@
 		<mat-label>Username</mat-label>
 		<input matInput [formControl]="usernameControl">
 	</mat-form-field>
-	@if (!id) {
+	@if (!(details$ | async)) {
 		<br>
 		<mat-form-field>
 			<mat-label>Password</mat-label>

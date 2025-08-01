@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { MassUnit } from "../nutrients/nutrient-types/nutrient-type";
 import { MassUnitsService } from "./mass-units.service";
 import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
@@ -7,6 +6,7 @@ import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink } from "@angular/router";
 import { DatePipe } from "@angular/common";
+import { MassUnit } from "./mass-unit";
 
 @Component({
   selector: 'app-mass-units',
