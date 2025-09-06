@@ -1,5 +1,5 @@
 import { Id } from "../item-base";
-import { ICrudService } from "../crud/crud.service.abstract";
+import { ICrudService } from "../crud-table/crud.service.abstract";
 import { MatDialogRef } from "@angular/material/dialog";
 import { CreateAssignationPayloadBase, IAssignationService } from "../assignation/assignation.service.abstract";
 import { MatTable } from "@angular/material/table";

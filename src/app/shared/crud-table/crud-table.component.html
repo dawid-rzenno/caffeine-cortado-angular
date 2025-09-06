@@ -1,0 +1,58 @@
+<div class="flex justify-space-between align-center">
+	<h2>{{ title }}</h2>
+	<button mat-stroked-button routerLink="./new">Create</button>
+</div>
+
+
+<table mat-table class="full-width-table" matSort [dataSource]="items">
+
+  <ng-container [matColumnDef]="ColumnKeys.Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+  </ng-container>
+
+  <ng-container [matColumnDef]="ColumnKeys.Timestamp">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+    <td mat-cell *matCellDef="let row">{{ row.timestamp | date : 'short' }}</td>
+  </ng-container>
+
+  <ng-container [matColumnDef]="ColumnKeys.UserId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
+    <td mat-cell *matCellDef="let row">{{ row.userId }}</td>
+  </ng-container>
+
+  <ng-container [matColumnDef]="ColumnKeys.Actions">
+    <th mat-header-cell *matHeaderCellDef>
+			<div class="full-width flex justify-end search-term-control">
+				<form class="half-width" [formGroup]="formGroup" (submit)="setSearchQueryParam()">
+					<mat-form-field class="full-width">
+						<mat-label>Search</mat-label>
+						<input [formControl]="searchTermControl" matInput>
+						<div matSuffix>
+							<button type="submit" mat-icon-button  (click)="setSearchQueryParam()">
+								<mat-icon>search</mat-icon>
+							</button>
+							&nbsp;
+						</div>
+					</mat-form-field>
+				</form>
+			</div>
+		</th>
+    <td mat-cell *matCellDef="let row">
+      <div class="flex full-height full-width align-center justify-end">
+        <button mat-stroked-button [routerLink]="'./' + row.id">View</button>
+      </div>
+    </td>
+  </ng-container>
+
+	<ng-content></ng-content>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 20]"
+></mat-paginator>

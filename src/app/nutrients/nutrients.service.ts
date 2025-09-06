@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { CreateNutrientPayload, Nutrient, NutrientDetails, UpdateNutrientPayload } from "./nutrient";
-import { CrudService } from "../shared/crud/crud.service.abstract";
+import { CrudService } from "../shared/crud-table/crud.service.abstract";
 
 @Injectable({
 	providedIn: 'root'

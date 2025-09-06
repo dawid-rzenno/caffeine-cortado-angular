@@ -7,7 +7,7 @@ import {
 	NutrientTypeDetails,
 	UpdateNutrientTypePayload
 } from "./nutrient-type";
-import { CrudService } from "../../shared/crud/crud.service.abstract";
+import { CrudService } from "../../shared/crud-table/crud.service.abstract";
 
 @Injectable({
 	providedIn: 'root'

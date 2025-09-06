@@ -6,12 +6,11 @@ import { MatTable, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatButtonModule } from "@angular/material/button";
-import { RouterLink } from "@angular/router";
-import { DatePipe } from "@angular/common";
+import { CrudTableComponent } from "../shared/crud-table/crud-table.component";
 
 @Component({
   selector: 'app-trainings',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink, DatePipe],
+	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, CrudTableComponent],
   templateUrl: './trainings.component.html',
   styleUrl: './trainings.component.scss'
 })

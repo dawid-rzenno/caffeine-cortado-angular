@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { UserRole } from "../users/user-role";
-import { CrudService } from "../shared/crud/crud.service.abstract";
+import { CrudService } from "../shared/crud-table/crud.service.abstract";
 
 @Injectable({
 	providedIn: 'root'

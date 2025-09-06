@@ -1,16 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-
-export type SearchQueryParams = {
-	term?: string,
-	globalSearch?: boolean
-}
-
-export type GetAllQueryParams = SearchQueryParams & {
-	sort?: string;
-	limit?: number;
-	page?: number;
-}
+import { GetAllQueryParams } from "./get-all-query-params";
+import { InjectionToken } from "@angular/core";
 
 export interface IDetailsCrudService<ItemDetails, CreateItemPayload, UpdateItemPayload> {
 	apiUrl: string;
@@ -63,3 +54,5 @@ export abstract class CrudService<
 		return this.http.delete<void>(`${this.apiUrl}/${id}`);
 	}
 }
+
+export const CRUD_SERVICE = new InjectionToken<ICrudService<object>>("CRUD_SERVICE");

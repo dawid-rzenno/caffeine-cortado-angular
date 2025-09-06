@@ -2,7 +2,7 @@ import { UntypedFormGroup } from "@angular/forms";
 import { BehaviorSubject, of, switchMap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { DestroyRef } from "@angular/core";
-import { IDetailsCrudService } from "../crud/crud.service.abstract";
+import { IDetailsCrudService } from "../crud-table/crud.service.abstract";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Id, ItemBase } from "../item-base";
 
