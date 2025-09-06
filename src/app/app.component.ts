@@ -22,7 +22,7 @@ import { SideNavComponent } from "./core/side-nav/side-nav.component";
 	styleUrl: './app.component.scss'
 })
 export class AppComponent {
-	@ViewChild('sidenav') sidenav!: MatSidenav;
+	@ViewChild(MatSidenav) sidenav!: MatSidenav;
 
 	constructor(private appService: AppService) {
 		this.appService.isSideNavOpen$.pipe(takeUntilDestroyed()).subscribe(isSideNavOpen => {

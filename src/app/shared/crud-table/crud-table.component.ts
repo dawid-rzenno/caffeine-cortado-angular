@@ -1,10 +1,19 @@
-import { AfterViewInit, Component, DestroyRef, Inject, Input, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ContentChildren,
+	DestroyRef,
+	Inject,
+	Input,
+	QueryList,
+	ViewChild
+} from '@angular/core';
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule, PageEvent } from "@angular/material/paginator";
 import { MatSort, MatSortable, MatSortModule, Sort, SortDirection } from "@angular/material/sort";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute, NavigationExtras, Params, Router, RouterLink } from "@angular/router";
-import { DatePipe } from "@angular/common";
+import { DatePipe, NgForOf, NgTemplateOutlet } from "@angular/common";
 import { ItemBase } from "../item-base";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatInputModule } from "@angular/material/input";
@@ -12,12 +21,13 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { debounceTime, switchMap } from "rxjs";
 import { CRUD_SERVICE, ICrudService } from "./crud.service.abstract";
+import { CrudTableColumnComponent } from "./crud-table-column/crud-table-column.component";
 
 export enum CrudTableColumnKeys {
 	Name = 'name',
 	Timestamp = 'timestamp',
 	UserId = 'userId',
-	Actions = 'actions',
+	Actions = 'actions'
 }
 
 export enum CrudTableQueryParamKeys {
@@ -30,10 +40,9 @@ export enum CrudTableQueryParamKeys {
 
 @Component({
 	selector: 'app-crud-table',
-	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink, DatePipe, MatInputModule, MatIconModule, ReactiveFormsModule],
+	imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, RouterLink, DatePipe, MatInputModule, MatIconModule, ReactiveFormsModule, NgTemplateOutlet, NgForOf],
 	templateUrl: './crud-table.component.html',
 	styleUrl: './crud-table.component.scss',
-	standalone: true,
 })
 export class CrudTableComponent<Item extends ItemBase = ItemBase> implements AfterViewInit {
 	readonly ColumnKeys = CrudTableColumnKeys;
@@ -51,6 +60,8 @@ export class CrudTableComponent<Item extends ItemBase = ItemBase> implements Aft
 
 	@ViewChild(MatPaginator) matPaginator!: MatPaginator;
 	@ViewChild(MatSort) matSort!: MatSort;
+
+	@ContentChildren(CrudTableColumnComponent) columns!: QueryList<CrudTableColumnComponent>;
 
 	readonly searchTermControl = new FormControl<string>('', { nonNullable: true });
 

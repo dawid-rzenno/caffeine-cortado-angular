@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { SignInFormComponent } from "./auth/sign-in-form/sign-in-form.component";
-import { UsersComponent } from "./users/users.component";
-import { UserComponent } from "./users/user/user.component";
 
 export const routes: Routes = [
 	{
@@ -32,21 +30,7 @@ export const routes: Routes = [
 	{
 		path: 'users',
 		title: "Users",
-		children: [
-			{
-				path: '',
-				pathMatch: 'full',
-				component: UsersComponent,
-			},
-			{
-				path: 'new',
-				component: UserComponent,
-			},
-			{
-				path: ':id',
-				component: UserComponent,
-			},
-		]
+		loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
 	},
 	{
 		path: 'diets',

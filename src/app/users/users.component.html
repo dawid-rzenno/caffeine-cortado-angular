@@ -1,47 +1,13 @@
-<div class="flex justify-space-between align-center">
-  <h2>Users</h2>
-	<button mat-stroked-button routerLink="/users/new">Create</button>
-</div>
+<app-crud-table title="Users" [displayedColumns]="DisplayedColumnsKeys">
+	<app-crud-table-column name="username">
+		<ng-template #header>Username</ng-template>
+		<ng-template #cell let-element>
+			<span matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="element.id !== userId">{{ element.username }}&nbsp;</span>
+		</ng-template>
+	</app-crud-table-column>
 
-<table mat-table class="full-width-table" matSort>
-
-  <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-    <td mat-cell *matCellDef="let row">
-			<span matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="row.id !== userId">{{ row.username }}&nbsp;</span>
-		</td>
-  </ng-container>
-
-	<ng-container matColumnDef="role">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-		<td mat-cell *matCellDef="let row">{{ row.role.name }}</td>
-	</ng-container>
-
-  <ng-container matColumnDef="timestamp">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
-    <td mat-cell *matCellDef="let row">{{ row.timestamp | date : 'short' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="userId">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
-    <td mat-cell *matCellDef="let row">{{ row.userId }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let row">
-      <div class="flex full-height full-width align-center justify-end">
-        <button mat-stroked-button [routerLink]="'/users/' + row.id">View</button>
-      </div>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<mat-paginator
-  [pageIndex]="0"
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 20]"
-></mat-paginator>
+	<app-crud-table-column name="role">
+		<ng-template #header>Role</ng-template>
+		<ng-template #cell let-element>{{ element.role.name }}</ng-template>
+	</app-crud-table-column>
+</app-crud-table>
