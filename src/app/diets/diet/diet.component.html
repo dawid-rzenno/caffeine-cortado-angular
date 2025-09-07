@@ -1,35 +1,9 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-	<div class="flex justify-space-between align-center">
-		<h2>Diet</h2>
-		<div>
-			@if (form.dirty) {
-				<button mat-stroked-button type="button" (click)="onReset()">
-					<span>Reset</span>
-					<mat-icon>undo</mat-icon>
-				</button>
-				&nbsp;
-
-				<button mat-stroked-button type="submit">
-					<span>Save</span>
-					<mat-icon>save</mat-icon>
-				</button>
-				&nbsp;
-			}
-
-			@if (details$ | async; as diet) {
-				<button mat-stroked-button (click)="onDelete(diet.id)">
-					<span>Delete</span>
-					<mat-icon>delete</mat-icon>
-				</button>
-				&nbsp;
-			}
-
-			<button mat-stroked-button type="button" routerLink="/diets">
-				<span>Cancel</span>
-				<mat-icon>close</mat-icon>
-			</button>
-		</div>
-	</div>
+	<app-details-topbar
+		title="Diet"
+		[isFormDirty]="form.dirty"
+		[isNew]="isNew$ | async"
+	></app-details-topbar>
 
 	<mat-form-field>
 		<mat-label>Name</mat-label>
@@ -38,5 +12,7 @@
 </form>
 
 @if (details$ | async; as details) {
-	<app-diet-meals [parentId]="details.id" [children]="details.meals"></app-diet-meals>
+	@if (details.id) {
+		<app-diet-meals [parentId]="details.id" [children]="details.meals"></app-diet-meals>
+	}
 }

@@ -1,35 +1,37 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-	<div class="flex justify-space-between align-center">
-		<h2 matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="!isCurrentUser$">
+	<app-details-topbar
+		[isFormDirty]="form.dirty"
+		[isNew]="isNew$ | async"
+		[titleTemplate]="titleTemplate"
+		[additionalButtonsTemplate]="additionalButtonsTemplate"
+		[deleteButtonTemplate]="deleteButtonTemplate"
+	></app-details-topbar>
+
+	<ng-template #titleTemplate>
+		<h2 matBadge="You" matBadgeOverlap="false" [matBadgeHidden]="!(isCurrentUser$ | async)">
 			User
 		</h2>
-		<div>
-			<button mat-stroked-button type="submit">
-				<span>Save</span>
-				<mat-icon>save</mat-icon>
+	</ng-template>
+
+	<ng-template #additionalButtonsTemplate>
+		@if ((canUpdateUser$ | async)) {
+			<button mat-stroked-button type="button" (click)="openChangePasswordDialog(details$.value!.id)">
+				<span>Change password</span>
+				<mat-icon>password</mat-icon>
 			</button>
 			&nbsp;
+		}
+	</ng-template>
 
-			@if ((canUpdateUser$ | async)) {
-				<button mat-stroked-button type="button" (click)="openChangePasswordDialog(details$.value!.id)">
-					<span>Change password</span>
-					<mat-icon>password</mat-icon>
-				</button>
-				&nbsp;
-
-				<button mat-stroked-button type="button" (click)="onDelete(details$.value!.id)">
-					<span>Delete</span>
-					<mat-icon>delete</mat-icon>
-				</button>
-				&nbsp;
-			}
-
-			<button mat-stroked-button type="button" routerLink="/users">
-				<span>Cancel</span>
-				<mat-icon>close</mat-icon>
+	<ng-template #deleteButtonTemplate>
+		@if ((canUpdateUser$ | async)) {
+			<button mat-stroked-button type="button" (click)="onDelete(details$.value!.id)">
+				<span>Delete</span>
+				<mat-icon>delete</mat-icon>
 			</button>
-		</div>
-	</div>
+			&nbsp;
+		}
+	</ng-template>
 
 	<mat-form-field>
 		<mat-label>Username</mat-label>

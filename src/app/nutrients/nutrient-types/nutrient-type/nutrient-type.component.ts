@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { map, Observable, switchMap } from "rxjs";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NutrientTypesService } from "../nutrient-types.service";
 import {
 	CreateNutrientTypePayload,
@@ -21,6 +21,7 @@ import { MassUnit } from "../../../mass-units/mass-unit";
 import { DetailsComponent } from "../../../shared/details/details.component";
 
 import { Id } from "../../../shared/item-base";
+import { DetailsTopbarComponent } from "../../../shared/details/details-topbar/details-topbar.component";
 
 @Component({
 	selector: 'app-nutrient-type',
@@ -30,10 +31,10 @@ import { Id } from "../../../shared/item-base";
 		MatInput,
 		ReactiveFormsModule,
 		MatIconModule,
-		RouterLink,
 		AsyncPipe,
 		MatAutocompleteModule,
 		NgForOf,
+		DetailsTopbarComponent,
 	],
 	templateUrl: './nutrient-type.component.html',
 	styleUrl: './nutrient-type.component.scss'

@@ -1,5 +1,5 @@
 import { UntypedFormGroup } from "@angular/forms";
-import { BehaviorSubject, of, switchMap } from "rxjs";
+import { BehaviorSubject, map, Observable, of, switchMap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { DestroyRef } from "@angular/core";
 import { IDetailsCrudService } from "../crud-table/crud.service.abstract";
@@ -14,6 +14,9 @@ export abstract class DetailsComponent<
 	readonly abstract form: UntypedFormGroup;
 
 	readonly details$ = new BehaviorSubject<ItemDetails | undefined>(undefined);
+	readonly isNew$: Observable<boolean> = this.details$.pipe(
+		map((item: ItemDetails | undefined) => !!item?.id)
+	)
 
 	protected constructor(
 		protected route: ActivatedRoute,
@@ -38,7 +41,7 @@ export abstract class DetailsComponent<
 	updateFormOnDetailsChange() {
 		this.details$
 			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe(this.updateForm)
+			.subscribe((details?: ItemDetails) => this.updateForm(details))
 	}
 
 	updateDetailsOnIdRouteParamChange(): void {

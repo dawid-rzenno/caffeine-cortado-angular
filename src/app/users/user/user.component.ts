@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { map } from "rxjs";
 import { UsersService } from "../users.service";
@@ -19,8 +19,8 @@ import { SelectOption } from "../../utils/select-option";
 import { UserRole } from "../user-role";
 import { DetailsComponent } from "../../shared/details/details.component";
 import { AsyncPipe } from "@angular/common";
-
 import { Id } from "../../shared/item-base";
+import { DetailsTopbarComponent } from "../../shared/details/details-topbar/details-topbar.component";
 
 export type UserFormControls = {
 	username: FormControl<string>;
@@ -36,10 +36,10 @@ export type UserFormControls = {
 		MatInput,
 		ReactiveFormsModule,
 		MatIconModule,
-		RouterLink,
 		MatBadgeModule,
 		MatSelectModule,
-		AsyncPipe
+		AsyncPipe,
+		DetailsTopbarComponent
 	],
 	templateUrl: './user.component.html',
 	styleUrl: './user.component.scss'

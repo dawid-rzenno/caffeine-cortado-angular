@@ -1,0 +1,48 @@
+<div class="flex justify-space-between align-center">
+	@if (titleTemplate) {
+		<ng-container *ngTemplateOutlet="titleTemplate"></ng-container>
+	}
+	@else {
+		<h2>{{ title }}</h2>
+	}
+
+	<div>
+		@if (isFormDirty) {
+			<button mat-stroked-button type="button" (click)="onReset.emit()">
+				<span>Reset</span>
+				<mat-icon>undo</mat-icon>
+			</button>
+			&nbsp;
+
+			<button mat-stroked-button type="submit">
+				<span>Save</span>
+				<mat-icon>save</mat-icon>
+			</button>
+			&nbsp;
+		}
+
+		@if (additionalButtonsTemplate) {
+			<ng-container
+				*ngTemplateOutlet="additionalButtonsTemplate">
+			</ng-container>
+		}
+
+		@if (isNew) {
+			@if (deleteButtonTemplate) {
+				<ng-container *ngTemplateOutlet="deleteButtonTemplate"></ng-container>
+			}
+			@else {
+				<button mat-stroked-button (click)="onDelete.emit()">
+					<span>Delete</span>
+					<mat-icon>delete</mat-icon>
+				</button>
+				&nbsp;
+			}
+		}
+
+		<button mat-stroked-button type="button" routerLink="../">
+			<span>Cancel</span>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+</div>

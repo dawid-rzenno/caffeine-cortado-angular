@@ -1,43 +1,23 @@
-@if (details$ | async; as nutrientType) {
-	<form [formGroup]="form" (submit)="onSubmit()">
-		<div class="flex justify-space-between align-center">
-			<h2>Nutrient type</h2>
-			<div>
-				<button mat-stroked-button type="submit">
-					<span>Save</span>
-					<mat-icon>save</mat-icon>
-				</button>
-				&nbsp;
+<form [formGroup]="form" (submit)="onSubmit()">
+	<app-details-topbar
+		title="Nutrient type"
+		[isFormDirty]="form.dirty"
+		[isNew]="isNew$ | async"
+	></app-details-topbar>
 
-				@if (nutrientType.id) {
-					<button mat-stroked-button (click)="onDelete(nutrientType.id)">
-						<span>Delete</span>
-						<mat-icon>delete</mat-icon>
-					</button>
-					&nbsp;
-				}
+	<mat-form-field>
+		<mat-label>Name</mat-label>
+		<input matInput [formControl]="nameControl">
+	</mat-form-field>
+	<br>
+	<mat-form-field>
+		<mat-label>Mass unit</mat-label>
+		<input matInput [formControl]="massUnitSearchControl" [matAutocomplete]="auto">
 
-				<button mat-stroked-button type="button" routerLink="/nutrients/nutrient-types">
-					<span>Cancel</span>
-					<mat-icon>close</mat-icon>
-				</button>
-			</div>
-		</div>
-
-		<mat-form-field>
-			<mat-label>Name</mat-label>
-			<input matInput [formControl]="nameControl">
-		</mat-form-field>
-		<br>
-		<mat-form-field>
-			<mat-label>Mass unit</mat-label>
-			<input matInput [formControl]="massUnitSearchControl" [matAutocomplete]="auto">
-
-			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
-				<mat-option *ngFor="let option of massUnitSelectOptions | async" [value]="option.value">
-					{{ option.viewValue }}
-				</mat-option>
-			</mat-autocomplete>
-		</mat-form-field>
-	</form>
-}
+		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+			<mat-option *ngFor="let option of massUnitSelectOptions | async" [value]="option.value">
+				{{ option.viewValue }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+</form>

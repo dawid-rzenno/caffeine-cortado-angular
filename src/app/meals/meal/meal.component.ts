@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { CreateMealPayload, MealDetails, UpdateMealPayload } from "../meal";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MealsService } from "../meals.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -10,6 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { AsyncPipe } from "@angular/common";
 import { MealIngredientsComponent } from "./meal-ingredients/meal-ingredients.component";
 import { DetailsComponent } from "../../shared/details/details.component";
+import { DetailsTopbarComponent } from "../../shared/details/details-topbar/details-topbar.component";
 
 @Component({
 	selector: 'app-meal',
@@ -19,9 +20,9 @@ import { DetailsComponent } from "../../shared/details/details.component";
 		MatInput,
 		ReactiveFormsModule,
 		MatIconModule,
-		RouterLink,
 		AsyncPipe,
-		MealIngredientsComponent
+		MealIngredientsComponent,
+		DetailsTopbarComponent
 	],
 	templateUrl: './meal.component.html',
 	styleUrl: './meal.component.scss'

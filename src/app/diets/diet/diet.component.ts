@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DietsService } from "../diets.service";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -10,6 +10,7 @@ import { DietMealsComponent } from "./diet-meals/diet-meals.component";
 import { CreateDietPayload, DietDetails, UpdateDietPayload } from "../diet";
 import { AsyncPipe } from "@angular/common";
 import { DetailsComponent } from "../../shared/details/details.component";
+import { DetailsTopbarComponent } from "../../shared/details/details-topbar/details-topbar.component";
 
 export type DietFormControls = {
 	name: FormControl<string>
@@ -23,9 +24,9 @@ export type DietFormControls = {
 		MatInput,
 		ReactiveFormsModule,
 		MatIconModule,
-		RouterLink,
 		DietMealsComponent,
-		AsyncPipe
+		AsyncPipe,
+		DetailsTopbarComponent
 	],
 	templateUrl: './diet.component.html',
 	styleUrl: './diet.component.scss'
